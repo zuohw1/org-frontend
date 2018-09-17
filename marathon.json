@@ -1,0 +1,68 @@
+{
+  "id": "project_name",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 2048,
+  "disk": 0,
+  "instances": 1,
+  "portDefinitions": [],
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": false,
+      "image": "",
+      "parameters": [
+        {
+          "key": "dns",
+          "value": "10.0.210.93"
+        },
+        {
+          "key": "dns",
+          "value": "10.0.210.94"
+        },
+        {
+          "key": "dns",
+          "value": "10.0.210.95"
+        }
+      ],
+      "privileged": false
+    },
+    "volumes": [
+      {
+        "containerPath": "/etc/localtime",
+        "hostPath": "/etc/localtime",
+        "mode": "RO"
+      }
+    ],
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "labels": {},
+        "protocol": "tcp",
+        "servicePort": 0
+      }
+    ]
+  },
+  "env": {},
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "protocol": "TCP",
+      "timeoutSeconds": 20,
+      "delaySeconds": 15
+    }
+  ],
+  "labels": {},
+  "networks": [
+    {
+      "name": "colarch",
+      "mode": "container"
+    }
+  ]
+}
