@@ -1,16 +1,33 @@
 {
-  "name": "org-frontend",
-  "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-scripts": "1.1.5"
+    "antd": "^3.5.2",
+    "cross-env": "^5.2.0",
+    "dva": "^2.2.3",
+    "dva-loading": "^2.0.3",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "immutable": "^3.8.2",
+    "jquery": "^3.3.1",
+    "js-cookie": "^2.2.0",
+    "json-bigint": "^0.3.0",
+    "moment": "^2.22.2",
+    "path-to-regexp": "^2.2.1",
+    "ramda": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "redux-logger": "^3.0.6",
+    "history": "latest"
+  },
+  "devDependencies": {
+    "roadhog": "^2.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "lint": "eslint ./src",
+    "start": "node injector.js --env=development & cross-env PORT=8002 roadhog server",
+    "build": "roadhog build",
+    "prebuild": "npm run lint",
+    "inject": "node injector.js",
+    "jest": "echo 'test done！'"
   }
 }
