@@ -16,8 +16,7 @@
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "redux-logger": "^3.0.6",
-    "history": "latest"
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "roadhog": "^2.0.0"

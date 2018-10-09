@@ -1,0 +1,314 @@
+.Manpower{
+	width: 100%;
+	height: auto;
+}
+.Manpower .ant-layout{
+	width: 100%;
+	height: auto;
+}
+.part{
+	width: 100%;
+	height: auto;
+}
+.part1{
+	width: 100%;
+	height: 353px;
+	margin-bottom: 18px;
+}
+.part1Left{
+	width: 58%;
+	height: 353px;
+	margin-right: 2%;
+	float: left;
+}
+.part1Right{
+	width: 40%;
+	height: 353px;
+	float: left;
+}
+.part1LeftTop{
+	width: 100%;
+	height: 220px;
+	margin-bottom: 11px;
+}
+.part1LeftBottom{
+	width: 100%;
+	height: 113px;
+	bottom: 0;
+}
+.autoImg{
+	width: 100%;
+}
+.part2{
+	width: 100%;
+	height: 204px;
+	display: flex;
+	-webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.part2son{
+	width: 270px;
+}
+.part3{
+	width: 100%;
+	height: 320px;
+	display: flex;
+	-webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.part3son{
+	width: 552px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.Listshade{width: 100%;height: 100%;}
+.Treelist{width: 100%;height: 100%;}
+.Treeshade{width: 100%;height: 100%;}
+.Treeselect{width: 100%;height: 100%;}
+
+
+
+
+
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+	position: relative;
+}
+#covTree{
+	width:100%; 
+    height:100%;    
+    background-color:rgba(0, 0, 0, 0.5);    
+    z-index:1000;   
+    display:none;   
+    position:absolute;
+    top: 0;
+    left: 0;  
+    text-align:center;  
+    font-size: 16px;    
+    box-shadow:0px 0px 5px black;
+}
+#conTree{ 
+	display: none;
+    z-index:1100;   
+    width:720px;    
+    height:480px;   
+    background-color:white;
+    box-shadow: 0px 0px 15px black; 
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    margin: auto; 
+}
+.treeHeader{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 3px;
+	font-size: 16px;
+}
+.treeContent{
+	width: 100%;
+	height: 420px;
+}
+.treeContentT{
+	widows: 100%;
+	height: 26px;
+	margin-bottom: 8px;
+}
+.treeContentB{
+	widows: 100%;
+	height: 386px;
+	overflow-y: auto;
+}
+.treeFooter{
+	width: 100%;
+	height: 30px;
+	padding-right: 3px;
+}
+.treeFooter > button{
+	float:right;
+}
+.openTree{
+	width: 90px;
+	margin-right: 80px;
+	display: inline-block;
+}
+.shadeButton{
+	height: 28px;
+}
+.nodeInput{
+	display: inline-block;
+	width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#covList{
+	width:100%; 
+    height:100%;    
+    background-color:rgba(0, 0, 0, 0.5);    
+    z-index:1000;   
+    display:none;   
+    position:absolute;
+    top: 0;
+    left: 0;  
+    text-align:center;  
+    font-size: 16px;    
+    box-shadow:0px 0px 5px black;
+}
+#conList{ 
+	display: none;
+    z-index:1100;   
+    width:760px;    
+    height:512px;   
+    background-color:white;
+    box-shadow: 0px 0px 15px black; 
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    margin: auto; 
+}
+.listHeader{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 3px;
+	font-size: 16px;
+}
+.listContent{
+	width: 100%;
+	height: 452px;
+}
+.listContentT{
+	widows: 100%;
+	height: 26px;
+	margin-bottom: 8px;
+}
+.listContentB{
+	widows: 100%;
+	height: 439px;
+	overflow-y: auto;
+}
+.listFooter{
+	width: 100%;
+	height: 30px;
+	padding-right: 3px;
+}
+.listFooter > button{
+	float:right;
+	margin-left: 12px;
+}
+
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    padding: 6px 16px !important;
+}
+.ant-table-pagination.ant-pagination {
+    margin: 6px 0 !important;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#covTrli{
+	width:100%; 
+    height:100%;    
+    background-color:rgba(0, 0, 0, 0.5);    
+    z-index:1000;   
+    display:none;   
+    position:absolute;
+    top: 0;
+    left: 0;  
+    text-align:center;  
+    font-size: 16px;    
+    box-shadow:0px 0px 5px black;
+}
+#conTrli{ 
+	display: none;
+    z-index:1100;   
+    width:760px;    
+    height:472px;   
+    background-color:white;
+    box-shadow: 0px 0px 15px black; 
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; 
+    margin: auto; 
+}
+.trliHeader{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 3px;
+	font-size: 16px;
+}
+.trliContent{
+	width: 100%;
+	height: 412px;
+	display: flex;
+}
+.trliFooter{
+	width: 100%;
+	height: 30px;
+	padding-right: 3px;
+}
+.trliFooter > button{
+	float:right;
+	margin-left: 12px;
+}
+.trliContentLeft{
+	flex: 1;
+	height: 412px;
+	border: 1px solid #eee;
+}
+.trliContentRight{
+	flex: 3;
+	height: 412px;
+	border: 1px solid #eee;
+}
