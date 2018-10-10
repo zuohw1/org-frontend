@@ -27,7 +27,7 @@ function checkStatus(response) {
 }
 
 function generateUrl(url) {
-  return `${Configuration.api}/gateway/org/api/${url}`;
+  return `${Configuration.api}/${url}`;
 }
 
 function toJson(raw) {
@@ -46,6 +46,7 @@ function toJson(raw) {
  * @return {object}           An object containing either "data" or "err"
  */
 function genreateRequest(url, options) {
+  console.log(options);
   return fetch(generateUrl(url), options)
     .then(toJson)
     .then(checkStatus);
@@ -67,7 +68,7 @@ function genrateRequestHeader(method) {
   try {
     Object.assign(header.headers, {
       'x-business-group': 101,
-      'x-token-code': sessionStorage.getItem('key'),
+      'x-token-code': 'xjMjL0m2A6d1mOIsb9uFk+wuBIcKxrg4',
     });
   } catch (e) {
     return header;

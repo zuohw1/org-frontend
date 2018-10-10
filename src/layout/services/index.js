@@ -1,8 +1,8 @@
 import Request from '../../utils/request';
 
 const MenuService = {
-  async addLogRecord(param) {
-    return Request.post('leaderLogRecord/addPageName', param);
+  async getList() {
+    return Request.get('menuitemReg/menulist');
   },
 };
 

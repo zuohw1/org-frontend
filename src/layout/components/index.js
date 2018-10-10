@@ -47,7 +47,7 @@ const MainLayout = (state) => {
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
             {
               state.menus.map((item) => {
-                if (item.pid === '0') {
+                if (item.pid === 0) {
                   const children = state.menus.filter(i => i.pid === item.id);
                   return children.length !== 0 ? (
                     <SubMenu
