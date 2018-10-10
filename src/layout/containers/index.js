@@ -8,4 +8,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = dispatch => ({
+  // actions: bindActionCreators(actions, dispatch),
+  dispatch,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

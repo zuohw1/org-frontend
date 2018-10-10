@@ -8,8 +8,11 @@ import './App.css';
 import 'antd/dist/antd.css';
 import Manpower from '../../components/Manpower';
 
-const MainLayout = (state, dispatch) => {
-  console.log(state.collapsed);
+const { SubMenu } = Menu;
+
+const MainLayout = (state) => {
+  console.log(state);
+  console.log(state.menus);
   return (
     <div className="App">
       <div className="AppHeader">
@@ -38,86 +41,35 @@ const MainLayout = (state, dispatch) => {
         <Layout.Sider
           collapsible
           collapsed={state.collapsed}
-          onCollapse={() => { dispatch({ type: 'layout/nCollapse' }); }}
+          onCollapse={() => { state.dispatch({ type: 'layout/onCollapse' }); }}
         >
           <div className="logo" />
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <Link to="/">
-                <Icon type="pie-chart" />
-                <span>人员管理</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/treeselect">
-                <Icon type="desktop" />
-                <span>组织管理</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Link to="/listshade">
-                <Icon type="desktop" />
-                <span>绩效管理</span>
-              </Link>
-            </Menu.Item>
-            <Menu.SubMenu
-              key="sub1"
-              title={<span><Icon type="team" /><span>干部管理</span></span>}
-            >
-              <Menu.SubMenu
-                key="sub01"
-                title={<span><span>同步信息管理</span></span>}
-              >
-                <Menu.Item key="4">Team 1</Menu.Item>
-              </Menu.SubMenu>
-              <Menu.SubMenu
-                key="sub02"
-                title={<span><span>字段库标签库管理</span></span>}
-              >
-                <Menu.Item key="5">Team 2</Menu.Item>
-              </Menu.SubMenu>
-              <Menu.SubMenu
-                key="sub03"
-                title={<span><span>干部信息管理</span></span>}
-              >
-                <Menu.Item key="6">Team 3</Menu.Item>
-              </Menu.SubMenu>
-              <Menu.SubMenu
-                key="sub04"
-                title={<span><span>干部信息查询</span></span>}
-              >
-                <Menu.Item key="7">集团高管-正式</Menu.Item>
-                <Menu.Item key="8">集团高管-后备</Menu.Item>
-                <Menu.Item key="9">省管-正式</Menu.Item>
-                <Menu.Item key="10">省管-后备</Menu.Item>
-                <Menu.Item key="11">地市管-正式</Menu.Item>
-                <Menu.Item key="12">地市管-后备</Menu.Item>
-              </Menu.SubMenu>
-              <Menu.SubMenu
-                key="sub05"
-                title={<span><span>日志记录</span></span>}
-              >
-                <Menu.Item key="13">Team 4</Menu.Item>
-              </Menu.SubMenu>
-              <Menu.SubMenu
-                key="sub06"
-                title={<span><span>干部数据分析</span></span>}
-              >
-                <Menu.Item key="14">Team 5</Menu.Item>
-              </Menu.SubMenu>
-            </Menu.SubMenu>
-            <Menu.Item key="15">
-              <Link to="/treeshade">
-                <Icon type="file" />
-                <span>知识共享平台</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="16">
-              <Link to="/treelist">
-                <Icon type="file" />
-                <span>能力评估</span>
-              </Link>
-            </Menu.Item>
+            {
+              state.menus.map((item) => {
+                if (item.pid === '0') {
+                  const children = state.menus.filter(i => i.pid === item.id);
+                  return children.length !== 0 ? (
+                    <SubMenu
+                      key={item.id}
+                      title={<span><Icon type={item.iconUrl} />{item.menuName}</span>}
+                    >
+                      {children.map(ele => (
+                        <Menu.Item key={ele.id}>
+                          <Link to={ele.url || ''}>{ele.menuName}</Link>
+                        </Menu.Item>
+                      ))}
+                    </SubMenu>
+                  ) : (
+                    <Menu.Item key={item.id}>
+                      <Link to={item.url || ''}><Icon type={item.iconUrl} />{item.menuName}</Link>
+                    </Menu.Item>
+                  );
+                } else {
+                  return '';
+                }
+              })
+            }
           </Menu>
         </Layout.Sider>
         <Switch>

@@ -211,6 +211,7 @@ export default {
     },
     onCollapse(state) {
       return {
+        ...state,
         collapsed: !state.collapsed,
       };
     },
