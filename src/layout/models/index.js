@@ -4,7 +4,36 @@ export default {
   namespace: 'layout',
   state: {
     collapsed: false,
-    menus: [],
+    menus: [
+      {
+        id: 1,
+        menuName: '组织管理',
+        url: null,
+        pid: 0,
+        iconUrl: 'sync',
+      },
+      {
+        id: 101,
+        menuName: '组织信息查询',
+        url: '/sync/information/A,B',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
+        id: 2,
+        menuName: '职位管理',
+        url: '/sync/information/C,D',
+        pid: 0,
+        iconUrl: '',
+      },
+      {
+        id: 3,
+        menuName: '人员管理',
+        url: null,
+        pid: 0,
+        iconUrl: 'tag-o',
+      },
+    ],
   },
   reducers: {
     willUpdateState(state, { payload }) {
