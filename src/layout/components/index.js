@@ -4,9 +4,10 @@ import {
 } from 'antd';
 import { Route, Switch, Link } from 'dva/router';
 import logoImg from '../../images/logo.png';
-import './App.css';
 import 'antd/dist/antd.css';
+import app from './App.css';
 import Manpower from '../../components/Manpower';
+import Humanbusiness from '../../components/Humanbusiness';
 
 const { SubMenu } = Menu;
 
@@ -14,14 +15,14 @@ const MainLayout = (state) => {
   console.log(state);
   console.log(state.menus);
   return (
-    <div className="App">
-      <div className="AppHeader">
-        <div className="headerTop">
-          <div className="headerTopL">
+    <div className={app.App}>
+      <div className={app.AppHeader}>
+        <div className={app.headerTop}>
+          <div className={app.headerTopL}>
             <img src={logoImg} alt="" />
           </div>
-          <span className="headerTopC"><b>中国联通HR网上服务平台</b></span>
-          <div className="headerTopR">
+          <span className={app.headerTopC}><b>中国联通HR网上服务平台</b></span>
+          <div className={app.headerTopR}>
             <Input.Search
               placeholder="请输入功能或服务关键字"
               enterButton="搜索"
@@ -29,21 +30,22 @@ const MainLayout = (state) => {
             />
           </div>
         </div>
-        <div className="headerBottom">
+        <div className={app.headerBottom}>
           <nav>
             <a href="jacascript::void(0)">员工服务大厅</a>
-            <a href="jacascript::void(0)" className="navActive">人力业务管理</a>
+            <a href="jacascript::void(0)" className={app.navActive}>人力业务管理</a>
             <a href="jacascript::void(0)">数据决策中心</a>
           </nav>
         </div>
       </div>
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ minHeight: '75vh' }}>
         <Layout.Sider
           collapsible
           collapsed={state.collapsed}
           onCollapse={() => { state.dispatch({ type: 'layout/onCollapse' }); }}
+          theme="light"
         >
-          <div className="logo" />
+          <div className={app.logo} />
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
             {
               state.menus.map((item) => {
@@ -74,6 +76,7 @@ const MainLayout = (state) => {
         </Layout.Sider>
         <Switch>
           <Route exact path="/" component={Manpower} />
+          <Route exact path="/sync/information/C,D" component={Humanbusiness} />
         </Switch>
       </Layout>
     </div>

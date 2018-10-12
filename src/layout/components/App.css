@@ -70,11 +70,11 @@
 .navActive{
 	background-color: #B40710;
 }
-.ant-layout-sider-has-trigger .ant-layout-sider-trigger{
-	background-color: #fff;
+.ant-layout-sider-trigger{
+	background-color: #fff !important;
 }
-.ant-layout-has-sider .ant-layout-sider{
-	background-color: #fff;
+.ant-layout-sider{
+	background-color: #fff !important;
 }
 .anticon.anticon-left{
 	color: rgba(0, 0, 0, 0.65);
