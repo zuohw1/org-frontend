@@ -22,7 +22,7 @@ class Humanbusiness extends Component {
     return (
       <div className="Humanbusiness">
         <Layout>
-          <Content style={{ margin: '0 16px' }}>
+          <Content>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>组织管理</Breadcrumb.Item>
               <Breadcrumb.Item>组织结构查询</Breadcrumb.Item>
