@@ -5,10 +5,6 @@
     padding-left: 3px;
     background-color: white;
 }
-/* :global(.ant-layout) {
-  width: 100%;
-  height: 100%;
-} */
 :global(.tableMainTitle) {
     color: #c70000;
     border-bottom: 1px solid #ccc;
@@ -33,47 +29,51 @@
     background: aliceblue !important;
 }
 :global(.humanlaout) {
-    height: 100%;
     display: flex;
 }
 :global(.sider) {
-    width: 350px;
-    height: 442px;
+    height: 415px;
     background: white;
     display: flex;
     flex-direction: column;
+    max-width: 500px !important;
+    min-width: 350px !important;
+    /* width: 350px !important;
+    flex: 0 0 350px !important; */
+    flex: 3.2 !important;
 }
 :global(.siderTop) {
-    width: 350px;
-    height: 25px;
+    width: 100%;
+    height: 33px;
+    display: flex
 }
 :global(.siderTopL) {
     display: inline-block;
-    width: 66px;
+    flex: 2.1;
     padding-left: 8px;
     border-bottom: 1px #cccccc solid;
     border-right: 1px #cccccc solid;
-    height: 25px;
-    line-height: 25px;
-    background: #f0f0f0;
+    height: 33px;
+    line-height: 33px;
+    background: #f0f2f5;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
     color: #575a5d;
 }
 :global(.siderTopR) {
-    width: 284px;
-    height: 25px;
+    flex: 7.9;
+    height: 33px;
     border-bottom: 1px #cccccc solid;
     border-right: 1px #cccccc solid;
     border-left: 1px #cccccc solid;
     display: inline-block;
-    font-size: 12px;
+    font-size: 13px;
     color: #575a5d;
     text-align: center;
-    line-height: 25px;
+    line-height: 33px;
 }
 :global(.siderTopC1) {
-    width: 350px;
+    width: 100%;
     height: 20px;
     line-height: 20px;
     padding-left: 5px;
@@ -86,50 +86,66 @@
     background: aliceblue !important;
 }
 :global(.siderTopC2) {
-    width: 350px;
-    height: 25px;
-    line-height: 25px;
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
     font-family: Verdana, 宋体, Tahoma, Arial, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: #666;
-    background-color: #eee;  
+    background-color: #f0f2f5;
+    display: flex; 
 }
-:global(.siderTopC2>span) {
+/* :global(.siderTopC2>span) {
     display: inline-block;
-}
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 13px;
+} */
 :global(.siderTopC2>input) {
     display: inline-block;
+    width: 128px;
+    margin-right: 6px;
+    height: 21px;
+    margin-top: 5px;
 }
 :global(.siderTopC2span1) {
-    width: 53px;
-    height: 20px;
-    line-height: 20px;
+    flex:1.2;
+    height: 33px;
+    line-height: 33px;
     text-align: center;
-}
-:global(.siderTopC2input1) {
-    width: 127px;
-    height: 20px; 
+    margin-right: 0.1;
 }
 :global(.siderTopC2span2) {
-    width: 50px;
-    height: 20px;
-    line-height: 20px;
+    flex: 1.2;
+    height: 22px;
+    line-height: 22px;
     text-align: center;
+    margin-right: 0.2;
+    margin-top: 5px;
 }
 :global(.siderTopC2span3) {
-    width: 50px;
-    height: 20px;
-    line-height: 20px;
+    flex: 1.2;
+    height: 22px;
+    line-height: 22px;
     text-align: center;
+    margin-right: 0.2;
+    margin-top: 5px;
+}
+:global(.siderTopC2span4) {
+    flex: 2.3;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    margin-top: 5px;
 }
 :global(.siderTree) {
-    width: 350px;
+    width: 100%;
     flex: 1;
-    border: 1px #cccccc solid;
 }
 :global(.content) {
-    flex: 1;
-    height: 442px;
+    flex: 6.4 !important;
+    height: 415px;
     overflow-y: auto;
 }
 :global(.Title_bk) {
@@ -215,4 +231,11 @@
 :global(.ant-card-head) {
     padding: 0;
     min-height: 36px;
+}
+:global(.ant-btn) {
+    padding: 0;
+    font-size: 13px;
+}
+:global(.ant-btn > .anticon + span) {
+    margin-left: 2px;
 }
