@@ -34,6 +34,7 @@ const generateList = (data) => {
     const node = data[i];
     const key = node.key;
     dataList.push({ key, title: key });
+    //console.log(dataList)
     if (node.children) {
       generateList(node.children, node.key);
     }
@@ -93,6 +94,11 @@ class Treeshade extends Component {
             this.refs.covTree.style.display = "none";
       	    this.refs.conTree.style.display = "none";
       	}
+        enterTreeData=() => {
+            this.refs.covTree.style.display = "none";
+            this.refs.conTree.style.display = "none";
+            console.log(this.state.userName)
+        }
         selectNode=(selectedKeys, e) => {
           console.log(selectedKeys);
           console.log(e)
@@ -100,64 +106,72 @@ class Treeshade extends Component {
         change=(e) =>{
           console.log(e)
         }
+        selectTreeNode=(selectedKeys, e)=>{
+            console.log(selectedKeys, e)
+            this.setState({
+                userName: selectedKeys[0]
+            })
+        }
         render() {
         	const { searchValue, expandedKeys, autoExpandParent } = this.state;
     	    const loop = data => data.map((item) => {
-  		    const index = item.title.indexOf(searchValue);
-  		    const beforeStr = item.title.substr(0, index);
-  		    const afterStr = item.title.substr(index + searchValue.length);
-  		    const title = index > -1 ? (
-  		        <span>
-  		          {beforeStr}
-  		          <span style={{ color: '#f50' }}>{searchValue}</span>
-  		          {afterStr}
-  		        </span>
-  		    ) : <span>{item.title}</span>;
-  		    if (item.children) {
-  		        return (
-  		          <TreeNode key={item.key} title={title} onSelect = {this.selectNode}>
-  		            {loop(item.children)}
-  		          </TreeNode>
-  		        );
-  		    }
-  		    return <TreeNode key={item.key} title={title} />;
-  	    })
-        const { userName } = this.state;
-        const suffix = userName ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
-        return (
-            <div className="Treeshade">
-                <div id="covTree" ref="covTree"></div>
-    				    <div id="conTree" ref="conTree">
-                    <div className="treeHeader">可搜索的树</div>
-                    <div className="treeContent">
-                        <div className="treeContentT">
-                          <Search placeholder="Search" onChange={this.onChange} />
+    		    const index = item.title.indexOf(searchValue);
+    		    const beforeStr = item.title.substr(0, index);
+    		    const afterStr = item.title.substr(index + searchValue.length);
+    		    const title = index > -1 ? (
+    		        <span>
+    		          {beforeStr}
+    		          <span style={{ color: '#f50' }}>{searchValue}</span>
+    		          {afterStr}
+    		        </span>
+    		    ) : <span>{item.title}</span>;
+    		    if (item.children) {
+    		        return (
+    		          <TreeNode key={item.key} title={title} onSelect = {this.selectNode}>
+    		            {loop(item.children)}
+    		          </TreeNode>
+    		        );
+    		    }
+    		    return <TreeNode key={item.key} title={title} />;
+    	    })
+            const { userName } = this.state;
+            const suffix = userName ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
+            return (
+                <div className="Treeshade">
+                    <div id="covTree" ref="covTree"></div>
+        				    <div id="conTree" ref="conTree">
+                        <div className="treeHeader">可搜索的树</div>
+                        <div className="treeContent">
+                            <div className="treeContentT">
+                              <Search placeholder="Search" onChange={this.onChange} />
+                            </div>
+                            <div className="treeContentB">
+                                <Tree
+                                  onExpand={this.onExpand}
+                                  expandedKeys={expandedKeys}
+                                  autoExpandParent={autoExpandParent}
+                                  onSelect={this.selectTreeNode}
+                                >
+                                  {loop(gData)}
+                                </Tree>
+                            </div>
                         </div>
-                        <div className="treeContentB">
-                            <Tree
-                              onExpand={this.onExpand}
-                              expandedKeys={expandedKeys}
-                              autoExpandParent={autoExpandParent}
-                            >
-                              {loop(gData)}
-                            </Tree>
+                        <div className="treeFooter">
+                          <Button type="danger" onClick = {this.closeConTree} className="shadeButton">关闭</Button>
+                          <Button type="primary" onClick = {this.enterTreeData} className="shadeButton">确定</Button>
                         </div>
-                    </div>
-                    <div className="treeFooter">
-                      <Button type="danger" onClick = {this.closeConTree} className="shadeButton">关闭</Button>
-                    </div>
-    				    </div>
-                <Button type="primary" onClick = {this.showConTree} className="openTree">树之遮罩</Button>
-                <Input
-                  placeholder="请输入当前树的节点"
-                  suffix={suffix}
-                  value={userName}
-                  ref={node => this.userNameInput = node}
-                  className="nodeInput"
-                  onChange = {this.change}
-                />  
-            </div>
-        );
+        				    </div>
+                    <Button type="primary" onClick = {this.showConTree} className="openTree">树之遮罩</Button>
+                    <Input
+                      placeholder="请选择树节点"
+                      suffix={suffix}
+                      value={userName}
+                      ref={node => this.userNameInput = node}
+                      className="nodeInput"
+                      onChange = {this.change}
+                    />  
+                </div>
+            );
     }
 }
 export default Treeshade;
