@@ -13,7 +13,7 @@ class AdvancedSearchForm2 extends Component {
     const children = [];
     for (let i = 0; i < res.length; i++) {
       children.push(
-        <Col span={8} key={i}>
+        <Col span={12} key={i}>
           <FormItem label={`${res[i]}`}>
             {getFieldDecorator(`${i}`, {
               rules: [{

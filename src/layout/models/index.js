@@ -15,7 +15,14 @@ export default {
       {
         id: 101,
         menuName: '组织信息查询',
-        url: '/sync/information/A,B',
+        url: '/org/search',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
+        id: 102,
+        menuName: '组织批文前置流程',
+        url: '/org/approval',
         pid: 1,
         iconUrl: 'sync',
       },

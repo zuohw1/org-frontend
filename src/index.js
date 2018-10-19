@@ -24,6 +24,7 @@ if (Configure.debug) {
 }
 
 app.model(require('./layout/models').default);
+app.model(require('./org/models/approval').default);
 
 app.router(({ history }) => (
   <LocaleProvider locale={zhCN}>

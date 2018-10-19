@@ -3,11 +3,13 @@ import {
   Layout, Menu, Icon, Input,
 } from 'antd';
 import { Route, Switch, Link } from 'dva/router';
-import logoImg from '../../images/logo.png';
+import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.css';
-import app from './App.css';
-import Manpower from '../../components/Manpower';
+import app from '../../assets/styles/App.css';
+import Manpower from './Manpower';
 import Humanbusiness from '../../components/Humanbusiness';
+import OrgApproval from '../../org/containers/approval';
+import Treelist from '../../components/Treelist';
 
 const { SubMenu } = Menu;
 
@@ -74,10 +76,13 @@ const MainLayout = (state) => {
             }
           </Menu>
         </Layout.Sider>
-        <Switch>
-          <Route exact path="/" component={Manpower} />
-          <Route exact path="/sync/information/C,D" component={Humanbusiness} />
-        </Switch>
+        <Layout style={{ padding: '0 24px 24px' }}>
+          <Switch>
+            <Route exact path="/" component={Manpower} />
+            <Route exact path="/org/search" component={Treelist} />
+            <Route exact path="/org/approval" component={OrgApproval} />
+          </Switch>
+        </Layout>
       </Layout>
     </div>
   );

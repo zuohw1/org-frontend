@@ -10,12 +10,6 @@
 :global(.ant-advanced-search-form .ant-form-item-control-wrapper) {
     flex: 1;
 }
-:global(.ant-col-8) {
-    width: 50%;
-}
-:global(.ant-advanced-search-form .ant-form-item) {
-    margin-bottom: 6px;
-}
-:global(.form222 .ant-row .ant-col-8 .ant-form-item .ant-form-item-label) {
+:global(.form222 .ant-row .ant-col-12 .ant-form-item .ant-form-item-label) {
     width: 88.5px;
 }
