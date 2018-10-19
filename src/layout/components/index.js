@@ -9,7 +9,6 @@ import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
 import Humanbusiness from '../../components/Humanbusiness';
 import OrgApproval from '../../org/containers/approval';
-import Treelist from '../../components/Treelist';
 
 const { SubMenu } = Menu;
 
@@ -79,7 +78,7 @@ const MainLayout = (state) => {
         <Layout style={{ padding: '0 24px 24px' }}>
           <Switch>
             <Route exact path="/" component={Manpower} />
-            <Route exact path="/org/search" component={Treelist} />
+            <Route exact path="/org/search" component={Humanbusiness} />
             <Route exact path="/org/approval" component={OrgApproval} />
           </Switch>
         </Layout>
