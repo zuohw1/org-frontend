@@ -3,19 +3,11 @@ import ApprovalService from '../services/approval';
 
 /* 格式化添加修改数据 */
 const formatRecord = (record) => {
-  const webIconUrl = record.webIconUrl ? record.webIconUrl.fileList[0] ? record.webIconUrl.fileList[0].response : '' : '';
-  const mobileIconUrl = record.mobileIconUrl ? record.mobileIconUrl.fileList[0] ? record.mobileIconUrl.fileList[0].response : '' : '';
-
+  console.log(record.DOC_DATE);
   const format = {
     ...record,
-    abbreviation: record.abbreviation.trim(),
-    name: record.name.trim(),
-    webIconUrl,
-    mobileIconUrl,
-    deleteFlag: record.deleteFlag ? 1 : 0,
+    DOC_DATE: record.DOC_DATE.format('YYYY-MM-DD'),
   };
-  delete format.id;
-  delete format.systemName;
   return format;
 };
 
@@ -23,7 +15,7 @@ const formatRecord = (record) => {
 const formatTableData = (tableData) => {
   const num = tableData.current * 10 - 10;
   const table = tableData.records.map((item, index) => {
-    let ite = { ...item, orderNum: index + 1 + num};
+    let ite = { ...item, key: index + 1 + num};
     return ite;
   });
   const formatTable = { ...tableData, records: table };
@@ -41,8 +33,9 @@ export default {
       pages: 0,
     },
     modal: false,
-    newModal: false,
+    refmodal : false,
     expand: false,
+    formEdit:true,
     record: {},
     search: {
       batchCode: '',
@@ -62,8 +55,8 @@ export default {
       {itemName:"发起结束日期",itemKey:"batDateE",itemType:"Date",required:false}],
     table_columns: [{
       title: '序号',
-      dataIndex: 'orderNum',
-      key: 'orderNum',
+      dataIndex: 'key',
+      key: 'key',
       align: 'center',
     }, {
       title: '文件名称和文号',
@@ -117,7 +110,6 @@ export default {
   effects: {
     * fetch({ payload: { search } }, { call, put }) {
       const tableData = yield call(ApprovalService.list, search);
-      console.log(tableData);
       const formatTable = formatTableData(tableData);
       yield put({
         type: 'stateWillUpdate',
@@ -131,33 +123,36 @@ export default {
     * newRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const records = formatRecord(record);
-      yield put({
-        type: 'stateWillUpdate',
-        payload: { record: { ...records, deleteFlag: record.deleteFlag } },
-      });
       yield call(ApprovalService.add, records);
       yield put({
         type: 'fetch',
-        payload: { search: null },
+        payload: { search: {pageNumber:1,pageSize:10} },
       });
-      yield put({
+     yield put({
         type: 'stateWillUpdate',
-        payload: { newModal: false, record: {} },
+        payload: { modal: false, record: {} },
       });
     },
 
     * updataRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const records = formatRecord(record);
-      const id = JsonBig.parse(JsonBig.stringify(record.id));
-      yield call(ApprovalService.update, records, id);
+      yield call(ApprovalService.update, records);
       yield put({
         type: 'fetch',
-        payload: { search: null },
+        payload: { search: {pageNumber:1,pageSize:10} },
       });
       yield put({
         type: 'stateWillUpdate',
         payload: { modal: false },
+      });
+    },
+
+    * deleteRecord({ payload: { record } }, { call, put }) {
+      yield call(ApprovalService.delete, record.BATCH_HEADER_ID);
+      yield put({
+        type: 'fetch',
+        payload: { search: {pageNumber:1,pageSize:10} },
       });
     },
   },

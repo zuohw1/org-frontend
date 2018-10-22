@@ -1,8 +1,17 @@
-export function isModeShow(modal) {
+export function isModeShow(modal,formEdit) {
   return {
     type: 'orgApproval/stateWillUpdate',
     payload: {
-      modal,
+      modal,formEdit
+    },
+  };
+}
+
+export function isRefModeShow(refmodal) {
+  return {
+    type: 'orgApproval/stateWillUpdate',
+    payload: {
+      refmodal
     },
   };
 }
@@ -12,15 +21,6 @@ export function getRecord(record) {
     type: 'orgApproval/stateWillUpdate',
     payload: {
       record,
-    },
-  };
-}
-
-export function isNewModeShow(newModal) {
-  return {
-    type: 'orgApproval/stateWillUpdate',
-    payload: {
-      newModal,
     },
   };
 }
@@ -44,17 +44,35 @@ export function listTable(search) {
 }
 
 export function updataRecord(record) {
+  if(record.BATCH_HEADER_ID && record.BATCH_HEADER_ID!==''){
+    return {
+      type: 'orgApproval/updataRecord',
+      payload: {
+        record,
+      },
+    };
+  }else{
+    return {
+      type: 'orgApproval/newRecord',
+      payload: {
+        record,
+      },
+    };
+  }
+}
+
+export function newRecord(record) {
   return {
-    type: 'orgApproval/updataRecord',
+    type: 'orgApproval/newRecord',
     payload: {
       record,
     },
   };
 }
 
-export function newRecord(record) {
+export function deleteRecord(record) {
   return {
-    type: 'orgApproval/newRecord',
+    type: 'orgApproval/deleteRecord',
     payload: {
       record,
     },

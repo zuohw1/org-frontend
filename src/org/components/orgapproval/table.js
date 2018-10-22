@@ -8,6 +8,8 @@ import {
 } from 'antd';
 import Model from './model';
 
+const { confirm } = Modal
+
 export default ({
   tableData,
   actions,
@@ -16,17 +18,36 @@ export default ({
   modal,
   form,
   table_columns,
-  loading,
+  loading, formEdit,refmodal,
 }) => {
   const {
     isModeShow,
     getRecord,
     updataRecord,
+    deleteRecord,
     listTable,
   } = actions;
-  const onClick = (_, records) => {
-    getRecord(records);
-    isModeShow(true);
+  const onClickView = (_, record) => {
+    getRecord(record);
+    isModeShow(true,false);
+  };
+
+  const onClickAdd = () => {
+    isModeShow(true,true);
+  };
+
+  const onClickEdit = (_, record) => {
+    getRecord(record);
+    isModeShow(true,true);
+  };
+
+  const onClickDelete = (record) => {
+    confirm({
+      title: '确定要删除本条记录吗?',
+      onOk () {
+        deleteRecord(record)
+      },
+    })
   };
 
   const data = tableData.records;
@@ -76,11 +97,15 @@ export default ({
         align: 'center',
         render: (text, records) => (
           <span>
-          <a href="javascript:;" onClick={() => onClick(text, records)}>查看</a>
+          <a href="javascript:;" onClick={() => onClickView(text, records)}>查看</a>
           <Divider type="vertical" />
-          <a href="javascript:;">修改</a>
+          <a href="javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
           <Divider type="vertical" />
-          <a href="javascript:;">删除</a>
+          <a href="javascript:;" onClick={() => onClickDelete(records)}>删除</a>
+         {/* <Popconfirm title="确定要删除吗？" onConfirm = {() => onClickDelete(records)}>
+              <a> 删除</a>
+            </Popconfirm>
+            */}
           </span>
         ),
       });
@@ -96,15 +121,18 @@ export default ({
         onCancel={onCancel}
         maskClosable={false}
         destroyOnClose
+        width={1200}
       >
         <Model
           record={record}
           form={form}
           actions={actions}
+          formEdit={formEdit}
+          refmodal={refmodal}
         />
       </Modal>
       <Button type="primary" style={{ margin: '20px 0' }}
-              onClick={onClick}>新增</Button>
+              onClick={onClickAdd}>新增</Button>
       <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} />
       <Pagination
         showQuickJumper
