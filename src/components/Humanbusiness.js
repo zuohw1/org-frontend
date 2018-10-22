@@ -27,7 +27,7 @@ class Humanbusiness extends Component {
               <Breadcrumb.Item>组织管理</Breadcrumb.Item>
               <Breadcrumb.Item>组织结构查询</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ minHeight: 360 }} className="humanlaout">
+            <div className="humanlaout">
               <Sider className="sider">
                 <div className="siderTop">
                   <b className="siderTopL">结构版本</b>
