@@ -16,13 +16,15 @@ class SearchTable extends React.Component {
   componentDidMount() {
     const { refUrl,getRefData } = this.props;
     const { search } = this.state;
-    console.log(search);
     getRefData(refUrl,search);
   }
 
-  onChange = (e) => {
-    const value = e.target.value;
-    console.log(value);
+  onSearch = (value) => {
+    const { refUrl,getRefData } = this.props;
+    const { search } = this.state;
+    const searchF = { ...search,batchCode:value };
+    console.log(searchF);
+    getRefData(refUrl,searchF);
   }
 
   onChangePage = (pageNumber, pageSize) => {
@@ -45,7 +47,7 @@ class SearchTable extends React.Component {
 
     return (
       <div>
-        <Search style={{ width: 300 }} placeholder="Search" onChange={this.onChange} />
+        <Search style={{ width: 300 }} placeholder="Search" onSearch={this.onSearch} />
         <Table columns={columns} dataSource={records}
                pagination={false} size="small"
                rowSelection={rowSelection}/>

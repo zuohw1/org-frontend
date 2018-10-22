@@ -168,8 +168,8 @@ export default {
         payload: { record },
       });
     },
-    * getRefData({ payload: { search } }, { call, put }) {
-      const tableData = yield call(ApprovalService.getRefData ,search);
+    * getRefData({ payload: { url,search } }, { call, put }) {
+      const tableData = yield call(ApprovalService.getRefData ,url,search);
       const formatTable = formatTableData(tableData);
       console.log(formatTable);
       yield put({

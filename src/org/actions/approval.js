@@ -43,11 +43,11 @@ export function listTable(search) {
   };
 }
 
-export function getRefData(search) {
+export function getRefData(url,search) {
   return {
     type: 'orgApproval/getRefData',
     payload: {
-      search,
+      url,search,
     },
   };
 }

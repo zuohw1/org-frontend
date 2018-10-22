@@ -26,17 +26,17 @@ export default {
   getAttachData(id) {
     return request.get(`orgHeaderBatch/getAttachData?id=${id}`);
   },
-  getRefData(search) {
-   /* let url = `orgHeaderBatch/list?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
+  getRefData(url,search) {
+    url = url+`?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
     if(search.batchCode && search.batchCode!==''){
       url+= `&batchCode=${search.batchCode}`;
-    }*/
-    return request.get(`orgHeaderBatch/list`);
+    }
+    return request.get(url);
   },
   add(records) {
     return request.post('orgHeaderBatch/save', records);
   },
-  update(records, id) {
+  update(records) {
     return request.post(`orgHeaderBatch/update`, records);
   },
   delete(id) {
