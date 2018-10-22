@@ -1,9 +1,7 @@
-import JsonBig from 'json-bigint';
 import ApprovalService from '../services/approval';
 
 /* 格式化添加修改数据 */
 const formatRecord = (record) => {
-  console.log(record.DOC_DATE);
   const format = {
     ...record,
     DOC_DATE: record.DOC_DATE.format('YYYY-MM-DD'),
@@ -34,6 +32,7 @@ export default {
     },
     modal: false,
     refmodal : false,
+    refData : [],
     expand: false,
     formEdit:true,
     record: {},
@@ -153,6 +152,31 @@ export default {
       yield put({
         type: 'fetch',
         payload: { search: {pageNumber:1,pageSize:10} },
+      });
+    },
+
+    * getRecord({ payload: { record } }, { call, put }) {
+      if(record.BATCH_HEADER_ID && record.BATCH_HEADER_ID!==''){
+        const attachData = yield call(ApprovalService.getAttachData, record.BATCH_HEADER_ID);
+        record = {
+          ...record,
+          attachData: attachData,
+        };
+      }
+      yield put({
+        type: 'stateWillUpdate',
+        payload: { record },
+      });
+    },
+    * getRefData({ payload: { search } }, { call, put }) {
+      const tableData = yield call(ApprovalService.getRefData ,search);
+      const formatTable = formatTableData(tableData);
+      console.log(formatTable);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          refData: formatTable,
+        },
       });
     },
   },

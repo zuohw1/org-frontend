@@ -18,6 +18,7 @@ export default ({
   modal,
   form,
   table_columns,
+  refData,
   loading, formEdit,refmodal,
 }) => {
   const {
@@ -117,7 +118,7 @@ export default ({
       <Modal
         title="变更依据"
         visible={modal}
-        onOk={onSubmit}
+        onOk={formEdit?onSubmit:onCancel}
         onCancel={onCancel}
         maskClosable={false}
         destroyOnClose
@@ -129,6 +130,7 @@ export default ({
           actions={actions}
           formEdit={formEdit}
           refmodal={refmodal}
+          refData={refData}
         />
       </Modal>
       <Button type="primary" style={{ margin: '20px 0' }}

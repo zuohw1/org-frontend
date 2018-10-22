@@ -8,15 +8,13 @@ export default ({
                   loading,
                 }) => {
 
-  const data = [];
-
   function getFields() {
     const children = [];
     children.push(
       {
         title: '附件信息',
-        dataIndex: 'key',
-        key: 'key',
+        dataIndex: 'rownum',
+        key: 'rownum',
         align: 'center',
       });
     children.push(
@@ -42,6 +40,6 @@ export default ({
   }
 
   return (
-    <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} />
+    <Table columns={getFields()} loading={loading} dataSource={attachData} pagination={false} />
   );
 };

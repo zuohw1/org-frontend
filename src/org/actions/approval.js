@@ -18,7 +18,7 @@ export function isRefModeShow(refmodal) {
 
 export function getRecord(record) {
   return {
-    type: 'orgApproval/stateWillUpdate',
+    type: 'orgApproval/getRecord',
     payload: {
       record,
     },
@@ -37,6 +37,15 @@ export function selectName(search) {
 export function listTable(search) {
   return {
     type: 'orgApproval/fetch',
+    payload: {
+      search,
+    },
+  };
+}
+
+export function getRefData(search) {
+  return {
+    type: 'orgApproval/getRefData',
     payload: {
       search,
     },

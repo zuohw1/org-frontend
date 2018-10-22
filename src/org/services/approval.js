@@ -2,7 +2,6 @@ import request from '../../utils/request';
 
 export default {
   list(search) {
-    console.log(search);
     let url = `orgHeaderBatch/all?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
     if(search.batchCode && search.batchCode!==''){
       url+= `&batchCode=${search.batchCode}`;
@@ -23,6 +22,16 @@ export default {
       url+= `&batDateE=${search.batDateE.format('YYYY-MM-DD')}`;
     }
     return request.get(url);
+  },
+  getAttachData(id) {
+    return request.get(`orgHeaderBatch/getAttachData?id=${id}`);
+  },
+  getRefData(search) {
+   /* let url = `orgHeaderBatch/list?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
+    if(search.batchCode && search.batchCode!==''){
+      url+= `&batchCode=${search.batchCode}`;
+    }*/
+    return request.get(`orgHeaderBatch/list`);
   },
   add(records) {
     return request.post('orgHeaderBatch/save', records);

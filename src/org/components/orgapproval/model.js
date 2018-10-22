@@ -5,7 +5,7 @@ import {
   DatePicker, Radio, Row, Col, Modal,
 } from 'antd';
 import AttachTable from './attachTable';
-import SearchTree from '../../../components/SearchTree';
+import SearchTable from '../../../components/SearchTable';
 import moment from 'moment';
 
 const FormItem = Form.Item;
@@ -17,10 +17,11 @@ export default ({
   actions,
   formEdit,
   refmodal,
+  refData,
 }) => {
   const { getFieldDecorator } = form;
 
-  const { isRefModeShow } = actions;
+  const { isRefModeShow,getRefData } = actions;
 
   const onRefSubmit = (e) => {
     console.log(record);
@@ -38,7 +39,35 @@ export default ({
     isRefModeShow(true);
   };
 
-  const refCodes = [{code:'DOC_CODE',refcode:'name'},{code:'DOC_VERIFIER',refcode:'id'}];
+  const refCodes = [{code:'DOC_CODE',refcode:'docCode'},{code:'DOC_VERIFIER',refcode:'docVerifier'}];
+  const refColumns = [{
+    title: '序号',
+    dataIndex: 'key',
+    key: 'key',
+    align: 'center',
+  }, {
+    title: '文件名称和文号',
+    dataIndex: 'docCode',
+    key: 'docCode',
+    align: 'center',
+  }, {
+    title: '文件拟稿人',
+    dataIndex: 'docVerifier',
+    key: 'docVerifier',
+    align: 'center',
+  }];
+
+  const refUrl = 'orgHeaderBatch/list';
+
+  const rowSelection = {
+    type:'radio',
+    onSelect: (row, selected, selectedRows) => {
+      console.log(row);
+      refCodes.map((item) => {
+        record[item.code] = row[item.refcode];
+      });
+    },
+  }
 
   return (
     <div>
@@ -49,8 +78,15 @@ export default ({
       onCancel={onRefCancel}
       maskClosable={false}
       destroyOnClose
+      width={700}
     >
-      <SearchTree record={record} refCodes={refCodes} />
+      <SearchTable
+        columns={refColumns}
+        refUrl={refUrl}
+        getRefData={getRefData}
+        refData={refData}
+        rowSelection={rowSelection}
+      />
     </Modal>
     <Form>
       <Row gutter={24}>
@@ -122,7 +158,7 @@ export default ({
       </Col>
       </Row>
     </Form>
-    <AttachTable></AttachTable>
+    <AttachTable attachData={record.attachData}></AttachTable>
     </div>
   );
 };
