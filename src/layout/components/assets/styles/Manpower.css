@@ -172,6 +172,9 @@
   padding-top: 1px;
   padding-bottom: 1px;
 }
+:global(.part1RightLBottom .ant-card-bordered .ant-card-body p) {
+  font-size: 13px;
+}
 
 
 
