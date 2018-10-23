@@ -3,7 +3,7 @@ import {Table, Input, Pagination} from 'antd';
 
 const Search = Input.Search;
 
-class SearchTable extends React.Component {
+class SearchTable extends React.PureComponent {
 
   state = {
     search: {

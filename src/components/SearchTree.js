@@ -60,7 +60,7 @@ const getParentKey = (key, tree) => {
   return parentKey;
 };
 
-class SearchTree extends React.Component {
+class SearchTree extends React.PureComponent {
 
   state = {
     expandedKeys: [],
