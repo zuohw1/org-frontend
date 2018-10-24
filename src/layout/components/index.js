@@ -7,7 +7,7 @@ import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.css';
 import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
-import Humanbusiness from '../../components/Humanbusiness';
+import Orgsearch from '../../org/components/orgsearch/Orgsearch';
 import OrgApproval from '../../org/containers/approval';
 
 const { SubMenu } = Menu;
@@ -78,7 +78,7 @@ const MainLayout = (state) => {
         <Layout style={{ padding: '0 24px 24px' }}>
           <Switch>
             <Route exact path="/" component={Manpower} />
-            <Route exact path="/org/search" component={Humanbusiness} />
+            <Route exact path="/org/search" component={Orgsearch} />
             <Route exact path="/org/approval" component={OrgApproval} />
           </Switch>
         </Layout>
