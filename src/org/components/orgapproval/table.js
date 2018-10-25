@@ -18,7 +18,6 @@ export default ({
   modal,
   form,
   table_columns,
-  refData,
   loading, formEdit,refmodal,
 }) => {
   const {
@@ -103,10 +102,6 @@ export default ({
           <a href="javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
           <Divider type="vertical" />
           <a href="javascript:;" onClick={() => onClickDelete(records)}>删除</a>
-         {/* <Popconfirm title="确定要删除吗？" onConfirm = {() => onClickDelete(records)}>
-              <a> 删除</a>
-            </Popconfirm>
-            */}
           </span>
         ),
       });
@@ -130,7 +125,6 @@ export default ({
           actions={actions}
           formEdit={formEdit}
           refmodal={refmodal}
-          refData={refData}
         />
       </Modal>
       <Button type="primary" style={{ margin: '20px 0' }}

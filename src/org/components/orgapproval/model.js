@@ -17,11 +17,10 @@ export default ({
   actions,
   formEdit,
   refmodal,
-  refData,
 }) => {
   const { getFieldDecorator } = form;
 
-  const { isRefModeShow,getRefData } = actions;
+  const { isRefModeShow } = actions;
 
   const onRefSubmit = (e) => {
     console.log(record);
@@ -83,8 +82,6 @@ export default ({
       <SearchTable
         columns={refColumns}
         refUrl={refUrl}
-        getRefData={getRefData}
-        refData={refData}
         rowSelection={rowSelection}
       />
     </Modal>

@@ -43,15 +43,6 @@ export function listTable(search) {
   };
 }
 
-export function getRefData(url,search) {
-  return {
-    type: 'orgApproval/getRefData',
-    payload: {
-      url,search,
-    },
-  };
-}
-
 export function updataRecord(record) {
   if(record.BATCH_HEADER_ID && record.BATCH_HEADER_ID!==''){
     return {
