@@ -7,7 +7,7 @@ import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.css';
 import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
-import Humanbusiness from '../../components/Humanbusiness';
+import Orgsearch from '../../org/components/orgsearch/Orgsearch';
 import OrgApproval from '../../org/containers/approval';
 
 const { SubMenu } = Menu;
@@ -55,17 +55,17 @@ const MainLayout = (state) => {
                   return children.length !== 0 ? (
                     <SubMenu
                       key={item.id}
-                      title={<span><Icon type={item.iconUrl} />{item.menuName}</span>}
+                      title={<span><Icon type={item.iconUrl} /><span>{item.menuName}</span></span>}
                     >
                       {children.map(ele => (
                         <Menu.Item key={ele.id}>
-                          <Link to={ele.url || ''}>{ele.menuName}</Link>
+                          <Link to={ele.url || ''}><span>{ele.menuName}</span></Link>
                         </Menu.Item>
                       ))}
                     </SubMenu>
                   ) : (
                     <Menu.Item key={item.id}>
-                      <Link to={item.url || ''}><Icon type={item.iconUrl} />{item.menuName}</Link>
+                      <Link to={item.url || ''}><Icon type={item.iconUrl} /><span>{item.menuName}</span></Link>
                     </Menu.Item>
                   );
                 } else {
@@ -78,7 +78,7 @@ const MainLayout = (state) => {
         <Layout style={{ padding: '0 24px 24px' }}>
           <Switch>
             <Route exact path="/" component={Manpower} />
-            <Route exact path="/org/search" component={Humanbusiness} />
+            <Route exact path="/org/search" component={Orgsearch} />
             <Route exact path="/org/approval" component={OrgApproval} />
           </Switch>
         </Layout>

@@ -31,7 +31,7 @@ export default {
         menuName: '职位管理',
         url: '/sync/information/C,D',
         pid: 0,
-        iconUrl: '',
+        iconUrl: 'user',
       },
       {
         id: 3,
