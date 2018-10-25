@@ -55,17 +55,17 @@ const MainLayout = (state) => {
                   return children.length !== 0 ? (
                     <SubMenu
                       key={item.id}
-                      title={<span><Icon type={item.iconUrl} />{item.menuName}</span>}
+                      title={<span><Icon type={item.iconUrl} /><span>{item.menuName}</span></span>}
                     >
                       {children.map(ele => (
                         <Menu.Item key={ele.id}>
-                          <Link to={ele.url || ''}>{ele.menuName}</Link>
+                          <Link to={ele.url || ''}><span>{ele.menuName}</span></Link>
                         </Menu.Item>
                       ))}
                     </SubMenu>
                   ) : (
                     <Menu.Item key={item.id}>
-                      <Link to={item.url || ''}><Icon type={item.iconUrl} />{item.menuName}</Link>
+                      <Link to={item.url || ''}><Icon type={item.iconUrl} /><span>{item.menuName}</span></Link>
                     </Menu.Item>
                   );
                 } else {
