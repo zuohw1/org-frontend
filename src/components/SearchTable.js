@@ -6,6 +6,20 @@ const Search = Input.Search;
 
 /**
  * 表格参照
+ * <SearchTable
+ * columns={refColumns}//表格显示字段
+ * refUrl={refUrl}//请求url
+ * rowSelection={rowSelection}//行属性
+ * const rowSelection = {
+    type:'radio',//radio、checkbox
+    onSelect: (row, selected, selectedRows) => {
+      console.log(row);
+      refCodes.map((item) => {
+        record[item.code] = row[item.refcode];
+      });
+    },
+  }
+ * />
  */
 class SearchTable extends React.PureComponent {
 

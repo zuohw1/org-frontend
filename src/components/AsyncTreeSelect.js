@@ -6,16 +6,30 @@ const TreeNode = Tree.TreeNode;
 
 /**
  * 异步加载的TreeSelect
+ * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange}/>
  */
 class AsyncTreeSelect extends React.PureComponent {
-  onChange = (value) => {
-    console.log(value);
-    this.setState({ value });
+
+  /**
+   * 回写form
+   * const treeSelectChange = (value, label, extra) => {
+    form.setFieldsValue({
+      orgid: `${extra.triggerNode.props.id}`,
+    });
   }
+   * @param value
+   * @param label
+   * @param extra
+   */
+  onChange = (value, label, extra) => {
+    this.setState({ value });
+    const { treeSelectChange } = this.props;
+    treeSelectChange(value, label, extra);
+  }
+
   state = {
     value: undefined,
     treeData: [],
-    raw: [],
   }
 
   /**
@@ -24,24 +38,14 @@ class AsyncTreeSelect extends React.PureComponent {
    * @returns {Promise<any>}
    */
   onLoadData = (treeNode) => {
-    const { raw, treeData } = this.state;
-    const { value } = treeNode.props;
+    const { treeData } = this.state;
+    const { key } = treeNode.props.dataRef;
     return new Promise(async (resolve) => {
-      const result = await request.get(`organizationAll/tree?id=${value}&isSelf=false`);
-      const mappedResult = result.map(item => ({
-        key: item.key,
-        title: item.title,
-        value: item.value,
-        extra: item,
-      }));
-      const parent = raw.find(item => parseInt(item.value, 10) === parseInt(value, 10));
-      if (parent) {
-        Object.assign(parent, {
-          children: mappedResult,
-        });
-      }
-      const newRaw = [...raw, ...mappedResult];
-      this.setState({ treeData: [...treeData], raw: newRaw });
+      const result = await request.get(`organizationAll/childrenTree?id=${key}`);
+      treeNode.props.dataRef.children = result;
+      this.setState({
+        treeData: [...this.state.treeData],
+      });
       resolve();
     });
   }
@@ -55,7 +59,7 @@ class AsyncTreeSelect extends React.PureComponent {
     return data.map((item) => {
       if (item.children) {
         return (
-          <TreeNode title={item.title} value={item.value} key={item.key} dataRef={item}>
+          <TreeNode {...item} dataRef={item}>
             {this.renderTreeNodes(item.children)}
           </TreeNode>
         );
@@ -69,14 +73,9 @@ class AsyncTreeSelect extends React.PureComponent {
    * @returns {Promise<void>}
    */
   async componentDidMount() {
-    const result = await request.get('organizationAll/tree?id=101&isSelf=true');
-    const treeData = (result || []).map(item => ({
-      key: item.key,
-      title: item.title,
-      value: item.value,
-      extra: item,
-    }));
-    this.setState({ treeData, raw: treeData });
+    const { treeId } = this.props;
+    const result = await request.get(`organizationAll/orgTree?id=${treeId}`);
+    this.setState({ treeData:result });
   }
 
   render() {
@@ -88,7 +87,7 @@ class AsyncTreeSelect extends React.PureComponent {
         value={this.state.value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         loadData={this.onLoadData}
-        placeholder="Please select"
+        placeholder="请选择"
         onChange={this.onChange}
       >
         {this.renderTreeNodes(this.state.treeData)}
@@ -96,4 +95,4 @@ class AsyncTreeSelect extends React.PureComponent {
     );
   }
 }
-export default SearchTreeSelect;
+export default AsyncTreeSelect;
