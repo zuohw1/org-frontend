@@ -104,7 +104,7 @@ export default (props) => {
       <Row gutter={24}>{getFields()}</Row>
       <Row>
         <Col span={24} style={{ textAlign: 'right' }}>
-          <Button type="primary" htmlType="submit">查询</Button>
+          <Button htmlType="submit">查询</Button>
           <Button style={{ marginLeft: 8 }} onClick={handleReset}>
             重置
           </Button>
