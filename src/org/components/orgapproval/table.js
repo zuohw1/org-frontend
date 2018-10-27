@@ -18,7 +18,7 @@ export default ({
   modal,
   form,
   tableCols,
-  loading, formEdit, refmodal,
+  loading, formEdit, refModal,
 }) => {
   const {
     isModeShow,
@@ -86,7 +86,7 @@ export default ({
 
   function getFields() {
     const children = [];
-    for (let i = 0; i < tableCols.length; i++) {
+    for (let i = 0; i < tableCols.length; i += 1) {
       children.push(tableCols[i]);
     }
     children.push(
@@ -125,7 +125,7 @@ export default ({
           form={form}
           actions={actions}
           formEdit={formEdit}
-          refmodal={refmodal}
+          refModal={refModal}
         />
       </Modal>
       <Button

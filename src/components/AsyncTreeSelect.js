@@ -10,6 +10,11 @@ const { TreeNode } = Tree;
  * 使用方法：
  * const refUrl = 'org/getChildrenData?id=';
  * const url = 'org/getData?id=';
+ * const treeSelectChange = (value, label, extra) => {
+    form.setFieldsValue({
+      orgid: `${extra.triggerNode.props.id}`,
+    });
+    }
  * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} url={url}/>
  */
 class AsyncTreeSelect extends React.PureComponent {
@@ -35,11 +40,11 @@ class AsyncTreeSelect extends React.PureComponent {
    */
   onLoadData = (treeNode) => {
     const { treeData } = this.state;
-    const { key } = treeNode.props.dataRef;
+    const { dataRef } = treeNode.props;
     const { refUrl } = this.props;
     return new Promise(async (resolve) => {
-      const result = await request.get(`${refUrl}${key}`);
-      key.children = result;
+      const result = await request.get(`${refUrl}${dataRef.id}`);
+      dataRef.children = result;
       this.setState({
         treeData: [...treeData],
       });
