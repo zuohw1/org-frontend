@@ -6,7 +6,11 @@ const TreeNode = Tree.TreeNode;
 
 /**
  * 异步加载的TreeSelect
- * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange}/>
+ *
+ * 使用方法：
+ * const refUrl = 'org/getChildrenData?id=';
+ * const url = 'org/getData?id=';
+ * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} url={url}/>
  */
 class AsyncTreeSelect extends React.PureComponent {
 
@@ -40,8 +44,9 @@ class AsyncTreeSelect extends React.PureComponent {
   onLoadData = (treeNode) => {
     const { treeData } = this.state;
     const { key } = treeNode.props.dataRef;
+    const { refUrl } = this.props;
     return new Promise(async (resolve) => {
-      const result = await request.get(`organizationAll/childrenTree?id=${key}`);
+      const result = await request.get(refUrl+`${key}`);
       treeNode.props.dataRef.children = result;
       this.setState({
         treeData: [...this.state.treeData],
@@ -73,8 +78,8 @@ class AsyncTreeSelect extends React.PureComponent {
    * @returns {Promise<void>}
    */
   async componentDidMount() {
-    const { treeId } = this.props;
-    const result = await request.get(`organizationAll/orgTree?id=${treeId}`);
+    const { treeId,url } = this.props;
+    const result = await request.get(url+`${treeId}`);
     this.setState({ treeData:result });
   }
 
@@ -83,6 +88,7 @@ class AsyncTreeSelect extends React.PureComponent {
     console.log(treeData);
     return (
       <TreeSelect
+        treeDefaultExpandAll={true}
         style={{ width: 300 }}
         value={this.state.value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}

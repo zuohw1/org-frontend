@@ -6,7 +6,8 @@ const TreeNode = Tree.TreeNode;
 
 /**
  * 同步TreeSelect
- * <SyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange}/>
+ * const refUrl = 'org/allData?id=';
+ * <SyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl}/>
  */
 class syncTreeSelect extends React.PureComponent {
 
@@ -36,8 +37,8 @@ class syncTreeSelect extends React.PureComponent {
    * @returns {Promise<void>}
    */
   async componentDidMount() {
-    const { treeId } = this.props;
-    const treeData = await request.get(`organizationAll/allTree?id=${treeId}`);
+    const { treeId,refUrl } = this.props;
+    const treeData = await request.get(refUrl+`${treeId}`);
     this.setState({ treeData});
   }
 
