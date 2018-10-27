@@ -1,17 +1,17 @@
-export function isModeShow(modal,formEdit) {
+export function isModeShow(modal, formEdit) {
   return {
     type: 'orgApproval/stateWillUpdate',
     payload: {
-      modal,formEdit
+      modal, formEdit,
     },
   };
 }
 
-export function isRefModeShow(refmodal) {
+export function isRefModeShow(refModal) {
   return {
     type: 'orgApproval/stateWillUpdate',
     payload: {
-      refmodal
+      refModal,
     },
   };
 }
@@ -44,14 +44,14 @@ export function listTable(search) {
 }
 
 export function updataRecord(record) {
-  if(record.BATCH_HEADER_ID && record.BATCH_HEADER_ID!==''){
+  if (record.BATCH_HEADER_ID && record.BATCH_HEADER_ID !== '') {
     return {
       type: 'orgApproval/updataRecord',
       payload: {
         record,
       },
     };
-  }else{
+  } else {
     return {
       type: 'orgApproval/newRecord',
       payload: {

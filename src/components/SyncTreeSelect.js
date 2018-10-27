@@ -1,8 +1,6 @@
 import React from 'react';
-import { TreeSelect, Tree } from 'antd';
+import { TreeSelect } from 'antd';
 import request from '../utils/request';
-
-const TreeNode = Tree.TreeNode;
 
 /**
  * 同步TreeSelect
@@ -10,6 +8,20 @@ const TreeNode = Tree.TreeNode;
  * <SyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl}/>
  */
 class syncTreeSelect extends React.PureComponent {
+  state = {
+    value: undefined,
+    treeData: [],
+  }
+
+  /**
+   *第一次渲染后调用
+   * @returns {Promise<void>}
+   */
+  async componentDidMount() {
+    const { treeId, refUrl } = this.props;
+    const treeData = await request.get(`${refUrl}${treeId}`);
+    this.setState({ treeData });
+  }
 
   /**
    * 回写form
@@ -27,36 +39,20 @@ class syncTreeSelect extends React.PureComponent {
     const { treeSelectChange } = this.props;
     treeSelectChange(value, label, extra);
   }
-  state = {
-    value: undefined,
-    treeData: [],
-  }
-
-  /**
-   *第一次渲染后调用
-   * @returns {Promise<void>}
-   */
-  async componentDidMount() {
-    const { treeId,refUrl } = this.props;
-    const treeData = await request.get(refUrl+`${treeId}`);
-    this.setState({ treeData});
-  }
 
   render() {
-    const { treeData } = this.state;
-    console.log(treeData);
+    const { treeData, value } = this.state;
     return (
       <TreeSelect
-        allowClear={true}
+        allowClear
         showSearch
         style={{ width: 300 }}
-        value={this.state.value}
+        value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         placeholder="请选择"
         onChange={this.onChange}
         treeData={treeData}
-      >
-      </TreeSelect>
+      />
     );
   }
 }

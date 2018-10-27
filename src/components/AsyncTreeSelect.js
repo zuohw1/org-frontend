@@ -2,7 +2,7 @@ import React from 'react';
 import { TreeSelect, Tree } from 'antd';
 import request from '../utils/request';
 
-const TreeNode = Tree.TreeNode;
+const { TreeNode } = Tree;
 
 /**
  * 异步加载的TreeSelect
@@ -13,27 +13,19 @@ const TreeNode = Tree.TreeNode;
  * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} url={url}/>
  */
 class AsyncTreeSelect extends React.PureComponent {
-
-  /**
-   * 回写form
-   * const treeSelectChange = (value, label, extra) => {
-    form.setFieldsValue({
-      orgid: `${extra.triggerNode.props.id}`,
-    });
-  }
-   * @param value
-   * @param label
-   * @param extra
-   */
-  onChange = (value, label, extra) => {
-    this.setState({ value });
-    const { treeSelectChange } = this.props;
-    treeSelectChange(value, label, extra);
-  }
-
   state = {
     value: undefined,
     treeData: [],
+  }
+
+  /**
+   *第一次渲染后调用,初始化本级
+   * @returns {Promise<void>}
+   */
+  async componentDidMount() {
+    const { treeId, url } = this.props;
+    const result = await request.get(`${url}${treeId}`);
+    this.setState({ treeData: result });
   }
 
   /**
@@ -46,10 +38,10 @@ class AsyncTreeSelect extends React.PureComponent {
     const { key } = treeNode.props.dataRef;
     const { refUrl } = this.props;
     return new Promise(async (resolve) => {
-      const result = await request.get(refUrl+`${key}`);
-      treeNode.props.dataRef.children = result;
+      const result = await request.get(`${refUrl}${key}`);
+      key.children = result;
       this.setState({
-        treeData: [...this.state.treeData],
+        treeData: [...treeData],
       });
       resolve();
     });
@@ -74,29 +66,36 @@ class AsyncTreeSelect extends React.PureComponent {
   }
 
   /**
-   *第一次渲染后调用,初始化本级
-   * @returns {Promise<void>}
+   * 回写form
+   * const treeSelectChange = (value, label, extra) => {
+    form.setFieldsValue({
+      orgid: `${extra.triggerNode.props.id}`,
+    });
+  }
+   * @param value
+   * @param label
+   * @param extra
    */
-  async componentDidMount() {
-    const { treeId,url } = this.props;
-    const result = await request.get(url+`${treeId}`);
-    this.setState({ treeData:result });
+  onChange = (value, label, extra) => {
+    this.setState({ value });
+    const { treeSelectChange } = this.props;
+    treeSelectChange(value, label, extra);
   }
 
   render() {
-    const { treeData } = this.state;
+    const { treeData, value } = this.state;
     console.log(treeData);
     return (
       <TreeSelect
-        treeDefaultExpandAll={true}
+        treeDefaultExpandAll
         style={{ width: 300 }}
-        value={this.state.value}
+        value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         loadData={this.onLoadData}
         placeholder="请选择"
         onChange={this.onChange}
       >
-        {this.renderTreeNodes(this.state.treeData)}
+        {this.renderTreeNodes(treeData)}
       </TreeSelect>
     );
   }
