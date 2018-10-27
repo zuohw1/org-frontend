@@ -43,7 +43,7 @@ export default (props) => {
   function getFields() {
     const count = expand ? queryCols.length : 3;
     const children = [];
-    for (let i = 0; i < queryCols.length; i++) {
+    for (let i = 0; i < queryCols.length; i += 1) {
       if (queryCols[i].itemType === 'String') {
         children.push(
           <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
