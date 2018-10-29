@@ -61,18 +61,19 @@ const getParentKey = (key, tree) => {
 };
 
 class SearchTree extends React.PureComponent {
-
   state = {
     expandedKeys: [],
     searchValue: '',
     autoExpandParent: true,
   }
+
   onExpand = (expandedKeys) => {
     this.setState({
       expandedKeys,
       autoExpandParent: false,
     });
   }
+
   onChange = (e) => {
     const value = e.target.value;
     const expandedKeys = dataList.map((item) => {
@@ -87,13 +88,15 @@ class SearchTree extends React.PureComponent {
       autoExpandParent: true,
     });
   }
+
   onSelect = (selectedKeys, info) => {
-    const { record,refCodes } = this.props;
+    const { record, refCodes } = this.props;
     refCodes.map((item) => {
       record[item.code] = selectedKeys[0];
     });
     console.log('selected', selectedKeys, info);
   }
+
   render() {
     const { searchValue, expandedKeys, autoExpandParent } = this.state;
     const loop = data => data.map((item) => {

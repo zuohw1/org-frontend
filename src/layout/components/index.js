@@ -4,7 +4,7 @@ import {
 } from 'antd';
 import { Route, Switch, Link } from 'dva/router';
 import logoImg from '../../assets/images/logo.png';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
 import Orgsearch from '../../org/containers/orgsearch';

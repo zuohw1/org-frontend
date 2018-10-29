@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import Model from './model';
 
-const { confirm } = Modal
+const { confirm } = Modal;
 
 export default ({
   tableData,
@@ -17,9 +17,8 @@ export default ({
   search,
   modal,
   form,
-  table_columns,
-  refData,
-  loading, formEdit,refmodal,
+  tableCols,
+  loading, formEdit, refModal,
 }) => {
   const {
     isModeShow,
@@ -28,27 +27,27 @@ export default ({
     deleteRecord,
     listTable,
   } = actions;
-  const onClickView = (_, record) => {
-    getRecord(record);
-    isModeShow(true,false);
+  const onClickView = (_, row) => {
+    getRecord(row);
+    isModeShow(true, false);
   };
 
   const onClickAdd = () => {
-    isModeShow(true,true);
+    isModeShow(true, true);
   };
 
-  const onClickEdit = (_, record) => {
-    getRecord(record);
-    isModeShow(true,true);
+  const onClickEdit = (_, row) => {
+    getRecord(row);
+    isModeShow(true, true);
   };
 
-  const onClickDelete = (record) => {
+  const onClickDelete = (row) => {
     confirm({
       title: '确定要删除本条记录吗?',
-      onOk () {
-        deleteRecord(record)
+      onOk() {
+        deleteRecord(row);
       },
-    })
+    });
   };
 
   const data = tableData.records;
@@ -87,8 +86,8 @@ export default ({
 
   function getFields() {
     const children = [];
-    for (let i = 0; i < table_columns.length; i++) {
-        children.push(table_columns[i]);
+    for (let i = 0; i < tableCols.length; i += 1) {
+      children.push(tableCols[i]);
     }
     children.push(
       {
@@ -98,18 +97,15 @@ export default ({
         align: 'center',
         render: (text, records) => (
           <span>
-          <a href="javascript:;" onClick={() => onClickView(text, records)}>查看</a>
-          <Divider type="vertical" />
-          <a href="javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
-          <Divider type="vertical" />
-          <a href="javascript:;" onClick={() => onClickDelete(records)}>删除</a>
-         {/* <Popconfirm title="确定要删除吗？" onConfirm = {() => onClickDelete(records)}>
-              <a> 删除</a>
-            </Popconfirm>
-            */}
+            <a href="javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
+            <Divider type="vertical" />
+            <a href="javascript:;" onClick={() => onClickDelete(records)}>删除</a>
           </span>
         ),
-      });
+      },
+    );
     return children;
   }
 
@@ -118,7 +114,7 @@ export default ({
       <Modal
         title="变更依据"
         visible={modal}
-        onOk={formEdit?onSubmit:onCancel}
+        onOk={formEdit ? onSubmit : onCancel}
         onCancel={onCancel}
         maskClosable={false}
         destroyOnClose
@@ -129,12 +125,15 @@ export default ({
           form={form}
           actions={actions}
           formEdit={formEdit}
-          refmodal={refmodal}
-          refData={refData}
+          refModal={refModal}
         />
       </Modal>
-      <Button type="primary" style={{ margin: '20px 0' }}
-              onClick={onClickAdd}>新增</Button>
+      <Button
+        type="primary"
+        style={{ margin: '20px 0' }}
+        onClick={onClickAdd}
+      >新增
+      </Button>
       <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} />
       <Pagination
         showQuickJumper

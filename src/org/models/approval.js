@@ -13,7 +13,7 @@ const formatRecord = (record) => {
 const formatTableData = (tableData) => {
   const num = tableData.current * 10 - 10;
   const table = tableData.records.map((item, index) => {
-    let ite = { ...item, key: index + 1 + num};
+    const ite = { ...item, key: index + 1 + num };
     return ite;
   });
   const formatTable = { ...tableData, records: table };
@@ -31,10 +31,10 @@ export default {
       pages: 0,
     },
     modal: false,
-    refmodal : false,
-    refData : [],
+    refModal: false,
+    refData: [],
     expand: false,
-    formEdit:true,
+    formEdit: true,
     record: {},
     search: {
       batchCode: '',
@@ -46,13 +46,25 @@ export default {
       pageSize: 10,
       pageNumber: 1,
     },
-    query_columns: [{itemName:"文件名称和文号",itemKey:"batchCode",itemType:"String",required:false},
-      {itemName:"流程状态",itemKey:"workFlowStatus",itemType:"Select",required:false,list:[{id:"0",title:"暂存中"},{id:"1",title:"审批中"},{id:"2",title:"审批完成"}]},
-      {itemName:"文件拟稿人",itemKey:"batchVerifier",itemType:"String",required:false},
-      {itemName:"文件发起人",itemKey:"fullName",itemType:"String",required:false},
-      {itemName:"发起开始日期",itemKey:"batDateS",itemType:"Date",required:false},
-      {itemName:"发起结束日期",itemKey:"batDateE",itemType:"Date",required:false}],
-    table_columns: [{
+    queryCols: [{
+      itemName: '文件名称和文号', itemKey: 'batchCode', itemType: 'String', required: false,
+    },
+    {
+      itemName: '流程状态', itemKey: 'workFlowStatus', itemType: 'Select', required: false, list: [{ id: '0', title: '暂存中' }, { id: '1', title: '审批中' }, { id: '2', title: '审批完成' }],
+    },
+    {
+      itemName: '文件拟稿人', itemKey: 'batchVerifier', itemType: 'String', required: false,
+    },
+    {
+      itemName: '文件发起人', itemKey: 'fullName', itemType: 'String', required: false,
+    },
+    {
+      itemName: '发起开始日期', itemKey: 'batDateS', itemType: 'Date', required: false,
+    },
+    {
+      itemName: '发起结束日期', itemKey: 'batDateE', itemType: 'Date', required: false,
+    }],
+    tableCols: [{
       title: '序号',
       dataIndex: 'key',
       key: 'key',
@@ -82,13 +94,13 @@ export default {
       dataIndex: 'DOC_STATUS',
       key: 'DOC_STATUS',
       align: 'center',
-      render: (text, records) => {
-        if(text==="0"){
-          return "暂存中";
-        }else if(text==="1"){
-          return "审批中";
-        }else if(text==="2"){
-          return "审批完成";
+      render: (text) => {
+        if (text === '0') {
+          return '暂存中';
+        } else if (text === '1') {
+          return '审批中';
+        } else if (text === '2') {
+          return '审批完成';
         }
       },
     }, {
@@ -125,9 +137,9 @@ export default {
       yield call(ApprovalService.add, records);
       yield put({
         type: 'fetch',
-        payload: { search: {pageNumber:1,pageSize:10} },
+        payload: { search: { pageNumber: 1, pageSize: 10 } },
       });
-     yield put({
+      yield put({
         type: 'stateWillUpdate',
         payload: { modal: false, record: {} },
       });
@@ -139,7 +151,7 @@ export default {
       yield call(ApprovalService.update, records);
       yield put({
         type: 'fetch',
-        payload: { search: {pageNumber:1,pageSize:10} },
+        payload: { search: { pageNumber: 1, pageSize: 10 } },
       });
       yield put({
         type: 'stateWillUpdate',
@@ -151,25 +163,21 @@ export default {
       yield call(ApprovalService.delete, record.BATCH_HEADER_ID);
       yield put({
         type: 'fetch',
-        payload: { search: {pageNumber:1,pageSize:10} },
+        payload: { search: { pageNumber: 1, pageSize: 10 } },
       });
     },
 
     * getRecord({ payload: { record } }, { call, put }) {
-      if(record.BATCH_HEADER_ID && record.BATCH_HEADER_ID!==''){
+      if (record.BATCH_HEADER_ID && record.BATCH_HEADER_ID !== '') {
         const attachData = yield call(ApprovalService.getAttachData, record.BATCH_HEADER_ID);
-        record = {
-          ...record,
-          attachData: attachData,
-        };
+        yield put({
+          type: 'stateWillUpdate',
+          payload: { ...record, attachData },
+        });
       }
-      yield put({
-        type: 'stateWillUpdate',
-        payload: { record },
-      });
     },
-    * getRefData({ payload: { url,search } }, { call, put }) {
-      const tableData = yield call(ApprovalService.getRefData ,url,search);
+    * getRefData({ payload: { url, search } }, { call, put }) {
+      const tableData = yield call(ApprovalService.getRefData, url, search);
       const formatTable = formatTableData(tableData);
       console.log(formatTable);
       yield put({
@@ -185,10 +193,10 @@ export default {
       return history.listen(({ pathname }) => {
         if (pathname === '/org/approval') {
           dispatch({
-          type: 'fetch',
-          payload: {search:{pageNumber:1,pageSize:10}},
-        });
-      }
+            type: 'fetch',
+            payload: { search: { pageNumber: 1, pageSize: 10 } },
+          });
+        }
       });
     },
   },
