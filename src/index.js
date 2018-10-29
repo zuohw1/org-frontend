@@ -24,7 +24,7 @@ if (Configure.debug) {
 }
 
 app.model(require('./layout/models').default);
-app.model(require('./org/models/approval').default);
+require('./org/models').default.forEach(key => app.model(key.default));
 
 app.router(({ history }) => (
   <LocaleProvider locale={zhCN}>
