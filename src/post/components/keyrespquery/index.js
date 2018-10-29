@@ -6,15 +6,15 @@ import '../../../assets/styles/module.less';
 
 const { Content } = Layout;
 
-const OrgApproval = (state) => {
+const KeyRespQuery = (state) => {
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>
-          组织管理
+          职位管理
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          组织批文前置流程
+          关键职责库查询
         </Breadcrumb.Item>
       </Breadcrumb>
       <Content
@@ -24,7 +24,7 @@ const OrgApproval = (state) => {
         }}
       >
         <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="组织变更依据" key="1">
+          <Tabs.TabPane tab="关键职责库查询" key="1">
             <Search {...state} />
             <Table {...state} />
           </Tabs.TabPane>
@@ -34,4 +34,4 @@ const OrgApproval = (state) => {
   );
 };
 
-export default OrgApproval;
+export default KeyRespQuery;

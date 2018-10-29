@@ -25,6 +25,7 @@ if (Configure.debug) {
 
 app.model(require('./layout/models').default);
 require('./org/models').default.forEach(key => app.model(key.default));
+require('./post/models').default.forEach(key => app.model(key.default));
 
 app.router(({ history }) => (
   <LocaleProvider locale={zhCN}>

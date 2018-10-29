@@ -9,6 +9,8 @@ import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
 import Orgsearch from '../../org/containers/orgsearch';
 import OrgApproval from '../../org/containers/approval';
+import KeyRespQuery from '../../post/containers/keyrespquery';
+import KeyResp from '../../post/containers/keyresp';
 
 const { SubMenu } = Menu;
 
@@ -80,6 +82,8 @@ const MainLayout = (state) => {
             <Route exact path="/" component={Manpower} />
             <Route exact path="/org/search" component={Orgsearch} />
             <Route exact path="/org/approval" component={OrgApproval} />
+            <Route exact path="/post/keyrespquery" component={KeyRespQuery} />
+            <Route exact path="/post/keyresp" component={KeyResp} />
           </Switch>
         </Layout>
       </Layout>

@@ -5,7 +5,7 @@ import request from '../utils/request';
 /**
  * 同步TreeSelect
  * const refUrl = 'org/allData?id=';
- * <SyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl}/>
+ * <SyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} checkbox/>
  */
 class syncTreeSelect extends React.PureComponent {
   state = {
@@ -42,11 +42,13 @@ class syncTreeSelect extends React.PureComponent {
 
   render() {
     const { treeData, value } = this.state;
+    const { checkbox } = this.props;
     return (
       <TreeSelect
         allowClear
         showSearch
-        style={{ width: 300 }}
+        treeCheckable={checkbox}
+        style={{ width: 220 }}
         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         placeholder="请选择"

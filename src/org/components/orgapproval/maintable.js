@@ -6,7 +6,7 @@ import {
   Button,
   Divider,
 } from 'antd';
-import Model from './model';
+import Model from './card';
 
 const { confirm } = Modal;
 

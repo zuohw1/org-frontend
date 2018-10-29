@@ -8,7 +8,6 @@ export default {
       {
         id: 1,
         menuName: '组织管理',
-        url: null,
         pid: 0,
         iconUrl: 'sync',
       },
@@ -29,8 +28,21 @@ export default {
       {
         id: 2,
         menuName: '职位管理',
-        url: '/sync/information/C,D',
         pid: 0,
+        iconUrl: 'user',
+      },
+      {
+        id: 201,
+        menuName: '关键职责库维护',
+        url: '/post/keyresp',
+        pid: 2,
+        iconUrl: 'user',
+      },
+      {
+        id: 202,
+        menuName: '关键职责库查询',
+        url: '/post/keyrespquery',
+        pid: 2,
         iconUrl: 'user',
       },
       {

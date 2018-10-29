@@ -15,7 +15,7 @@ const { TreeNode } = Tree;
       orgid: `${extra.triggerNode.props.id}`,
     });
     }
- * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} url={url}/>
+ * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} url={url} checkbox/>
  */
 class AsyncTreeSelect extends React.PureComponent {
   state = {
@@ -93,7 +93,7 @@ class AsyncTreeSelect extends React.PureComponent {
     return (
       <TreeSelect
         treeDefaultExpandAll
-        style={{ width: 300 }}
+        style={{ width: 220 }}
         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         loadData={this.onLoadData}
