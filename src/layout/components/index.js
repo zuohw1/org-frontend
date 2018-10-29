@@ -7,7 +7,7 @@ import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.css';
 import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
-import Orgsearch from '../../org/components/orgsearch/Orgsearch';
+import Orgsearch from '../../org/containers/orgsearch';
 import OrgApproval from '../../org/containers/approval';
 
 const { SubMenu } = Menu;
