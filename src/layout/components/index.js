@@ -15,8 +15,8 @@ import KeyResp from '../../post/containers/keyresp';
 const { SubMenu } = Menu;
 
 const MainLayout = (state) => {
-  console.log(state);
-  console.log(state.menus);
+  //console.log(state);
+  //console.log(state.menus);
   return (
     <div className={app.App}>
       <div className={app.AppHeader}>

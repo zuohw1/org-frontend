@@ -1,8 +1,8 @@
-export function isModeShow(modal,formEdit) {
+export function searchData() {
   return {
-    type: 'orgSearch/stateWillUpdate',
+    type: 'orgSearch/fetch',
     payload: {
-      modal,formEdit
+    	//data,
     },
   };
 }

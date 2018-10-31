@@ -97,11 +97,11 @@ export default ({
         align: 'center',
         render: (text, records) => (
           <span>
-            <a href="javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+            <a href="jacascript:void(0);" onClick={() => onClickView(text, records)}>查看</a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
+            <a href="jacascript:void(0);" onClick={() => onClickEdit(text, records)}>修改</a>
             <Divider type="vertical" />
-            <a href="javascript:;" onClick={() => onClickDelete(records)}>删除</a>
+            <a href="jacascript:void(0);" onClick={() => onClickDelete(records)}>删除</a>
           </span>
         ),
       },
