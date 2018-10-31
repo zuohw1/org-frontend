@@ -5,6 +5,8 @@ import AdvancedSearchForm from '../../../components/AdvancedSearchForm';
 import AdvancedSearchForm2 from '../../../components/AdvancedSearchForm2';
 import AdvancedSearchForm3 from '../../../components/AdvancedSearchForm3';
 import AdvancedSearchForm4 from '../../../components/AdvancedSearchForm4';
+//import fetch from 'dva/fetch';
+import { connect } from 'dva';
 
 const { Sider, Content } = Layout;
 const { TreeNode } = Tree;
@@ -14,11 +16,36 @@ const WrappedAdvancedSearchForm3 = Form.create()(AdvancedSearchForm3);
 const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 
 class Orgsearch extends Component {
+  constructor(props){
+    super(props)
+  }
+  componentWillMount() {
+    this.props.dispatch({
+      type: 'orgSearch/fetch',
+      payload: {//可以不填
+        //data: data
+      },
+    })
+  }
   onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   }
-
+  ///orgquery
+  /*componentDidMount(){
+    fetch('/api/orgquery', { // 在URL中写上传递的参数
+      method: 'GET'
+    })
+    .then((res)=>{
+      return res.text()
+    })
+    .then((res)=>{
+      console.log(res)
+    })
+  }*/
   render() {
+    //查看网络请求传递出来的内容
+    console.log(this.props.data)
+    //this.props.data为mapStateToProps中的data
     return (
       <div className="Orgsearch">
         <Layout>
@@ -83,4 +110,12 @@ class Orgsearch extends Component {
   }
 }
 
-export default Orgsearch;
+//export default Orgsearch;
+
+const mapStateToProps = (state) => {  //见名知意，把state转换为props
+  //可以打印state看看数据结构，然后放到data里
+  return {
+    data: state.data
+  };
+};
+export default connect(mapStateToProps)(Orgsearch)

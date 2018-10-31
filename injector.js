@@ -14,10 +14,10 @@ if (!env) {
   throw new Error('--env参数不能为空');
 }
 let debug = true;
-let api = 'http://localhost:8080/api';
+let api = 'https://www.easy-mock.com/mock/5b9f51bc8b5cc40f1f28a324/example';
 if (env !== 'development') {
   debug = false;
-  api = 'http://10.0.210.93';
+  api = 'http://10.0.210.93';//https://www.easy-mock.com/mock/5b9f51bc8b5cc40f1f28a324/example
 }
 const injectString = `
 /* -- please ignore this file, it will be generated dynamically -- */

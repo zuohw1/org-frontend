@@ -1,7 +1,7 @@
 import { connect } from 'dva';
 import { Form } from 'antd';
-import Index from '../components/orgsearch/index';
 import { bindActionCreators } from 'redux';
+import Index from '../components/orgsearch/index';
 import * as actions from '../actions/orgsearch';
 
 const mapStateToProps = state => ({
