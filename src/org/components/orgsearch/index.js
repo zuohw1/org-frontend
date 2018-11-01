@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { Tree, Card, Form, Layout, Breadcrumb, Button } from 'antd';
+import React from 'react';
+import {
+  Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker,
+} from 'antd';
 import '../assets/styles/Orgsearch.css';
 import AdvancedSearchForm from '../../../components/AdvancedSearchForm';
 import AdvancedSearchForm2 from '../../../components/AdvancedSearchForm2';
@@ -13,13 +15,19 @@ const WrappedAdvancedSearchForm2 = Form.create()(AdvancedSearchForm2);
 const WrappedAdvancedSearchForm3 = Form.create()(AdvancedSearchForm3);
 const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 
-class Orgsearch extends Component {
-  onSelect = (selectedKeys, info) => {
+
+const Orgsearch = (state) => {
+  console.log(state)
+  const { actions, } = state;
+  const { searchData, isTrueExecute } = actions;
+  const select = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   }
-
-  render() {
-    return (
+  if(state.execute === true){
+    searchData();
+    isTrueExecute();
+  }
+  return (
       <div className="Orgsearch">
         <Layout>
           <Content>
@@ -31,7 +39,7 @@ class Orgsearch extends Component {
               <Sider className="sider">
                 <div className="siderTop">
                   <b className="siderTopL">结构版本</b>
-                  <span className="siderTopR">四川省分公司组织结构</span>
+                  <span className="siderTopR">{ state.structureName }</span>
                 </div>
                 <div className="siderTopC2">
                   <span className="siderTopC2span1">组织名</span>
@@ -43,7 +51,7 @@ class Orgsearch extends Component {
                 <div className="siderTree">
                   <Tree
                     defaultExpandedKeys={['0-0-0']}
-                    onSelect={this.onSelect}
+                    onSelect={select}
                   >
                     <TreeNode title="四川省分公司" key="0-0">
                       <TreeNode title="四川省分公司总部" key="0-0-0">
@@ -59,8 +67,17 @@ class Orgsearch extends Component {
                   </Tree>
                 </div>
               </Sider>
-              <Content className="content">
+              <Content className="content"> 
                 <div id="thistableas">
+                  <div className="contentTop">
+                    <div className="contentTopItem1"><Input addonBefore="版本号" defaultValue="111" /></div>
+                    <div className="contentTopItem2">
+                      <Input addonBefore="开始日期：" defaultValue="222" className="contentTopItem2First"/>
+                      <Input addonBefore="结束日期：" className="contentTopItem2Second"/>
+                      <DatePicker  className="contentTopItem2Third"/>
+                    </div>
+                    <div className="contentTopItem3"><Button className="contentTopItem3But">查找</Button></div>
+                  </div>
                   <Card title="基本信息">
                     <WrappedAdvancedSearchForm />
                   </Card>
@@ -80,7 +97,6 @@ class Orgsearch extends Component {
         </Layout>
       </div>
     );
-  }
-}
+};
 
 export default Orgsearch;

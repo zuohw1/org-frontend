@@ -27,6 +27,7 @@ function checkStatus(response) {
 }
 
 function generateUrl(url) {
+  //console.log(url)
   return `${Configuration.api}/${url}`;
 }
 
@@ -46,7 +47,8 @@ function toJson(raw) {
  * @return {object}           An object containing either "data" or "err"
  */
 function genreateRequest(url, options) {
-  console.log(options);
+  //console.log(options);
+  //console.log(url)
   return fetch(generateUrl(url), options)
     .then(toJson)
     .then(checkStatus);

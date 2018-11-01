@@ -129,7 +129,7 @@ class EditableTable extends React.Component {
           this.state.dataSource.length >= 1
             ? (
               <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-                <a href="javascript:;">删除</a>
+                <a href="jacascript:void(0);">删除</a>
               </Popconfirm>
             ) : null
         );

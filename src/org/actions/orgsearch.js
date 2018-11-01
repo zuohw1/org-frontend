@@ -1,8 +1,16 @@
-export function isModeShow(modal,formEdit) {
+export function searchData() {
   return {
-    type: 'orgSearch/stateWillUpdate',
+    type: 'orgSearch/searchData',
     payload: {
-      modal,formEdit
+    	//data,
+    },
+  };
+}
+export function isTrueExecute(execute) {
+  return {
+    type: 'orgSearch/isTrueExecute',
+    payload: {
+      execute,
     },
   };
 }

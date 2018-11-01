@@ -7,6 +7,7 @@ import '../../../assets/styles/module.less';
 const { Content } = Layout;
 
 const OrgApproval = (state) => {
+  //console.log(state)
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: '16px 0' }}>
