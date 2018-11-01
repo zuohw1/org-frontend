@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Tree, Card, Form, Layout, Breadcrumb, Button,
+  Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker,
 } from 'antd';
 import '../assets/styles/Orgsearch.css';
 import AdvancedSearchForm from '../../../components/AdvancedSearchForm';
@@ -16,20 +16,17 @@ const WrappedAdvancedSearchForm3 = Form.create()(AdvancedSearchForm3);
 const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 
 
-//org/search              org/approval
-
 const Orgsearch = (state) => {
   console.log(state)
-  console.log(state.structureName)
   const { actions, } = state;
-  const { searchData } = actions;
+  const { searchData, isTrueExecute } = actions;
   const select = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   }
-  const initialize = () => {
-    searchData()
+  if(state.execute === true){
+    searchData();
+    isTrueExecute();
   }
-  
   return (
       <div className="Orgsearch">
         <Layout>
@@ -41,7 +38,7 @@ const Orgsearch = (state) => {
             <div className="humanlaout">
               <Sider className="sider">
                 <div className="siderTop">
-                  <b className="siderTopL"  onClick={()=> initialize()}>结构版本</b>
+                  <b className="siderTopL">结构版本</b>
                   <span className="siderTopR">{ state.structureName }</span>
                 </div>
                 <div className="siderTopC2">
@@ -70,8 +67,17 @@ const Orgsearch = (state) => {
                   </Tree>
                 </div>
               </Sider>
-              <Content className="content">
+              <Content className="content"> 
                 <div id="thistableas">
+                  <div className="contentTop">
+                    <div className="contentTopItem1"><Input addonBefore="版本号" defaultValue="111" /></div>
+                    <div className="contentTopItem2">
+                      <Input addonBefore="开始日期：" defaultValue="222" className="contentTopItem2First"/>
+                      <Input addonBefore="结束日期：" className="contentTopItem2Second"/>
+                      <DatePicker  className="contentTopItem2Third"/>
+                    </div>
+                    <div className="contentTopItem3"><Button className="contentTopItem3But">查找</Button></div>
+                  </div>
                   <Card title="基本信息">
                     <WrappedAdvancedSearchForm />
                   </Card>

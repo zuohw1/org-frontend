@@ -12,6 +12,7 @@ export default {
     flexValue: "",
     orgTree: "",
     structureName: "",
+    execute: true,
   },
 
   subscriptions: {
@@ -28,7 +29,7 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
+    *searchData({ payload }, { call, put }) {  // eslint-disable-line
       const result = yield call(orgquery);//如果使用  {参数}  ，则是一个对象
       console.log(result);
       //把请求的数据保存起来
@@ -46,13 +47,26 @@ export default {
         }
       })
     },
+    *isTrueExecute({ payload }, { call, put }) {
+      yield put({
+        type: 'stateUpdate',  //reducers中的方法名
+        payload:{  //网络返回的要保留的数据
+          execute: false,    
+        }
+      })
+    },
   },
 
   reducers: {
-    save(state, { payload }) {//: { data }
-      //console.log(payload)
+    save(state, { payload }) {
       return {
         ...state,  //第一个data是state的，第二个data是payload的
+        ...payload,
+      };
+    },
+    stateUpdate(state, { payload }) {
+      return {
+        ...state,
         ...payload,
       };
     },
