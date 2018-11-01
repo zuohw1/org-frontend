@@ -46,6 +46,13 @@ export default {
         iconUrl: 'user',
       },
       {
+        id: 203,
+        menuName: '关键职责职级列表',
+        url: '/post/keyresprank',
+        pid: 2,
+        iconUrl: 'user',
+      },
+      {
         id: 3,
         menuName: '人员管理',
         url: null,
