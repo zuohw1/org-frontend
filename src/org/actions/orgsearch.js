@@ -14,3 +14,11 @@ export function isTrueExecute(execute) {
     },
   };
 }
+/*export function handleChangeValue(value) {
+  return {
+    type: 'orgSearch/handleChangeValue',
+    payload: {
+      value,
+    },
+  };
+}*/
