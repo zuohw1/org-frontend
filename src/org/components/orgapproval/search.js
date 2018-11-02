@@ -74,7 +74,7 @@ export default (props) => {
       if (queryCols[i].itemType === 'String') {
         children.push(
           <Col span={6} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-            <FormItem label={queryCols[i].itemName} labelCol={{ span: 8 }}>
+            <FormItem label={queryCols[i].itemName}>
               {getFieldDecorator(queryCols[i].itemKey, {
                 rules: [{
                   required: queryCols[i].required,
@@ -89,7 +89,7 @@ export default (props) => {
       } else if (queryCols[i].itemType === 'Select') {
         children.push(
           <Col span={6} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-            <FormItem label={queryCols[i].itemName} labelCol={{ span: 8 }}>
+            <FormItem label={queryCols[i].itemName}>
               {getFieldDecorator(queryCols[i].itemKey)(
                 <Select placeholder="请选择" allowClear>
                   {
@@ -103,14 +103,14 @@ export default (props) => {
       } else if (queryCols[i].itemType === 'Date') {
         children.push(
           <Col span={6} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-            <FormItem label={queryCols[i].itemName} labelCol={{ span: 8 }}>
+            <FormItem label={queryCols[i].itemName}>
               {getFieldDecorator(queryCols[i].itemKey, {
                 rules: [{
                   required: queryCols[i].required,
                   message: '不能为空!',
                 }],
               })(
-                <DatePicker style={{ width: 210 }} />,
+                <DatePicker />,
               )}
             </FormItem>
           </Col>,
@@ -125,7 +125,7 @@ export default (props) => {
       }
     }
     children.push(
-      <Col span={6} key={count + 5} style={{ textAlign: 'right' }}>
+      <Col span={6} key={count + 5} style={{ textAlign: 'right', marginTop: 5 }}>
         <Button htmlType="submit">查询</Button>
         <Button style={{ marginLeft: 8 }} onClick={handleReset}>
           重置
@@ -141,6 +141,7 @@ export default (props) => {
       className="ant-advanced-search-form"
       onSubmit={handleSearch}
       style={{ padding: 10 }}
+      layout="inline"
     >
       <Row gutter={24}>{getFields()}</Row>
     </Form>);
