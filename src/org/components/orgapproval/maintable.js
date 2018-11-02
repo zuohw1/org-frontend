@@ -17,7 +17,7 @@ export default ({
   search,
   modal,
   form,
-  loading, formEdit, refModal,
+  loading, formEdit, refModal, refSelectData,
 }) => {
   const {
     isModeShow,
@@ -27,8 +27,7 @@ export default ({
     listTable,
   } = actions;
   const onClickView = (_, row) => {
-    getRecord(row);
-    isModeShow(true, false);
+    getRecord(row, true, false);
   };
 
   const onClickAdd = () => {
@@ -36,8 +35,7 @@ export default ({
   };
 
   const onClickEdit = (_, row) => {
-    getRecord(row);
-    isModeShow(true, true);
+    getRecord(row, true, true);
   };
 
   const onClickDelete = (row) => {
@@ -66,9 +64,8 @@ export default ({
 
   const onCancel = (e) => {
     e.preventDefault();
-    isModeShow(false);
     form.resetFields();
-    getRecord({});
+    getRecord({}, false, true);
   };
 
   const onChange = (pageNumber, pageSize) => {
@@ -179,6 +176,7 @@ export default ({
           actions={actions}
           formEdit={formEdit}
           refModal={refModal}
+          refSelectData={refSelectData}
         />
       </Modal>
       <Button

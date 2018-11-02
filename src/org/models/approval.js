@@ -11,7 +11,7 @@ const formatRecord = (record) => {
 
 /* 格式化table数据 */
 const formatTableData = (tableData) => {
-  const num = tableData.current * 10 - 10;
+  const num = tableData.current * tableData.size - tableData.size;
   const table = tableData.records.map((item, index) => {
     const ite = { ...item, key: index + 1 + num };
     return ite;
@@ -32,7 +32,7 @@ export default {
     },
     modal: false,
     refModal: false,
-    refData: [],
+    refSelectData: {},
     expand: false,
     formEdit: true,
     record: {},
@@ -104,25 +104,23 @@ export default {
       });
     },
 
-    * getRecord({ payload: { record } }, { call, put }) {
+    * getRecord({ payload: { record, modal, formEdit } }, { call, put }) {
       if (record.BATCH_HEADER_ID && record.BATCH_HEADER_ID !== '') {
-        const attachData = yield call(ApprovalService.getAttachData, record.BATCH_HEADER_ID);
+        const data = yield call(ApprovalService.getAttachData, record.BATCH_HEADER_ID);
+        const attachData = data.map((item, index) => {
+          const ite = { ...item, key: index + 1 };
+          return ite;
+        });
         yield put({
           type: 'stateWillUpdate',
-          payload: { ...record, attachData },
+          payload: { record: { ...record, attachData }, modal, formEdit },
+        });
+      } else {
+        yield put({
+          type: 'stateWillUpdate',
+          payload: { record: { ...record }, modal, formEdit },
         });
       }
-    },
-    * getRefData({ payload: { url, search } }, { call, put }) {
-      const tableData = yield call(ApprovalService.getRefData, url, search);
-      const formatTable = formatTableData(tableData);
-      console.log(formatTable);
-      yield put({
-        type: 'stateWillUpdate',
-        payload: {
-          refData: formatTable,
-        },
-      });
     },
   },
   subscriptions: {

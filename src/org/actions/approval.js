@@ -16,11 +16,29 @@ export function isRefModeShow(refModal) {
   };
 }
 
-export function getRecord(record) {
+export function setRefSelectData(refSelectData, refModal) {
+  if (refSelectData === null) {
+    return {
+      type: 'orgApproval/stateWillUpdate',
+      payload: {
+        refSelectData: {}, refModal,
+      },
+    };
+  } else {
+    return {
+      type: 'orgApproval/stateWillUpdate',
+      payload: {
+        refModal, record: refSelectData,
+      },
+    };
+  }
+}
+
+export function getRecord(record, modal, formEdit) {
   return {
     type: 'orgApproval/getRecord',
     payload: {
-      record,
+      record, modal, formEdit,
     },
   };
 }

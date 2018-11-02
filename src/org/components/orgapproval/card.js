@@ -16,24 +16,24 @@ export default ({
   actions,
   formEdit,
   refModal,
+  refSelectData,
 }) => {
   const { getFieldDecorator } = form;
 
-  const { isRefModeShow } = actions;
+  const { isRefModeShow, setRefSelectData } = actions;
 
   const onRefSubmit = (e) => {
-    console.log(record);
     e.preventDefault();
-    isRefModeShow(false);
+    const data = { ...record, ...refSelectData };
+    setRefSelectData(data, false);
   };
 
   const onRefCancel = (e) => {
     e.preventDefault();
-    isRefModeShow(false);
+    setRefSelectData(null, false);
   };
 
-  const onRadioChange = (e) => {
-    console.log('radio checked', e.target.value);
+  const onRadioChange = () => {
     isRefModeShow(true);
   };
 
@@ -61,11 +61,10 @@ export default ({
     type: 'radio',
     onSelect: (row) => {
       refCodes.map((item) => {
-        return record[item.code] = row[item.refcode];
+        return refSelectData[item.code] = row[item.refcode];
       });
     },
   };
-
   return (
     <div>
       <Modal

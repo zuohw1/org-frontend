@@ -41,7 +41,7 @@ class SearchTable extends React.PureComponent {
   }
 
   formatTableData = (tableData) => {
-    const num = tableData.current * 10 - 10;
+    const num = tableData.current * tableData.size - tableData.size;
     const table = tableData.records.map((item, index) => {
       const ite = { ...item, key: index + 1 + num };
       return ite;
