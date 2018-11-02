@@ -134,7 +134,7 @@ export default ({
         onClick={onClickAdd}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small"/>
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: 240 }} />
       <Pagination
         showQuickJumper
         current={current}
