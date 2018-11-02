@@ -10,9 +10,10 @@ export default {
     dateTo: "",
     flexName: "",
     flexValue: "",
-    orgTree: "",
+    orgTree: [],
     structureName: "",
     execute: true,
+    value: "",
   },
 
   subscriptions: {
@@ -55,6 +56,14 @@ export default {
         }
       })
     },
+    /**handleChangeValue({ payload }, { call, put }) {
+      yield put({
+        type: 'stateUpdate',  //reducers中的方法名
+        payload:{  //网络返回的要保留的数据
+          value: event.target.value,    
+        }
+      })
+    },*/
   },
 
   reducers: {
