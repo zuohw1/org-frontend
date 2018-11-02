@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Breadcrumb, Tabs } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 import Search from './search';
 import Table from './maintable';
 import '../../../assets/styles/module.less';
