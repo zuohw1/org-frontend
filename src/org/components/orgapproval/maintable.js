@@ -17,7 +17,6 @@ export default ({
   search,
   modal,
   form,
-  tableCols,
   loading, formEdit, refModal,
 }) => {
   const {
@@ -84,6 +83,59 @@ export default ({
 
   const { current, size, total } = tableData;
 
+  const tableCols = [{
+    title: '序号',
+    dataIndex: 'key',
+    key: 'key',
+    align: 'center',
+    width: 50,
+  }, {
+    title: '文件名称和文号',
+    dataIndex: 'DOC_CODE',
+    key: 'DOC_CODE',
+    align: 'center',
+    width: 400,
+  }, {
+    title: '发起人',
+    dataIndex: 'ATTRIBUTE8',
+    key: 'ATTRIBUTE8',
+    align: 'center',
+    width: 150,
+  }, {
+    title: '发起时间',
+    dataIndex: 'ATTRIBUTE9',
+    key: 'ATTRIBUTE9',
+    align: 'center',
+    width: 100,
+  }, {
+    title: '文件拟稿人',
+    dataIndex: 'DOC_VERIFIER',
+    key: 'DOC_VERIFIER',
+    align: 'center',
+    width: 150,
+  }, {
+    title: '状态',
+    dataIndex: 'DOC_STATUS',
+    key: 'DOC_STATUS',
+    align: 'center',
+    width: 100,
+    render: (text) => {
+      if (text === '0') {
+        return '暂存中';
+      } else if (text === '1') {
+        return '审批中';
+      } else if (text === '2') {
+        return '审批完成';
+      }
+    },
+  }, {
+    title: '审批人',
+    dataIndex: 'ATTRIBUTE10',
+    key: 'ATTRIBUTE10',
+    align: 'center',
+    width: 150,
+  }];
+
   function getFields() {
     const children = [];
     for (let i = 0; i < tableCols.length; i += 1) {
@@ -95,6 +147,7 @@ export default ({
         dataIndex: 'action',
         key: 'action',
         align: 'center',
+        width: 240,
         render: (text, records) => (
           <span>
             <a href="jacascript:void(0);" onClick={() => onClickView(text, records)}>查看</a>
@@ -134,7 +187,7 @@ export default ({
         onClick={onClickAdd}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: document.body.scrollHeight - 500 }} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: document.body.scrollHeight - 460 }} />
       <Pagination
         showQuickJumper
         current={current}

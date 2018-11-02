@@ -46,69 +46,6 @@ export default {
       pageSize: 10,
       pageNumber: 1,
     },
-    queryCols: [{
-      itemName: '文件名称和文号', itemKey: 'batchCode', itemType: 'String', required: false,
-    },
-    {
-      itemName: '流程状态', itemKey: 'workFlowStatus', itemType: 'Select', required: false, list: [{ id: '0', title: '暂存中' }, { id: '1', title: '审批中' }, { id: '2', title: '审批完成' }],
-    },
-    {
-      itemName: '文件拟稿人', itemKey: 'batchVerifier', itemType: 'String', required: false,
-    },
-    {
-      itemName: '文件发起人', itemKey: 'fullName', itemType: 'String', required: false,
-    },
-    {
-      itemName: '发起开始日期', itemKey: 'batDateS', itemType: 'Date', required: false,
-    },
-    {
-      itemName: '发起结束日期', itemKey: 'batDateE', itemType: 'Date', required: false,
-    }],
-    tableCols: [{
-      title: '序号',
-      dataIndex: 'key',
-      key: 'key',
-      align: 'center',
-    }, {
-      title: '文件名称和文号',
-      dataIndex: 'DOC_CODE',
-      key: 'DOC_CODE',
-      align: 'center',
-    }, {
-      title: '发起人',
-      dataIndex: 'ATTRIBUTE8',
-      key: 'ATTRIBUTE8',
-      align: 'center',
-    }, {
-      title: '发起时间',
-      dataIndex: 'ATTRIBUTE9',
-      key: 'ATTRIBUTE9',
-      align: 'center',
-    }, {
-      title: '文件拟稿人',
-      dataIndex: 'DOC_VERIFIER',
-      key: 'DOC_VERIFIER',
-      align: 'center',
-    }, {
-      title: '状态',
-      dataIndex: 'DOC_STATUS',
-      key: 'DOC_STATUS',
-      align: 'center',
-      render: (text) => {
-        if (text === '0') {
-          return '暂存中';
-        } else if (text === '1') {
-          return '审批中';
-        } else if (text === '2') {
-          return '审批完成';
-        }
-      },
-    }, {
-      title: '审批人',
-      dataIndex: 'ATTRIBUTE10',
-      key: 'ATTRIBUTE10',
-      align: 'center',
-    }],
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
