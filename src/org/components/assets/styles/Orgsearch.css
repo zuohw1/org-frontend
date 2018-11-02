@@ -131,6 +131,66 @@
     top: 0;
     width: 68%;
 }
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop) {
+    width: 100%;
+    height: 32px;
+    display: flex;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem1) {
+    flex:22.2;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem1>span) {
+    width: 40%;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 32px;
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.65);
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px solid #d9d9d9;
+    padding: 0 11px;
+    position: relative;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem1 .ant-select-enabled) {
+    width: 60%;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem2) {
+    flex: 59.4;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem2>span:first-child) {
+    width: 50%;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem2>span:nth-child(2)) {
+    width: 23%;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 32px;
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.65);
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px solid #d9d9d9;
+    padding: 0 11px;
+    position: relative;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem2 .contentTopItem2Third) {
+    width: 27%;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem3) {
+    flex: 18.4;
+}
+:global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content .contentTop .contentTopItem3 .contentTopItem3But) {
+    width: 64px;
+    margin: 0 auto;
+    display: block;
+}
 :global(.Title_bk) {
     border-top:1px solid #ccc;
     border-left:1px solid #ccc;

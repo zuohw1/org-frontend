@@ -61,7 +61,7 @@ export default ({
     type: 'radio',
     onSelect: (row) => {
       refCodes.map((item) => {
-        record[item.code] = row[item.refcode];
+        return record[item.code] = row[item.refcode];
       });
     },
   };

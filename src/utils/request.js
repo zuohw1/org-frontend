@@ -46,7 +46,6 @@ function toJson(raw) {
  * @return {object}           An object containing either "data" or "err"
  */
 function genreateRequest(url, options) {
-  console.log(options);
   return fetch(generateUrl(url), options)
     .then(toJson)
     .then(checkStatus);

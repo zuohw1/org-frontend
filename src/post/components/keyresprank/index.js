@@ -6,26 +6,25 @@ import '../../../assets/styles/module.less';
 
 const { Content } = Layout;
 
-const OrgApproval = (state) => {
-  //console.log(state)
+const KeyRespRank = (state) => {
   return (
     <React.Fragment>
-      <Breadcrumb style={{ margin: '10px 0' }}>
+      <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>
-          组织管理
+          职位管理
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          组织批文前置流程
+          关键职责职级列表
         </Breadcrumb.Item>
       </Breadcrumb>
       <Content
         className="page-module"
         style={{
-          background: '#fff', padding: '0px 15px 15px 15px', margin: 0, minHeight: 280,
+          background: '#fff', padding: 24, margin: 0, minHeight: 280,
         }}
       >
         <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="组织变更依据" key="1">
+          <Tabs.TabPane tab="关键职责职级列表" key="1">
             <Search {...state} />
             <Table {...state} />
           </Tabs.TabPane>
@@ -35,4 +34,4 @@ const OrgApproval = (state) => {
   );
 };
 
-export default OrgApproval;
+export default KeyRespRank;
