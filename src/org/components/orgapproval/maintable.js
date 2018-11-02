@@ -134,7 +134,7 @@ export default ({
         onClick={onClickAdd}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: 240 }} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: document.body.scrollHeight - 500 }} />
       <Pagination
         showQuickJumper
         current={current}
@@ -144,7 +144,7 @@ export default ({
         onShowSizeChange={onChangePageSize}
         showTotal={tota => `共 ${tota} 条`}
         showSizeChanger
-        style={{ marginTop: 10, float: 'right' }}
+        style={{ marginTop: 10, marginRight: 20, float: 'right' }}
       />
     </div>
   );
