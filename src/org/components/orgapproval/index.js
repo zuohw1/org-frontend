@@ -10,7 +10,7 @@ const OrgApproval = (state) => {
   //console.log(state)
   return (
     <React.Fragment>
-      <Breadcrumb style={{ margin: '16px 0' }}>
+      <Breadcrumb style={{ margin: '10px 0' }}>
         <Breadcrumb.Item>
           组织管理
         </Breadcrumb.Item>
@@ -21,7 +21,7 @@ const OrgApproval = (state) => {
       <Content
         className="page-module"
         style={{
-          background: '#fff', padding: 24, margin: 0, minHeight: 280,
+          background: '#fff', padding: '0px 15px 15px 15px', margin: 0, minHeight: 280,
         }}
       >
         <Tabs defaultActiveKey="1">

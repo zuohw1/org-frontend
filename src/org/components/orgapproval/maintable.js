@@ -130,11 +130,11 @@ export default ({
       </Modal>
       <Button
         type="primary"
-        style={{ margin: '20px 0' }}
+        style={{ margin: '10px 0' }}
         onClick={onClickAdd}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: 240 }} />
       <Pagination
         showQuickJumper
         current={current}

@@ -96,7 +96,7 @@ export default (props) => {
   let collapse = null;
   if (queryCols.length > 3) {
     collapse = (
-      <a style={{ marginLeft: 8, fontSize: 12 }} onClick={toggle}>
+      <a style={{ marginLeft: 8, fontSize: 14 }} onClick={toggle}>
       更多 <Icon type={expand ? 'up' : 'down'} />
       </a>
     );
@@ -106,6 +106,7 @@ export default (props) => {
     <Form
       className="ant-advanced-search-form"
       onSubmit={handleSearch}
+      style={{ padding: 10 }}
     >
       <Row gutter={24}>{getFields()}</Row>
       <Row>
