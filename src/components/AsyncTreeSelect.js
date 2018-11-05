@@ -93,7 +93,6 @@ class AsyncTreeSelect extends React.PureComponent {
     return (
       <TreeSelect
         treeDefaultExpandAll
-        style={{ width: 220 }}
         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         loadData={this.onLoadData}
