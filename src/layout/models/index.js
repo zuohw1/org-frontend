@@ -4,6 +4,7 @@ export default {
   namespace: 'layout',
   state: {
     collapsed: false,
+    /* 左侧菜单数据 */
     menus: [
       {
         id: 1,
@@ -43,24 +44,20 @@ export default {
   },
   effects: {
     *getMenuList({ payload }, { call, put }) {
-      try {
-        const menu = yield call(MenuService.getList, payload);
-        console.log(menu);
-        yield put({
-          type: 'willUpdateState',
-          payload: {
-            menus: menu,
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      const menu = yield call(MenuService.getList, payload);
+      yield put({
+        type: 'willUpdateState',
+        payload: {
+          menus: menu,
+        },
+      });
     },
   },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname && pathname === '/') {
+          /* 跳转页面后初始化左侧菜单数据 */
           dispatch({
             type: 'getMenuList',
             payload: {
