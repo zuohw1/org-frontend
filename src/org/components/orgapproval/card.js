@@ -20,7 +20,7 @@ export default ({
 }) => {
   const { getFieldDecorator } = form;
 
-  const { isRefModeShow, setRefSelectData } = actions;
+  const { setRefModeShow, setRefSelectData } = actions;
 
   const onRefSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ export default ({
   };
 
   const onRadioChange = () => {
-    isRefModeShow(true);
+    setRefModeShow(true);
   };
 
   const refCodes = [{ code: 'DOC_CODE', refcode: 'docCode' }, { code: 'DOC_VERIFIER', refcode: 'docVerifier' }];
@@ -61,6 +61,7 @@ export default ({
     type: 'radio',
     onSelect: (row) => {
       refCodes.map((item) => {
+        /* eslint-disable no-param-reassign,no-return-assign */
         return refSelectData[item.code] = row[item.refcode];
       });
     },

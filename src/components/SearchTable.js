@@ -4,6 +4,8 @@ import request from '../utils/request';
 
 /**
  * 表格参照
+ * refCodes //参照回写字段对应关系，
+ * 如 [{ code: 'DOC_CODE', refcode: 'docCode' }]; 表示把参照框中docCode回写到界面DOC_CODE上
  * <SearchTable
  * columns={refColumns}//表格显示字段
  * refUrl={refUrl}//请求url

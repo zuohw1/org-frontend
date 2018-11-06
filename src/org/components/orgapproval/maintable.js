@@ -10,6 +10,10 @@ import Model from './card';
 
 const { confirm } = Modal;
 
+/* table size统一设置为small 固定表头，
+   scroll={{ y: document.body.scrollHeight - 460 }}
+   460为其他控件宽度之和
+*/
 export default ({
   tableData,
   actions,
@@ -20,7 +24,7 @@ export default ({
   loading, formEdit, refModal, refSelectData,
 }) => {
   const {
-    isModeShow,
+    setModeShow,
     getRecord,
     updataRecord,
     deleteRecord,
@@ -31,7 +35,7 @@ export default ({
   };
 
   const onClickAdd = () => {
-    isModeShow(true, true);
+    setModeShow(true, true);
   };
 
   const onClickEdit = (_, row) => {
@@ -55,7 +59,6 @@ export default ({
     form.validateFields((err, values) => {
       if (!err) {
         /* eslint no-console: 0 */
-        console.log('Received values of form: ', values);
         updataRecord(values);
         form.resetFields();
       }
@@ -80,6 +83,7 @@ export default ({
 
   const { current, size, total } = tableData;
 
+  /* 列表字段 */
   const tableCols = [{
     title: '序号',
     dataIndex: 'key',

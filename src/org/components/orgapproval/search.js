@@ -39,6 +39,7 @@ export default (props) => {
     return (<Option value={item.id} key={item.id}> {item.title} </Option>);
   };
 
+  /* 查询字段 */
   const queryCols = [{
     itemName: '文件名称和文号', itemKey: 'batchCode', itemType: 'String', required: false,
   },
