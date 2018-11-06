@@ -4,6 +4,7 @@ export default {
   namespace: 'layout',
   state: {
     collapsed: false,
+    /* 左侧菜单数据 */
     menus: [
       {
         id: 1,
@@ -25,40 +26,6 @@ export default {
         pid: 1,
         iconUrl: 'sync',
       },
-      {
-        id: 2,
-        menuName: '职位管理',
-        pid: 0,
-        iconUrl: 'user',
-      },
-      {
-        id: 201,
-        menuName: '关键职责库维护',
-        url: '/post/keyresp',
-        pid: 2,
-        iconUrl: 'user',
-      },
-      {
-        id: 202,
-        menuName: '关键职责库查询',
-        url: '/post/keyrespquery',
-        pid: 2,
-        iconUrl: 'user',
-      },
-      {
-        id: 203,
-        menuName: '关键职责职级列表',
-        url: '/post/keyresprank',
-        pid: 2,
-        iconUrl: 'user',
-      },
-      {
-        id: 3,
-        menuName: '人员管理',
-        url: null,
-        pid: 0,
-        iconUrl: 'tag-o',
-      },
     ],
   },
   reducers: {
@@ -77,24 +44,20 @@ export default {
   },
   effects: {
     *getMenuList({ payload }, { call, put }) {
-      try {
-        const menu = yield call(MenuService.getList, payload);
-        console.log(menu);
-        yield put({
-          type: 'willUpdateState',
-          payload: {
-            menus: menu,
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      const menu = yield call(MenuService.getList, payload);
+      yield put({
+        type: 'willUpdateState',
+        payload: {
+          menus: menu,
+        },
+      });
     },
   },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname && pathname === '/') {
+          /* 跳转页面后初始化左侧菜单数据 */
           dispatch({
             type: 'getMenuList',
             payload: {

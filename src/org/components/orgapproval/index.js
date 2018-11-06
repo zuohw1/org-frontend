@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Breadcrumb, Tabs } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 import Search from './search';
 import Table from './maintable';
 import '../../../assets/styles/module.less';
@@ -7,29 +7,24 @@ import '../../../assets/styles/module.less';
 const { Content } = Layout;
 
 const OrgApproval = (state) => {
-  //console.log(state)
   return (
     <React.Fragment>
-      <Breadcrumb style={{ margin: '16px 0' }}>
+      <Breadcrumb style={{ margin: '10px 0' }}>
         <Breadcrumb.Item>
           组织管理
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          组织批文前置流程
+          <strong>组织批文前置流程</strong>
         </Breadcrumb.Item>
       </Breadcrumb>
       <Content
         className="page-module"
         style={{
-          background: '#fff', padding: 24, margin: 0, minHeight: 280,
+          background: '#fff', padding: '15px', margin: 0, minHeight: 280,
         }}
       >
-        <Tabs defaultActiveKey="1">
-          <Tabs.TabPane tab="组织变更依据" key="1">
-            <Search {...state} />
-            <Table {...state} />
-          </Tabs.TabPane>
-        </Tabs>
+        <Search {...state} />
+        <Table {...state} />
       </Content>
     </React.Fragment>
   );

@@ -10,6 +10,10 @@ import Model from './card';
 
 const { confirm } = Modal;
 
+/* table size统一设置为small 固定表头，
+   scroll={{ y: document.body.scrollHeight - 460 }}
+   460为其他控件宽度之和
+*/
 export default ({
   tableData,
   actions,
@@ -17,28 +21,25 @@ export default ({
   search,
   modal,
   form,
-  tableCols,
-  loading, formEdit, refModal,
+  loading, formEdit, refModal, refSelectData,
 }) => {
   const {
-    isModeShow,
+    setModeShow,
     getRecord,
     updataRecord,
     deleteRecord,
     listTable,
   } = actions;
   const onClickView = (_, row) => {
-    getRecord(row);
-    isModeShow(true, false);
+    getRecord(row, true, false);
   };
 
   const onClickAdd = () => {
-    isModeShow(true, true);
+    setModeShow(true, true);
   };
 
   const onClickEdit = (_, row) => {
-    getRecord(row);
-    isModeShow(true, true);
+    getRecord(row, true, true);
   };
 
   const onClickDelete = (row) => {
@@ -58,7 +59,6 @@ export default ({
     form.validateFields((err, values) => {
       if (!err) {
         /* eslint no-console: 0 */
-        console.log('Received values of form: ', values);
         updataRecord(values);
         form.resetFields();
       }
@@ -67,9 +67,8 @@ export default ({
 
   const onCancel = (e) => {
     e.preventDefault();
-    isModeShow(false);
     form.resetFields();
-    getRecord({});
+    getRecord({}, false, true);
   };
 
   const onChange = (pageNumber, pageSize) => {
@@ -84,6 +83,60 @@ export default ({
 
   const { current, size, total } = tableData;
 
+  /* 列表字段 */
+  const tableCols = [{
+    title: '序号',
+    dataIndex: 'key',
+    key: 'key',
+    align: 'center',
+    width: 50,
+  }, {
+    title: '文件名称和文号',
+    dataIndex: 'DOC_CODE',
+    key: 'DOC_CODE',
+    align: 'center',
+    width: 400,
+  }, {
+    title: '发起人',
+    dataIndex: 'ATTRIBUTE8',
+    key: 'ATTRIBUTE8',
+    align: 'center',
+    width: 150,
+  }, {
+    title: '发起时间',
+    dataIndex: 'ATTRIBUTE9',
+    key: 'ATTRIBUTE9',
+    align: 'center',
+    width: 100,
+  }, {
+    title: '文件拟稿人',
+    dataIndex: 'DOC_VERIFIER',
+    key: 'DOC_VERIFIER',
+    align: 'center',
+    width: 150,
+  }, {
+    title: '状态',
+    dataIndex: 'DOC_STATUS',
+    key: 'DOC_STATUS',
+    align: 'center',
+    width: 100,
+    render: (text) => {
+      if (text === '0') {
+        return '暂存中';
+      } else if (text === '1') {
+        return '审批中';
+      } else if (text === '2') {
+        return '审批完成';
+      }
+    },
+  }, {
+    title: '审批人',
+    dataIndex: 'ATTRIBUTE10',
+    key: 'ATTRIBUTE10',
+    align: 'center',
+    width: 150,
+  }];
+
   function getFields() {
     const children = [];
     for (let i = 0; i < tableCols.length; i += 1) {
@@ -95,6 +148,7 @@ export default ({
         dataIndex: 'action',
         key: 'action',
         align: 'center',
+        width: 240,
         render: (text, records) => (
           <span>
             <a href="jacascript:void(0);" onClick={() => onClickView(text, records)}>查看</a>
@@ -126,15 +180,16 @@ export default ({
           actions={actions}
           formEdit={formEdit}
           refModal={refModal}
+          refSelectData={refSelectData}
         />
       </Modal>
       <Button
         type="primary"
-        style={{ margin: '20px 0' }}
+        style={{ margin: '10px 0' }}
         onClick={onClickAdd}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: document.body.scrollHeight - 460 }} />
       <Pagination
         showQuickJumper
         current={current}
@@ -144,7 +199,7 @@ export default ({
         onShowSizeChange={onChangePageSize}
         showTotal={tota => `共 ${tota} 条`}
         showSizeChanger
-        style={{ marginTop: 10, float: 'right' }}
+        style={{ marginTop: 10, marginRight: 20, float: 'right' }}
       />
     </div>
   );

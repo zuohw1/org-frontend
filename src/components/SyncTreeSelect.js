@@ -48,7 +48,6 @@ class syncTreeSelect extends React.PureComponent {
         allowClear
         showSearch
         treeCheckable={checkbox}
-        style={{ width: 220 }}
         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         placeholder="请选择"

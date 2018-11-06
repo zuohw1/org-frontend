@@ -4,6 +4,7 @@ import ApprovalService from '../services/approval';
 const formatRecord = (record) => {
   const format = {
     ...record,
+    /* 格式化日期 */
     DOC_DATE: record.DOC_DATE.format('YYYY-MM-DD'),
   };
   return format;
@@ -11,7 +12,7 @@ const formatRecord = (record) => {
 
 /* 格式化table数据 */
 const formatTableData = (tableData) => {
-  const num = tableData.current * 10 - 10;
+  const num = tableData.current * tableData.size - tableData.size;
   const table = tableData.records.map((item, index) => {
     const ite = { ...item, key: index + 1 + num };
     return ite;
@@ -23,6 +24,7 @@ const formatTableData = (tableData) => {
 export default {
   namespace: 'orgApproval',
   state: {
+    /* 列表数据 */
     tableData: {
       total: 0,
       size: 0,
@@ -30,12 +32,19 @@ export default {
       records: [],
       pages: 0,
     },
+    /* 卡片是否显示 */
     modal: false,
+    /* 参照是否显示 */
     refModal: false,
-    refData: [],
+    /* 参照选中数据 */
+    refSelectData: {},
+    /* 查询是否展开 */
     expand: false,
+    /* 卡片表单是否可编辑 */
     formEdit: true,
+    /* 卡片记录 */
     record: {},
+    /* 查询条件数据 */
     search: {
       batchCode: '',
       workFlowStatus: '',
@@ -46,69 +55,6 @@ export default {
       pageSize: 10,
       pageNumber: 1,
     },
-    queryCols: [{
-      itemName: '文件名称和文号', itemKey: 'batchCode', itemType: 'String', required: false,
-    },
-    {
-      itemName: '流程状态', itemKey: 'workFlowStatus', itemType: 'Select', required: false, list: [{ id: '0', title: '暂存中' }, { id: '1', title: '审批中' }, { id: '2', title: '审批完成' }],
-    },
-    {
-      itemName: '文件拟稿人', itemKey: 'batchVerifier', itemType: 'String', required: false,
-    },
-    {
-      itemName: '文件发起人', itemKey: 'fullName', itemType: 'String', required: false,
-    },
-    {
-      itemName: '发起开始日期', itemKey: 'batDateS', itemType: 'Date', required: false,
-    },
-    {
-      itemName: '发起结束日期', itemKey: 'batDateE', itemType: 'Date', required: false,
-    }],
-    tableCols: [{
-      title: '序号',
-      dataIndex: 'key',
-      key: 'key',
-      align: 'center',
-    }, {
-      title: '文件名称和文号',
-      dataIndex: 'DOC_CODE',
-      key: 'DOC_CODE',
-      align: 'center',
-    }, {
-      title: '发起人',
-      dataIndex: 'ATTRIBUTE8',
-      key: 'ATTRIBUTE8',
-      align: 'center',
-    }, {
-      title: '发起时间',
-      dataIndex: 'ATTRIBUTE9',
-      key: 'ATTRIBUTE9',
-      align: 'center',
-    }, {
-      title: '文件拟稿人',
-      dataIndex: 'DOC_VERIFIER',
-      key: 'DOC_VERIFIER',
-      align: 'center',
-    }, {
-      title: '状态',
-      dataIndex: 'DOC_STATUS',
-      key: 'DOC_STATUS',
-      align: 'center',
-      render: (text) => {
-        if (text === '0') {
-          return '暂存中';
-        } else if (text === '1') {
-          return '审批中';
-        } else if (text === '2') {
-          return '审批完成';
-        }
-      },
-    }, {
-      title: '审批人',
-      dataIndex: 'ATTRIBUTE10',
-      key: 'ATTRIBUTE10',
-      align: 'center',
-    }],
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -119,6 +65,7 @@ export default {
     },
   },
   effects: {
+    /* 列表查询 */
     * fetch({ payload: { search } }, { call, put }) {
       const tableData = yield call(ApprovalService.list, search);
       const formatTable = formatTableData(tableData);
@@ -130,7 +77,7 @@ export default {
         },
       });
     },
-
+    /* 新增保存 */
     * newRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const records = formatRecord(record);
@@ -144,7 +91,7 @@ export default {
         payload: { modal: false, record: {} },
       });
     },
-
+    /* 修改保存 */
     * updataRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const records = formatRecord(record);
@@ -158,7 +105,7 @@ export default {
         payload: { modal: false },
       });
     },
-
+    /* 删除 */
     * deleteRecord({ payload: { record } }, { call, put }) {
       yield call(ApprovalService.delete, record.BATCH_HEADER_ID);
       yield put({
@@ -166,26 +113,24 @@ export default {
         payload: { search: { pageNumber: 1, pageSize: 10 } },
       });
     },
-
-    * getRecord({ payload: { record } }, { call, put }) {
+    /* 获取列表选中记录 */
+    * getRecord({ payload: { record, modal, formEdit } }, { call, put }) {
       if (record.BATCH_HEADER_ID && record.BATCH_HEADER_ID !== '') {
-        const attachData = yield call(ApprovalService.getAttachData, record.BATCH_HEADER_ID);
+        const data = yield call(ApprovalService.getAttachData, record.BATCH_HEADER_ID);
+        const attachData = data.map((item, index) => {
+          const ite = { ...item, key: index + 1 };
+          return ite;
+        });
         yield put({
           type: 'stateWillUpdate',
-          payload: { ...record, attachData },
+          payload: { record: { ...record, attachData }, modal, formEdit },
+        });
+      } else {
+        yield put({
+          type: 'stateWillUpdate',
+          payload: { record: { ...record }, modal, formEdit },
         });
       }
-    },
-    * getRefData({ payload: { url, search } }, { call, put }) {
-      const tableData = yield call(ApprovalService.getRefData, url, search);
-      const formatTable = formatTableData(tableData);
-      console.log(formatTable);
-      yield put({
-        type: 'stateWillUpdate',
-        payload: {
-          refData: formatTable,
-        },
-      });
     },
   },
   subscriptions: {
