@@ -121,7 +121,12 @@
 }
 :global(.siderTree) {
     width: 100%;
+    height: 84%;
     flex: 1;
+    overflow-y: auto;
+    position: absolute;
+    left: 0;
+    top: 16%;
 }
 :global(.Orgsearch .ant-layout-has-sider .ant-layout-content .humanlaout .content) {
     height: 100%;

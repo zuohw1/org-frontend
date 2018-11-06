@@ -2,7 +2,6 @@ export function searchData() {
   return {
     type: 'orgSearch/searchData',
     payload: {
-    	//data,
     },
   };
 }
@@ -14,11 +13,19 @@ export function isTrueExecute(execute) {
     },
   };
 }
-/*export function handleChangeValue(value) {
+export function getTreeChildren(id) {
   return {
-    type: 'orgSearch/handleChangeValue',
+    type: 'orgSearch/getTreeChildren',
     payload: {
-      value,
+      id,
     },
   };
-}*/
+}
+export function changeKey(orgTree) {//id, , dataRef
+  return {
+    type: 'orgSearch/changeKey',
+    payload: {
+      orgTree,
+    },
+  };
+}

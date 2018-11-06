@@ -7,12 +7,11 @@ import AdvancedSearchForm from '../../../components/AdvancedSearchForm';
 import AdvancedSearchForm2 from '../../../components/AdvancedSearchForm2';
 import AdvancedSearchForm3 from '../../../components/AdvancedSearchForm3';
 import AdvancedSearchForm4 from '../../../components/AdvancedSearchForm4';
-//import moment from 'moment';
+import request from '../../../utils/request';
 
 const { Sider, Content } = Layout;
 const { TreeNode } = Tree;
 const Option = Select.Option;
-//const dateFormat = 'YYYY/MM/DD';
 const WrappedAdvancedSearchForm = Form.create()(AdvancedSearchForm);
 const WrappedAdvancedSearchForm2 = Form.create()(AdvancedSearchForm2);
 const WrappedAdvancedSearchForm3 = Form.create()(AdvancedSearchForm3);
@@ -20,10 +19,10 @@ const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 
 
 const Orgsearch = (state) => {
+  console.log(this)
   console.log(state)
-  console.log(state.orgTree)
   const { actions, } = state;
-  const { searchData, isTrueExecute } = actions;
+  const { searchData, isTrueExecute, getTreeChildren } = actions;
   const children = [];
   for (let i = 0; i < state.dataList.length; i++) {
     children.push(<Option key={ state.dataList[i].show }>{ state.dataList[i].show }</Option>);
@@ -35,32 +34,33 @@ const Orgsearch = (state) => {
   const select = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   }
-  const handleChange = (value) => {
+  const handleChange = (value, event) => {
     console.log(`selected ${value}`);
   }
-  const loadData = (treeNode) => {
+  const onLoadData = (treeNode) => {
+    console.log(treeNode) 
+    console.log(state) 
+    const { dataRef } = treeNode.props;
     return new Promise((resolve) => {
       if (treeNode.props.children) {
         resolve();
         return;
       }
-      setTimeout(() => {
-        treeNode.props.dataRef.children = [
-          { title: 'Child Node', key: `${treeNode.props.eventKey}-0` },
-          { title: 'Child Node', key: `${treeNode.props.eventKey}-1` },
-        ];
-        this.setState({
-          treeData: [...this.state.treeData],
-        });
+      setTimeout(async () => {
+        const id =  dataRef.key;
+        const result = await request.get('orgquery'+ id);
+        dataRef.children = result;
+        console.log(dataRef.children)
+        getTreeChildren();
         resolve();
       }, 1000);
-    });
+    })
   }
   const renderTreeNodes = (data) => {
     return data.map((item) => {
       if (item.children) {
         return (
-          <TreeNode title={item.title} key={item.id} dataRef={item}>
+          <TreeNode title={item.title} key={item.key} dataRef={item}>
             {renderTreeNodes(item.children)}
           </TreeNode>
         );
@@ -92,8 +92,9 @@ const Orgsearch = (state) => {
                 </div>
                 <div className="siderTree">
                   <Tree
+                    defaultExpandParent
                     onSelect={select}
-                    onLoadData={loadData}
+                    loadData={onLoadData}
                   >
                     {renderTreeNodes(state.orgTree)}
                   </Tree>
