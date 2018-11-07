@@ -19,8 +19,6 @@ const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 
 
 const Orgsearch = (state) => {
-  console.log(this)
-  console.log(state)
   const { actions, } = state;
   const { searchData, isTrueExecute, getTreeChildren } = actions;
   const children = [];
@@ -38,8 +36,6 @@ const Orgsearch = (state) => {
     console.log(`selected ${value}`);
   }
   const onLoadData = (treeNode) => {
-    console.log(treeNode) 
-    console.log(state) 
     const { dataRef } = treeNode.props;
     return new Promise((resolve) => {
       if (treeNode.props.children) {
@@ -50,8 +46,7 @@ const Orgsearch = (state) => {
         const id =  dataRef.key;
         const result = await request.get('orgquery'+ id);
         dataRef.children = result;
-        console.log(dataRef.children)
-        getTreeChildren();
+        getTreeChildren(state.orgTree);
         resolve();
       }, 1000);
     })

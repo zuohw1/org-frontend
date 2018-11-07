@@ -13,19 +13,19 @@ export function isTrueExecute(execute) {
     },
   };
 }
-export function getTreeChildren(id) {
+export function getTreeChildren(orgTree) {
   return {
     type: 'orgSearch/getTreeChildren',
     payload: {
-      id,
+      orgTree,
     },
   };
 }
-export function changeKey(orgTree) {//id, , dataRef
+export function changeKey(id) {
   return {
     type: 'orgSearch/changeKey',
     payload: {
-      orgTree,
+      id,
     },
   };
 }

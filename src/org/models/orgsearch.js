@@ -34,7 +34,6 @@ export default {
   effects: {
     *searchData({ payload }, { call, put }) {  // eslint-disable-line
       const result = yield call(orgquery);//如果使用  {参数}  ，则是一个对象
-      console.log(result);//把请求的数据保存起来
       yield put({//数据更新会带动页面重新渲染
         type: 'save',  //reducers中的方法名
         payload:{  //网络返回的要保留的数据
@@ -48,7 +47,7 @@ export default {
         }
       })
     },
-    *getTreeChildren({ payload: { orgTree } }, { call, put }) {    
+    *getTreeChildren({ payload: { orgTree } }, { call, put }) {
       yield put({ //更新树的数据
         type: 'stateUpdate',
         payload:{  
@@ -65,7 +64,6 @@ export default {
       })
     },
     *changeKey({ payload: { stringKey } }, { call, put }) {
-      console.log(stringKey)
       yield put({
         type: 'stateUpdate',
         payload:{  
