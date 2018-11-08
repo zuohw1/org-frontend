@@ -29,3 +29,11 @@ export function changeKey(id) {
     },
   };
 }
+export function handleChange(flexName) {
+  return {
+    type: 'orgSearch/handleChange',
+    payload: {
+      flexName,
+    },
+  };
+}

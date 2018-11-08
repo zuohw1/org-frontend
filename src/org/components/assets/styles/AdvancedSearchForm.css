@@ -16,3 +16,23 @@
 :global(.form111 .ant-row .ant-col-12 .ant-form-item .ant-form-item-label) {
     width: 80.05px;
 }
+
+
+
+:global(.form222 .ant-row .ant-col-12 .ant-form-item .ant-form-item-label) {
+    width: 88.5px;
+}
+
+
+
+
+:global(.form333 .ant-row .ant-col-12 .ant-form-item .ant-form-item-label) {
+    width: 164.05px;
+}
+
+
+
+
+:global(.form444 .ant-row .ant-col-12 .ant-form-item .ant-form-item-label) {
+    width: 108.05px;
+}

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {
   Form, Row, Col, Input
 } from 'antd';
-import './AdvancedSearchForm3.css';
+import '../../assets/styles/AdvancedSearchForm.css';
 
 const FormItem = Form.Item;
-const res = ["续存实业对应省公司名","组织排序号","组织层级","南方/北方/子公司","地点地址","虚拟组织","所属省份","组织属性","组织撤销发文时间","组织更名-原组织","组织更名-新组织","划小单元"];
+const res = ["地点","内部/外部","国家(地区)","省市","地点地址","邮编"];
 
-class AdvancedSearchForm3 extends Component {
+class AdvancedSearchForm2 extends Component {
   getFields() {
+    console.log(this.props)
     const { getFieldDecorator } = this.props.form;
     const children = [];
     for (let i = 0; i < res.length; i++) {
@@ -33,7 +34,7 @@ class AdvancedSearchForm3 extends Component {
   render() {
     return (
       <Form
-        className="ant-advanced-search-form form333"
+        className="ant-advanced-search-form form222"
       >
         <Row gutter={24}>{this.getFields()}</Row>
       </Form>
@@ -41,4 +42,4 @@ class AdvancedSearchForm3 extends Component {
   }
 }
 
-export default AdvancedSearchForm3;
+export default AdvancedSearchForm2;

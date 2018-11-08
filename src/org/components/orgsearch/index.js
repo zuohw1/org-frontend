@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker, Select,
+  Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker, Select, Icon
 } from 'antd';
 import '../assets/styles/Orgsearch.css';
-import AdvancedSearchForm from '../../../components/AdvancedSearchForm';
-import AdvancedSearchForm2 from '../../../components/AdvancedSearchForm2';
-import AdvancedSearchForm3 from '../../../components/AdvancedSearchForm3';
-import AdvancedSearchForm4 from '../../../components/AdvancedSearchForm4';
+import AdvancedSearchForm from './components/AdvancedSearchForm';
+import AdvancedSearchForm2 from './components/AdvancedSearchForm2';
+import AdvancedSearchForm3 from './components/AdvancedSearchForm3';
+import AdvancedSearchForm4 from './components/AdvancedSearchForm4';
 import request from '../../../utils/request';
 
 const { Sider, Content } = Layout;
@@ -20,7 +20,7 @@ const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 
 const Orgsearch = (state) => {
   const { actions, } = state;
-  const { searchData, isTrueExecute, getTreeChildren } = actions;
+  const { searchData, isTrueExecute, getTreeChildren, handleChange } = actions;
   const children = [];
   for (let i = 0; i < state.dataList.length; i++) {
     children.push(<Option key={ state.dataList[i].show }>{ state.dataList[i].show }</Option>);
@@ -32,8 +32,11 @@ const Orgsearch = (state) => {
   const select = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   }
-  const handleChange = (value, event) => {
+  const handleChangeValue = (event, value) => {
     console.log(`selected ${value}`);
+    console.log(event)
+    //console.log(666)
+    handleChange(event)
   }
   const onLoadData = (treeNode) => {
     const { dataRef } = treeNode.props;
@@ -55,7 +58,7 @@ const Orgsearch = (state) => {
     return data.map((item) => {
       if (item.children) {
         return (
-          <TreeNode title={item.title} key={item.key} dataRef={item}>
+          <TreeNode  icon={<Icon type="star-o" theme="twoTone"/>} title={item.title} key={item.key} dataRef={item} >
             {renderTreeNodes(item.children)}
           </TreeNode>
         );
@@ -87,7 +90,8 @@ const Orgsearch = (state) => {
                 </div>
                 <div className="siderTree">
                   <Tree
-                    defaultExpandParent
+                    showIcon
+                    defaultExpandAll
                     onSelect={select}
                     loadData={onLoadData}
                   >
@@ -102,8 +106,8 @@ const Orgsearch = (state) => {
                       <span>版本号</span>
                       <Select
                         size='default'
-                        defaultValue={ state.flexName }
-                        onChange={handleChange}
+                        value={ state.flexName }
+                        onChange={handleChangeValue}
                       >
                         {children}
                       </Select>
@@ -116,16 +120,16 @@ const Orgsearch = (state) => {
                     <div className="contentTopItem3"><Button className="contentTopItem3But">查找</Button></div>
                   </div>
                   <Card title="基本信息">
-                    <WrappedAdvancedSearchForm />
+                    <WrappedAdvancedSearchForm  sta={state}/>
                   </Card>
                   <Card title="地点信息">
-                    <WrappedAdvancedSearchForm2 />
+                    <WrappedAdvancedSearchForm2 sta2={state}/>
                   </Card>
                   <Card title="附加信息">
-                    <WrappedAdvancedSearchForm3 />
+                    <WrappedAdvancedSearchForm3 sta3={state}/>
                   </Card>
                   <Card title="GRE/法律实体信息">
-                    <WrappedAdvancedSearchForm4 />
+                    <WrappedAdvancedSearchForm4 sta4={state}/>
                   </Card>
                 </div>
               </Content>
