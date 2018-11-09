@@ -26,6 +26,13 @@ export default {
         pid: 1,
         iconUrl: 'sync',
       },
+      {
+        id: 103,
+        menuName: '组织新增',
+        url: '/org/create',
+        pid: 1,
+        iconUrl: 'sync',
+      },
     ],
   },
   reducers: {
