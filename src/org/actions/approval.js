@@ -58,10 +58,11 @@ export function listTable(search) {
 }
 
 /* 更新数据 */
-export function updataRecord(record) {
-  if (record.BATCH_HEADER_ID && record.BATCH_HEADER_ID !== '') {
+export function updateRecord(record) {
+  const id = record.BATCH_HEADER_ID;
+  if (id && id !== '') {
     return {
-      type: 'orgApproval/updataRecord',
+      type: 'orgApproval/updateRecord',
       payload: {
         record,
       },
