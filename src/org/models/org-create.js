@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import Service from '../services/orgcreate';
+import Service from '../services/org-create';
 
 /* 格式化table数据 */
 const formatTableData = (tableData) => {

@@ -7,10 +7,10 @@ import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.less';
 import app from '../../assets/styles/App.css';
 import Main from './main';
-import OrgSearch from '../../org/containers/orgsearch';
+import OrgSearch from '../../org/containers/org-search';
 import OrgApproval from '../../org/containers/approval';
-import OrgCreate from '../../org/containers/orgcreate';
-import ChangeDetail from '../../org/containers/changedetail';
+import OrgCreate from '../../org/containers/org-create';
+import ChangeDetail from '../../org/containers/change-detail';
 
 
 const { SubMenu } = Menu;

@@ -6,7 +6,7 @@ import '../../../assets/styles/module.less';
 import {
   Route, Switch, Link,
 } from 'dva/router';
-import ApprovalCard from '../../containers/approvalcard';
+import ApprovalCard from '../../containers/approval-card';
 import SearchTable from '../../../components/search-table';
 
 const { Content } = Layout;

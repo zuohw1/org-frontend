@@ -1,4 +1,4 @@
-import { orgquery, orgSearchDetail } from '../services/orgsearch';
+import { orgquery, orgSearchDetail } from '../services/org-search';
 
 export default {
 
@@ -37,7 +37,7 @@ export default {
     owenPrivince: "",//附加信息 所属省份
     orgProprerties: "",//附加信息 组织属性
     orgcancleDate: "",//附加信息 组织撤销发文时间
-    cucorgmin: "",//附加信息 最小基层单元 
+    cucorgmin: "",//附加信息 最小基层单元
     orgnizationName: "",//GRE/法律实体信息 公司名称
     orgCode: "",//GRE/法律实体信息 企业组织代码
     orgPeriodCode: "",//成本信息 公司段编码
@@ -67,13 +67,13 @@ export default {
       yield put({//数据更新会带动页面重新渲染
         type: 'save',  //reducers中的方法名
         payload:{  //网络返回的要保留的数据
-          dataList: result.dataList,  
-          dateFrom: result.dateFrom,  
-          dateTo: result.dateTo,  
-          flexName: result.flexName,  
-          flexValue: result.flexValue,  
-          orgTree: result.orgTree,  
-          structureName: result.structureName,  
+          dataList: result.dataList,
+          dateFrom: result.dateFrom,
+          dateTo: result.dateTo,
+          flexName: result.flexName,
+          flexValue: result.flexValue,
+          orgTree: result.orgTree,
+          structureName: result.structureName,
         }
       })
     },
@@ -117,7 +117,7 @@ export default {
     *getTreeChildren({ payload: { orgTree } }, { call, put }) {
       yield put({ //更新树的数据
         type: 'stateUpdate',
-        payload:{  
+        payload:{
            orgTree: [...orgTree],
         }
       });
@@ -126,14 +126,14 @@ export default {
       yield put({
         type: 'stateUpdate',
         payload:{
-          execute: false,    
+          execute: false,
         }
       })
     },
     *changeKey({ payload: { stringKey } }, { call, put }) {
       yield put({
         type: 'stateUpdate',
-        payload:{  
+        payload:{
           id: stringKey,
         }
       })
@@ -142,12 +142,12 @@ export default {
       console.log(flexName)
       yield put({
         type: 'stateUpdate',
-        payload:{  
+        payload:{
           flexName: flexName,
         }
       })
     },
-    
+
   },
 
   reducers: {
