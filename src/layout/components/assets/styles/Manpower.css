@@ -82,12 +82,78 @@
 :global(.part2) {
   width: 100%;
   height: 204px;
-  display: flex;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
 }
-:global(.part2son) {
-  width: 270px;
+:global(.part2 .ant-row) {
+  width: 100%;
+  height: 204px;
+  display: flex;
+}
+:global(.part2 .ant-row .ant-col-8) {
+  flex: 1;
+  height: 204px;
+}
+:global(.part2 .ant-row .ant-col-8 .ant-card .ant-card-body) {
+  height: 148px;
+}
+:global(.part2SonFirst .ant-card-head .ant-card-head-wrapper .ant-card-extra) {
+  padding: 5.5px 0;
+  padding-right: 8px;
+}
+:global(.part2SonFirst .ant-card-head .ant-card-head-wrapper .ant-card-head-title) {
+  padding-left: 8px;
+}
+:global(.part2SonFirstP) {
+  padding: 8px 8px;
+  margin-bottom: 0;
+}
+:global(.part2SonFirstP>i) {
+  font-style: normal;
+  display: inline-block;
+  width: 29%;
+  color: #D8000F;
+}
+:global(.part2SonFirstPSpan1) {
+  display: inline-block;
+  width: 20%;
+}
+:global(.part2SonFirstPSpan2) {
+  display: inline-block;
+  width: 51%;
+}
+
+:global(.part2SonSecond) {
+  height: 335px;
+}
+:global(.part2SonSecondP) {
+  padding: 14px 8px;
+  margin-bottom: 0;
+}
+:global(.part2SonSecondP1) {
+  padding: 8px 8px;
+  margin-bottom: 0;
+  font-family:"微软雅黑";
+  font-size: 15px;
+  margin-bottom: 4px;
+  margin-top: 7px;
+}
+:global(.part2SonSecondP1>i) {
+  font-style: normal;
+  display: inline-block;
+  color: #D8000F;
+}
+:global(.part2SonSecondPSpan1) {
+  display: inline-block;
+  width: 62%;
+}
+:global(.part2SonSecondPSpan2) {
+  display: inline-block;
+  width: 17%;
+}
+:global(.part2SonSecondPSpan2>i) {
+  font-style: normal;
+  display: inline-block;
+  color: #D8000F;
+  padding:0px 3px;
 }
 :global(.part3) {
   width: 100%;
@@ -97,7 +163,10 @@
   justify-content: space-between;
 }
 :global(.part3son) {
-  width: 552px;
+  width: 50%;
+}
+:global(.part3son2) {
+  margin-left: 6px;
 }
 
 :global(.Treeshade) {
@@ -106,9 +175,6 @@
 :global(.Treeselect) {
   width: 100%;height: 100%;
 }
-/* :global() {
-
-} */
 :global(.ant-card-bordered) {
   padding: 9px;
 }

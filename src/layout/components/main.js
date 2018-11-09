@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Layout, Breadcrumb, Card, Calendar,
-} from 'antd';
-import cultivateImg from './assets/images/u4462.png';
-import variousImg from './assets/images/u4463.png';
-import seniorImg from './assets/images/u4464.png';
-import checkImg from './assets/images/u4465.png';
-import qualificationsImg from './assets/images/u4466.png';
-import performanceImg from './assets/images/u4467.png';
-import './assets/styles/Manpower.css';
+import { Layout, Breadcrumb, Card, Calendar, Col, Row } from 'antd';
+import CadreAccount from './echarts/cadre-account';
+import SeniorCadreAccount from './echarts/senior-cadre-account';
+import VariousExamineAccount from './echarts/various-examine-account';
+import VariousCadreEducationDistribution from './echarts/various-cadre-education-distribution';
+import './assets/styles/manpower.css';
 
 const { Content } = Layout;
 
@@ -16,7 +12,7 @@ function onPanelChange(value, mode) {
   console.log(value, mode);
 }
 
-class Main extends Component {
+class Manpower extends Component {
   render() {
     return (
       <div className="Manpower">
@@ -26,7 +22,7 @@ class Main extends Component {
               <Breadcrumb.Item>人员管理</Breadcrumb.Item>
               <Breadcrumb.Item>人力业务管理</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ minHeight: 360 }} className="part">
+            <div style={{ minHeight: 360 }} className="part" >
               <div className="part1">
                 <div className="part1Left">
                   <div className="part1LeftTop">
@@ -58,7 +54,7 @@ class Main extends Component {
                   <div className="part1LeftBottom">
                     <Card
                       title="快速开始"
-                      extra={<a href="#">设置</a>}
+                      extra={<a href="jacascript::void(0)">设置</a>}
                     >
                       <div className="part1LeftBottompart"><p>考群设置</p><p>项目考核</p></div>
                       <div className="part1LeftBottompart"><p>绩效手册设置</p><p>排版管理</p></div>
@@ -71,11 +67,11 @@ class Main extends Component {
                 </div>
                 <div className="part1Right">
                   <div className="part1RightL">
-                    <div className="part1RightLTop" />
+                    <div className="part1RightLTop"></div>
                     <div className="part1RightLBottom">
                       <Card
                         title="编辑"
-                        extra={<a href="#">更多</a>}
+                        extra={<a href="jacascript::void(0)">更多>></a>}
                       >
                         <p>09:30&nbsp;&nbsp;1058房间新人......</p>
                         <p>13:30&nbsp;&nbsp;考核计划执行</p>
@@ -93,14 +89,69 @@ class Main extends Component {
                 </div>
               </div>
               <div className="part2">
-                <div className="part2son"><img src={cultivateImg} className="autoImg" alt="" /></div>
-                <div className="part2son"><img src={variousImg} className="autoImg" alt="" /></div>
-                <div className="part2son"><img src={seniorImg} className="autoImg" alt="" /></div>
-                <div className="part2son"><img src={checkImg} className="autoImg" alt="" /></div>
+                <Row gutter={16}>
+                  <Col span={8}>
+                    <Card title="实时培训看板" extra={<a href="jacascript::void(0)">编辑</a>}  bordered={false} className="part2SonFirst">
+                      <p className="part2SonFirstP"><i>[签到率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">产品经理课程</span></p>
+                      <p className="part2SonFirstP"><i>[评价率]</i><span className="part2SonFirstPSpan1">20%</span><span className="part2SonFirstPSpan2">SPARK培训</span></p>
+                      <p className="part2SonFirstP"><i>[报名率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">OGG技术培训</span></p>
+                      <p className="part2SonFirstP"><i>[报名率]</i><span className="part2SonFirstPSpan1">400%</span><span className="part2SonFirstPSpan2">OGG技术培训</span></p>
+                    </Card>
+                  </Col>
+                  <Col span={8}>
+                    <Card title="各类干部占比" bordered={false} className="part2SonFirst">
+                      <CadreAccount />
+                    </Card>
+                  </Col>
+                  <Col span={8}>
+                    <Card title="高管干部年龄占比" bordered={false} className="part2SonFirst">
+                      <SeniorCadreAccount />
+                    </Card>
+                  </Col>
+                  <Col span={8}>
+                    <Card title="各类考核占比" bordered={false} className="part2SonFirst">
+                      <VariousExamineAccount />
+                    </Card>
+                  </Col>
+                </Row>
               </div>
               <div className="part3">
-                <div className="part3son"><img src={qualificationsImg} className="autoImg" alt="" /></div>
-                <div className="part3son"><img src={performanceImg} className="autoImg" alt="" /></div>
+                <div className="part3son">
+                  <Card title="各类干部学历分布" bordered={false} className="part2SonFirst">
+                    <VariousCadreEducationDistribution />
+                  </Card>
+                </div>
+                <div className="part3son part3son2">
+                  <Card title="绩效消息中心" bordered={false} className="part2SonFirst">
+                    <p className="part2SonSecondP1">当前处于员工自评的计划有&nbsp;<i>5</i>&nbsp;条</p>
+                    <p className="part2SonSecondP">
+                      <span className="part2SonSecondPSpan1">系统运行中心考核计划（8月）</span>
+                      <span className="part2SonSecondPSpan2"><i>5</i>人未填写</span>
+                      <span className="part2SonSecondPSpan3">8月25日汇总上报</span>
+                    </p>
+                    <p className="part2SonSecondP">
+                      <span className="part2SonSecondPSpan1">管理信息产品部中心经理考核计...</span>
+                      <span className="part2SonSecondPSpan2"><i>5</i>人未填写</span>
+                      <span className="part2SonSecondPSpan3">8月30日汇总上报</span>
+                    </p>
+                    <p className="part2SonSecondP">
+                      <span className="part2SonSecondPSpan1">管信-ERP-人力考核计划（8月）</span>
+                      <span className="part2SonSecondPSpan2"><i>6</i>人未填写</span>
+                      <span className="part2SonSecondPSpan3">8月30日汇总上报</span>
+                    </p>
+                    <p className="part2SonSecondP">
+                      <span className="part2SonSecondPSpan1">管信-ERP-财务考核计划（8月）</span>
+                      <span className="part2SonSecondPSpan2"><i>8</i>人未填写</span>
+                      <span className="part2SonSecondPSpan3">8月30日汇总上报</span>
+                    </p>
+                    <p className="part2SonSecondP">
+                      <span className="part2SonSecondPSpan1">
+                      管信-ERP-物流考核计划（8月）</span>
+                      <span className="part2SonSecondPSpan2"><i>7</i>人未填写</span>
+                      <span className="part2SonSecondPSpan3">8月30日汇总上报</span>
+                    </p>
+                  </Card>
+                </div>
               </div>
             </div>
           </Content>
@@ -110,4 +161,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default Manpower;
