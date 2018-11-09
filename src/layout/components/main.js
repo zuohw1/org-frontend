@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Layout, Breadcrumb, Card, Calendar } from 'antd';
+import {
+  Layout, Breadcrumb, Card, Calendar,
+} from 'antd';
 import cultivateImg from './assets/images/u4462.png';
 import variousImg from './assets/images/u4463.png';
 import seniorImg from './assets/images/u4464.png';
@@ -14,7 +16,7 @@ function onPanelChange(value, mode) {
   console.log(value, mode);
 }
 
-class Manpower extends Component {
+class Main extends Component {
   render() {
     return (
       <div className="Manpower">
@@ -24,7 +26,7 @@ class Manpower extends Component {
               <Breadcrumb.Item>人员管理</Breadcrumb.Item>
               <Breadcrumb.Item>人力业务管理</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ minHeight: 360 }} className="part" >
+            <div style={{ minHeight: 360 }} className="part">
               <div className="part1">
                 <div className="part1Left">
                   <div className="part1LeftTop">
@@ -56,7 +58,7 @@ class Manpower extends Component {
                   <div className="part1LeftBottom">
                     <Card
                       title="快速开始"
-                      extra={<a href="jacascript::void(0)">设置</a>}
+                      extra={<a href="#">设置</a>}
                     >
                       <div className="part1LeftBottompart"><p>考群设置</p><p>项目考核</p></div>
                       <div className="part1LeftBottompart"><p>绩效手册设置</p><p>排版管理</p></div>
@@ -69,11 +71,11 @@ class Manpower extends Component {
                 </div>
                 <div className="part1Right">
                   <div className="part1RightL">
-                    <div className="part1RightLTop"></div>
+                    <div className="part1RightLTop" />
                     <div className="part1RightLBottom">
                       <Card
                         title="编辑"
-                        extra={<a href="jacascript::void(0)">更多>></a>}
+                        extra={<a href="#">更多</a>}
                       >
                         <p>09:30&nbsp;&nbsp;1058房间新人......</p>
                         <p>13:30&nbsp;&nbsp;考核计划执行</p>
@@ -108,4 +110,4 @@ class Manpower extends Component {
   }
 }
 
-export default Manpower;
+export default Main;

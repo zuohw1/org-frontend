@@ -6,7 +6,7 @@ import { Route, Switch, Link } from 'dva/router';
 import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.less';
 import app from '../../assets/styles/App.css';
-import Manpower from './Manpower';
+import Main from './main';
 import OrgSearch from '../../org/containers/orgsearch';
 import OrgApproval from '../../org/containers/approval';
 import OrgCreate from '../../org/containers/orgcreate';
@@ -78,7 +78,7 @@ const MainLayout = (state) => {
         </Layout.Sider>
         <Layout style={{ padding: '5px' }}>
           <Switch>
-            <Route exact path="/" component={Manpower} />
+            <Route exact path="/" component={Main} />
             <Route exact path="/org/search" component={OrgSearch} />
             <Route exact path="/org/approval" component={OrgApproval} />
             <Route exact path="/org/create" component={OrgCreate} />
