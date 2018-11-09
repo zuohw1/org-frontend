@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Manpower.css';
+import './Main.css';
 import { Input, Icon, Table, Button } from 'antd';
 import axios from 'axios';
 const Search = Input.Search;
