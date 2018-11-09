@@ -13,7 +13,7 @@ const columns = [{
   title: 'Name',
   dataIndex: 'name',
 }];
-class Listshade extends Component {
+class ListShade extends Component {
   	state = {
         userName: '',
         selectedRowKeys: [],
@@ -103,8 +103,8 @@ class Listshade extends Component {
         					/>
                         </div>
                         <div className="listContentB">
-                        	<Table  
-                        		columns={columns} 
+                        	<Table
+                        		columns={columns}
                         		dataSource={ this.state.data }
                         		onRowClick={this.rowClick}
                         	/>
@@ -129,4 +129,4 @@ class Listshade extends Component {
         );
     }
 }
-export default Listshade;
+export default ListShade;

@@ -14,12 +14,12 @@ const columns = [{
   title: 'Name',
   dataIndex: 'name',
 }];
-class Treelist extends Component {
+class TreeList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userName: '',
-            selectedRowKeys: [], 
+            selectedRowKeys: [],
             data:[],
             arr:[],
             res:[],
@@ -130,9 +130,9 @@ class Treelist extends Component {
                             </DirectoryTree>
                         </div>
                         <div className="trliContentRight">
-                            <Table 
-                                rowSelection={rowSelection} 
-                                columns={columns} 
+                            <Table
+                                rowSelection={rowSelection}
+                                columns={columns}
                                 dataSource={this.state.data}
                                 onRowClick={this.rowClick}
                             />
@@ -148,4 +148,4 @@ class Treelist extends Component {
         );
     }
 }
-export default Treelist;
+export default TreeList;

@@ -3,7 +3,7 @@ import './Manpower.css';
 import axios from 'axios';
 import { TreeSelect, Tree } from 'antd';
 const TreeNode = Tree.TreeNode;
-class Treeselect extends Component {
+class TreeSelect extends Component {
     onChange = (value) => {
           console.log(value);
           this.setState({ value });
@@ -69,4 +69,4 @@ class Treeselect extends Component {
         );
     }
 }
-export default Treeselect;
+export default TreeSelect;

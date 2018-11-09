@@ -55,7 +55,7 @@ const getParentKey = (key, tree) => {
   }
   return parentKey;
 };
-class Treeshade extends Component {
+class TreeShade extends Component {
         state = {
           expandedKeys: [],
           searchValue: '',
@@ -169,9 +169,9 @@ class Treeshade extends Component {
                       ref={node => this.userNameInput = node}
                       className="nodeInput"
                       onChange = {this.change}
-                    />  
+                    />
                 </div>
             );
     }
 }
-export default Treeshade;
+export default TreeShade;

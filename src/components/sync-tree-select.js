@@ -11,7 +11,7 @@ class syncTreeSelect extends React.PureComponent {
   state = {
     value: undefined,
     treeData: [],
-  }
+  };
 
   /**
    *第一次渲染后调用
@@ -38,7 +38,7 @@ class syncTreeSelect extends React.PureComponent {
     this.setState({ value });
     const { treeSelectChange } = this.props;
     treeSelectChange(value, label, extra);
-  }
+  };
 
   render() {
     const { treeData, value } = this.state;

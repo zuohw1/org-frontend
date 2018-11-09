@@ -1,11 +1,9 @@
 import React from 'react';
-import { Table, Input, Pagination } from 'antd';
+import { Input, Pagination, Table } from 'antd';
 import request from '../utils/request';
 
 /**
  * 表格参照
- * refCodes //参照回写字段对应关系，
- * 如 [{ code: 'DOC_CODE', refcode: 'docCode' }]; 表示把参照框中docCode回写到界面DOC_CODE上
  * <SearchTable
  * columns={refColumns}//表格显示字段
  * refUrl={refUrl}//请求url
@@ -28,7 +26,7 @@ class SearchTable extends React.PureComponent {
       pageSize: 10,
     },
     refData: [],
-  }
+  };
 
   async componentDidMount() {
     const { refUrl } = this.props;
@@ -43,13 +41,11 @@ class SearchTable extends React.PureComponent {
   }
 
   formatTableData = (tableData) => {
-    const num = tableData.current * tableData.size - tableData.size;
+    const num = tableData.current * 10 - 10;
     const table = tableData.records.map((item, index) => {
-      const ite = { ...item, key: index + 1 + num };
-      return ite;
+      return { ...item, key: index + 1 + num };
     });
-    const formatTable = { ...tableData, records: table };
-    return formatTable;
+    return { ...tableData, records: table };
   };
 
   onSearch = (value) => {
@@ -57,7 +53,7 @@ class SearchTable extends React.PureComponent {
     const { search } = this.state;
     const searchF = { ...search, name: value };
     this.refreshData(refUrl, searchF);
-  }
+  };
 
   onChangePage = (pageNumber, pageSize) => {
     const { refUrl } = this.props;
@@ -84,7 +80,7 @@ class SearchTable extends React.PureComponent {
       this.setState({ refData: formatTable });
       resolve();
     });
-  }
+  };
 
   render() {
     const { columns, rowSelection } = this.props;
