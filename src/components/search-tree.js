@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tree, Input } from 'antd';
 
-const TreeNode = Tree.TreeNode;
-const Search = Input.Search;
+const { TreeNode } = Tree;
+const { Search } = Input;
 
 const x = 3;
 const y = 2;
@@ -14,7 +14,7 @@ const generateData = (_level, _preKey, _tns) => {
   const tns = _tns || gData;
 
   const children = [];
-  for (let i = 0; i < x; i++) {
+  for (let i = 0; i < x; i += 1) {
     const key = `${preKey}-${i}`;
     tns.push({ title: key, key });
     if (i < y) {
@@ -34,12 +34,12 @@ generateData(z);
 
 const dataList = [];
 const generateList = (data) => {
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
     const node = data[i];
-    const key = node.key;
+    const { key } = node;
     dataList.push({ key, title: key });
     if (node.children) {
-      generateList(node.children, node.key);
+      generateList(node.children, key);
     }
   }
 };
@@ -47,7 +47,7 @@ generateList(gData);
 
 const getParentKey = (key, tree) => {
   let parentKey;
-  for (let i = 0; i < tree.length; i++) {
+  for (let i = 0; i < tree.length; i += 1) {
     const node = tree[i];
     if (node.children) {
       if (node.children.some(item => item.key === key)) {
@@ -65,37 +65,36 @@ class SearchTree extends React.PureComponent {
     expandedKeys: [],
     searchValue: '',
     autoExpandParent: true,
-  }
+  };
 
   onExpand = (expandedKeys) => {
     this.setState({
       expandedKeys,
       autoExpandParent: false,
     });
-  }
+  };
 
   onChange = (e) => {
-    const value = e.target.value;
     const expandedKeys = dataList.map((item) => {
-      if (item.key.indexOf(value) > -1) {
+      if (item.key.indexOf(e.target.value) > -1) {
         return getParentKey(item.key, gData);
       }
       return null;
     }).filter((item, i, self) => item && self.indexOf(item) === i);
     this.setState({
       expandedKeys,
-      searchValue: value,
+      searchValue: e.target.value,
       autoExpandParent: true,
     });
-  }
+  };
 
-  onSelect = (selectedKeys, info) => {
+  onSelect = (selectedKeys) => {
     const { record, refCodes } = this.props;
     refCodes.map((item) => {
-      record[item.code] = selectedKeys[0];
+      /* eslint-disable prefer-destructuring,no-return-assign */
+      return record[item.code] = selectedKeys[0];
     });
-    console.log('selected', selectedKeys, info);
-  }
+  };
 
   render() {
     const { searchValue, expandedKeys, autoExpandParent } = this.state;
