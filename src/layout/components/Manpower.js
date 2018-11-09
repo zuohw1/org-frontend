@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Layout, Breadcrumb, Card, Calendar } from 'antd';
-import cultivateImg from './assets/images/u4462.png';
-import variousImg from './assets/images/u4463.png';
-import seniorImg from './assets/images/u4464.png';
-import checkImg from './assets/images/u4465.png';
+import { Layout, Breadcrumb, Card, Calendar, Col, Row } from 'antd';
 import qualificationsImg from './assets/images/u4466.png';
 import performanceImg from './assets/images/u4467.png';
-import './assets/styles/Manpower.css';
+import './assets/styles/manpower.css';
 
 const { Content } = Layout;
 
@@ -91,10 +87,28 @@ class Manpower extends Component {
                 </div>
               </div>
               <div className="part2">
-                <div className="part2son"><img src={cultivateImg} className="autoImg" alt="" /></div>
-                <div className="part2son"><img src={variousImg} className="autoImg" alt="" /></div>
-                <div className="part2son"><img src={seniorImg} className="autoImg" alt="" /></div>
-                <div className="part2son"><img src={checkImg} className="autoImg" alt="" /></div>
+                <Row gutter={16}>
+                  <Col span={8}>
+                    <Card title="实时培训看板" extra={<a href="jacascript::void(0)">编辑</a>}  bordered={false} className="part2SonFirst">
+                      <p className="part2SonFirstP"><i>[签到率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">产品经理课程</span></p>
+                      <p className="part2SonFirstP"><i>[评价率]</i><span className="part2SonFirstPSpan1">20%</span><span className="part2SonFirstPSpan2">SPARK培训</span></p>
+                      <p className="part2SonFirstP"><i>[报名率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">OGG技术培训</span></p>
+                      <p className="part2SonFirstP"><i>[报名率]</i><span className="part2SonFirstPSpan1">400%</span><span className="part2SonFirstPSpan2">OGG技术培训</span></p>
+                    </Card>
+                  </Col>
+                  <Col span={8}>
+                    <Card title="各类干部占比" bordered={false}>
+                    </Card>
+                  </Col>
+                  <Col span={8}>
+                    <Card title="高管干部年龄占比" bordered={false}>
+                    </Card>
+                  </Col>
+                  <Col span={8}>
+                    <Card title="各类考核占比" bordered={false}>
+                    </Card>
+                  </Col>
+                </Row>
               </div>
               <div className="part3">
                 <div className="part3son"><img src={qualificationsImg} className="autoImg" alt="" /></div>

@@ -2,11 +2,11 @@ import React from 'react';
 import {
   Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker, Select, Icon
 } from 'antd';
-import '../assets/styles/Orgsearch.css';
-import AdvancedSearchForm from './components/AdvancedSearchForm';
-import AdvancedSearchForm2 from './components/AdvancedSearchForm2';
-import AdvancedSearchForm3 from './components/AdvancedSearchForm3';
-import AdvancedSearchForm4 from './components/AdvancedSearchForm4';
+import '../assets/styles/org-search.css';
+import AdvancedSearchForm from './components/advanced-search-form';
+import AdvancedSearchForm2 from './components/advanced-search-form2';
+import AdvancedSearchForm3 from './components/advanced-search-form3';
+import AdvancedSearchForm4 from './components/advanced-search-form4';
 import request from '../../../utils/request';
 
 const { Sider, Content } = Layout;
@@ -34,8 +34,6 @@ const Orgsearch = (state) => {
   }
   const handleChangeValue = (event, value) => {
     console.log(`selected ${value}`);
-    console.log(event)
-    //console.log(666)
     handleChange(event)
   }
   const onLoadData = (treeNode) => {

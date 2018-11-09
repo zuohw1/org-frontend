@@ -1,4 +1,4 @@
-import { orgquery, orgSearchDetail } from '../services/orgsearch';
+import { orgquery, orgSearchDetail } from '../services/org-search';
 
 export default {
 

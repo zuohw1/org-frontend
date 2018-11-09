@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Manpower.css';
+import './manpower.css';
 import { Tree, Input, Icon, Button } from 'antd';
 const TreeNode = Tree.TreeNode;
 const Search = Input.Search;

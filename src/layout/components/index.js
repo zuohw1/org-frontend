@@ -5,9 +5,9 @@ import {
 import { Route, Switch, Link } from 'dva/router';
 import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.less';
-import app from '../../assets/styles/App.css';
-import Manpower from './Manpower';
-import OrgSearch from '../../org/containers/orgsearch';
+import app from '../../assets/styles/app.css';
+import Manpower from './manpower';
+import OrgSearch from '../../org/containers/org-search';
 import OrgApproval from '../../org/containers/approval';
 
 
