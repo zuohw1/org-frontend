@@ -1,5 +1,5 @@
 import React from 'react';
-import { TreeSelect, Tree } from 'antd';
+import { Tree, TreeSelect } from 'antd';
 import request from '../utils/request';
 
 const { TreeNode } = Tree;
@@ -15,17 +15,22 @@ const { TreeNode } = Tree;
       orgid: `${extra.triggerNode.props.id}`,
     });
     }
- * <AsyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} url={url} checkbox/>
+ * <AsyncTreeSelect
+ * treeId={37838}
+ * treeSelectChange={treeSelectChange}
+ * refUrl={refUrl}
+ * url={url}
+ * checkbox/>
  */
 class AsyncTreeSelect extends React.PureComponent {
   state = {
     value: undefined,
     treeData: [],
-  }
+  };
 
   /**
    *第一次渲染后调用,初始化本级
-   * @returns {Promise<void>}
+   * @returns {void}
    */
   async componentDidMount() {
     const { treeId, url } = this.props;
@@ -43,14 +48,13 @@ class AsyncTreeSelect extends React.PureComponent {
     const { dataRef } = treeNode.props;
     const { refUrl } = this.props;
     return new Promise(async (resolve) => {
-      const result = await request.get(`${refUrl}${dataRef.id}`);
-      dataRef.children = result;
+      dataRef.children = await request.get(`${refUrl}${dataRef.id}`);
       this.setState({
         treeData: [...treeData],
       });
       resolve();
     });
-  }
+  };
 
   /**
    * 渲染树节点
@@ -68,7 +72,7 @@ class AsyncTreeSelect extends React.PureComponent {
       }
       return <TreeNode {...item} dataRef={item} />;
     });
-  }
+  };
 
   /**
    * 回写form
@@ -85,11 +89,10 @@ class AsyncTreeSelect extends React.PureComponent {
     this.setState({ value });
     const { treeSelectChange } = this.props;
     treeSelectChange(value, label, extra);
-  }
+  };
 
   render() {
     const { treeData, value } = this.state;
-    console.log(treeData);
     return (
       <TreeSelect
         treeDefaultExpandAll
