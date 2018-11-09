@@ -5,11 +5,9 @@ import Service from '../services/org-create';
 const formatTableData = (tableData) => {
   const num = tableData.current * tableData.size - tableData.size;
   const table = tableData.records.map((item, index) => {
-    const ite = { ...item, key: index + 1 + num };
-    return ite;
+    return { ...item, key: index + 1 + num };
   });
-  const formatTable = { ...tableData, records: table };
-  return formatTable;
+  return { ...tableData, records: table };
 };
 
 export default {

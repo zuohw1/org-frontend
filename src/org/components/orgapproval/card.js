@@ -6,7 +6,7 @@ import {
 } from 'antd';
 import moment from 'moment';
 import AttachTable from './attach-table';
-import SearchTable from '../../../components/SearchTable';
+import SearchTable from '../../../components/search-table';
 
 const FormItem = Form.Item;
 

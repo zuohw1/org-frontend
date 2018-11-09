@@ -14,11 +14,9 @@ const formatRecord = (record) => {
 const formatTableData = (tableData) => {
   const num = tableData.current * tableData.size - tableData.size;
   const table = tableData.records.map((item, index) => {
-    const ite = { ...item, key: index + 1 + num };
-    return ite;
+    return { ...item, key: index + 1 + num };
   });
-  const formatTable = { ...tableData, records: table };
-  return formatTable;
+  return { ...tableData, records: table };
 };
 
 export default {
@@ -92,7 +90,7 @@ export default {
       });
     },
     /* 修改保存 */
-    * updataRecord({ payload: { record } }, { call, put }) {
+    * updateRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const records = formatRecord(record);
       yield call(ApprovalService.update, records);

@@ -26,7 +26,7 @@ export default ({
   const {
     setModeShow,
     getRecord,
-    updataRecord,
+    updateRecord,
     deleteRecord,
     listTable,
   } = actions;
@@ -59,7 +59,7 @@ export default ({
     form.validateFields((err, values) => {
       if (!err) {
         /* eslint no-console: 0 */
-        updataRecord(values);
+        updateRecord(values);
         form.resetFields();
       }
     });
@@ -151,11 +151,11 @@ export default ({
         width: 240,
         render: (text, records) => (
           <span>
-            <a href="jacascript:void(0);" onClick={() => onClickView(text, records)}>查看</a>
+            <a href="#" onClick={() => onClickView(text, records)}>查看</a>
             <Divider type="vertical" />
-            <a href="jacascript:void(0);" onClick={() => onClickEdit(text, records)}>修改</a>
+            <a href="#" onClick={() => onClickEdit(text, records)}>修改</a>
             <Divider type="vertical" />
-            <a href="jacascript:void(0);" onClick={() => onClickDelete(records)}>删除</a>
+            <a href="#" onClick={() => onClickDelete(records)}>删除</a>
           </span>
         ),
       },
