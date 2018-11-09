@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import Search from './search';
-import Table from './maintable';
+import Table from './main-table';
 import '../../../assets/styles/module.less';
 
 const { Content } = Layout;

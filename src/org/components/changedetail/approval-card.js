@@ -5,7 +5,7 @@ import {
   DatePicker, Radio, Row, Col,
 } from 'antd';
 import moment from 'moment';
-import AttachTable from './attachTable';
+import AttachTable from './attach-table';
 
 const FormItem = Form.Item;
 
