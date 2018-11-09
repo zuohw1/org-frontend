@@ -9,6 +9,8 @@ import app from '../../assets/styles/App.css';
 import Manpower from './Manpower';
 import OrgSearch from '../../org/containers/orgsearch';
 import OrgApproval from '../../org/containers/approval';
+import OrgCreate from '../../org/containers/orgcreate';
+import ChangeDetail from '../../org/containers/changedetail';
 
 
 const { SubMenu } = Menu;
@@ -32,9 +34,9 @@ const MainLayout = (state) => {
         </div>
         <div className={app.headerBottom}>
           <nav>
-            <a href="jacascript::void(0)">员工服务大厅</a>
-            <a href="jacascript::void(0)" className={app.navActive}>人力业务管理</a>
-            <a href="jacascript::void(0)">数据决策中心</a>
+            <a href="#">员工服务大厅</a>
+            <a href="#" className={app.navActive}>人力业务管理</a>
+            <a href="#">数据决策中心</a>
           </nav>
         </div>
       </div>
@@ -79,6 +81,8 @@ const MainLayout = (state) => {
             <Route exact path="/" component={Manpower} />
             <Route exact path="/org/search" component={OrgSearch} />
             <Route exact path="/org/approval" component={OrgApproval} />
+            <Route exact path="/org/create" component={OrgCreate} />
+            <Route path="/org/changeDetail" component={ChangeDetail} />
           </Switch>
         </Layout>
       </Layout>
