@@ -45,7 +45,7 @@ node {
         stage('Code Build') {
             dockerRuntime('node injector.js --env=production')
             // 通过docker插件运行项目构建
-            dockerRuntime('PUBLIC_PATH=/org-frontend/ BASE_URL=/org-frontend yarn build')
+           dockerRuntime('yarn build')
         }
 
         stage('Docker Build') {
