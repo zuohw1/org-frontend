@@ -2,7 +2,7 @@ import { connect } from 'dva';
 import { Form } from 'antd';
 import { bindActionCreators } from 'redux';
 import Index from '../components/orgsearch/index';
-import * as actions from '../actions/orgsearch';
+import * as actions from '../actions/org-search';
 
 /* 建立组件跟 store 的 state 的映射关系 */
 const mapStateToProps = state => ({

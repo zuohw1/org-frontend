@@ -1,27 +1,27 @@
-import React from 'react'
-import ReactEcharts from 'echarts-for-react'
+import React from 'react';
+import ReactEcharts from 'echarts-for-react';
 
 const VariousExamineAccount = () => {
   const onChartReady = (echart) => {
-    console.log('echart is ready', echart)
-  }
+    console.log('echart is ready', echart);
+  };
   const onChartLegendselectchanged = (param, echart) => {
-    console.log(param, echart)
-  }
+    console.log(param, echart);
+  };
   const onChartClick = (param, echart) => {
-    console.log(param, echart)
-  }
+    console.log(param, echart);
+  };
   const getOtion = () => {
     const option = {
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c} ({d}%)',
       },
-      grid:{
-        left:'8%',
-        top: "8%",
-        containLabel:true
-      },
+      grid: {
+        left: '8%',
+        top: '8%',
+        containLabel: true,
+      },
       legend: {
         x: 'right',
         y: '10%',
@@ -36,38 +36,38 @@ const VariousExamineAccount = () => {
           avoidLabelOverlap: false,
           labelLine: {
             normal: {
-                show: false
-            }
+              show: false,
+            },
           },
           label: {
             normal: {
               show: true,
               position: 'inside',
               formatter: '{d}%',
-              textStyle : {                   
-                align : 'center',
-                baseline : 'middle',
-                fontFamily : '微软雅黑',
-                fontSize : 15,
-                fontWeight : 'bolder'
-             }
-            }
+              textStyle: {
+                align: 'center',
+                baseline: 'middle',
+                fontFamily: '微软雅黑',
+                fontSize: 15,
+                fontWeight: 'bolder',
+              },
+            },
           },
           data: [
-            { value: 35, name: '项目', itemStyle: {color: '#46A4B3'} },
-            { value: 40, name: '日常', itemStyle: {color: '#FB6566'} },
-            { value: 25, name: 'OKR', itemStyle: {color: '#FCB92C'} },
+            { value: 35, name: '项目', itemStyle: { color: '#46A4B3' } },
+            { value: 40, name: '日常', itemStyle: { color: '#FB6566' } },
+            { value: 25, name: 'OKR', itemStyle: { color: '#FCB92C' } },
           ],
         },
       ],
-    }
-    return option
-  }
+    };
+    return option;
+  };
 
-  let onEvents = {
+  const onEvents = {
     click: onChartClick,
     legendselectchanged: onChartLegendselectchanged,
-  }
+  };
 
   return (
     <div className="senior">
@@ -80,7 +80,7 @@ const VariousExamineAccount = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default VariousExamineAccount;

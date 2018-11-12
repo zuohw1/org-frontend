@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Layout, Breadcrumb, Card, Calendar, Col, Row } from 'antd';
+import {
+  Layout, Breadcrumb, Card, Calendar, Col, Row,
+} from 'antd';
 import CadreAccount from './echarts/cadre-account';
 import SeniorCadreAccount from './echarts/senior-cadre-account';
 import VariousExamineAccount from './echarts/various-examine-account';
 import VariousCadreEducationDistribution from './echarts/various-cadre-education-distribution';
-import './assets/styles/manpower.css';
+import './assets/styles/main.css';
 
 const { Content } = Layout;
 
@@ -22,7 +24,7 @@ class Manpower extends Component {
               <Breadcrumb.Item>人员管理</Breadcrumb.Item>
               <Breadcrumb.Item>人力业务管理</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ minHeight: 360 }} className="part" >
+            <div style={{ minHeight: 360 }} className="part">
               <div className="part1">
                 <div className="part1Left">
                   <div className="part1LeftTop">
@@ -54,7 +56,7 @@ class Manpower extends Component {
                   <div className="part1LeftBottom">
                     <Card
                       title="快速开始"
-                      extra={<a href="jacascript::void(0)">设置</a>}
+                      extra={<a href="#">设置</a>}
                     >
                       <div className="part1LeftBottompart"><p>考群设置</p><p>项目考核</p></div>
                       <div className="part1LeftBottompart"><p>绩效手册设置</p><p>排版管理</p></div>
@@ -67,11 +69,11 @@ class Manpower extends Component {
                 </div>
                 <div className="part1Right">
                   <div className="part1RightL">
-                    <div className="part1RightLTop"></div>
+                    <div className="part1RightLTop" />
                     <div className="part1RightLBottom">
                       <Card
                         title="编辑"
-                        extra={<a href="jacascript::void(0)">更多>></a>}
+                        extra={<a href="#">更多</a>}
                       >
                         <p>09:30&nbsp;&nbsp;1058房间新人......</p>
                         <p>13:30&nbsp;&nbsp;考核计划执行</p>
@@ -91,7 +93,7 @@ class Manpower extends Component {
               <div className="part2">
                 <Row gutter={16}>
                   <Col span={8}>
-                    <Card title="实时培训看板" extra={<a href="jacascript::void(0)">编辑</a>}  bordered={false} className="part2SonFirst">
+                    <Card title="实时培训看板" extra={<a href="#">编辑</a>} bordered={false} className="part2SonFirst">
                       <p className="part2SonFirstP"><i>[签到率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">产品经理课程</span></p>
                       <p className="part2SonFirstP"><i>[评价率]</i><span className="part2SonFirstPSpan1">20%</span><span className="part2SonFirstPSpan2">SPARK培训</span></p>
                       <p className="part2SonFirstP"><i>[报名率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">OGG技术培训</span></p>
@@ -146,7 +148,8 @@ class Manpower extends Component {
                     </p>
                     <p className="part2SonSecondP">
                       <span className="part2SonSecondPSpan1">
-                      管信-ERP-物流考核计划（8月）</span>
+                      管信-ERP-物流考核计划（8月）
+                      </span>
                       <span className="part2SonSecondPSpan2"><i>7</i>人未填写</span>
                       <span className="part2SonSecondPSpan3">8月30日汇总上报</span>
                     </p>

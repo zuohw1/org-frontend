@@ -1,27 +1,27 @@
-import React from 'react'
-import ReactEcharts from 'echarts-for-react'
+import React from 'react';
+import ReactEcharts from 'echarts-for-react';
 
 const CadreAccount = () => {
   const onChartReady = (echart) => {
-    console.log('echart is ready', echart)
-  }
+    console.log('echart is ready', echart);
+  };
   const onChartLegendselectchanged = (param, echart) => {
-    console.log(param, echart)
-  }
+    console.log(param, echart);
+  };
   const onChartClick = (param, echart) => {
-    console.log(param, echart)
-  }
+    console.log(param, echart);
+  };
   const getOtion = () => {
     const option = {
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c} ({d}%)',
       },
-      grid:{
-        left:'8%',
-        top: "8%",
-        containLabel:true
-      },
+      grid: {
+        left: '8%',
+        top: '8%',
+        containLabel: true,
+      },
       legend: {
         x: 'right',
         y: '10%',
@@ -36,39 +36,39 @@ const CadreAccount = () => {
           avoidLabelOverlap: false,
           labelLine: {
             normal: {
-                show: false
-            }
+              show: false,
+            },
           },
           label: {
             normal: {
               show: true,
               position: 'inside',
               formatter: '{d}%',
-              textStyle : {                   
-                align : 'center',
-                baseline : 'middle',
-                fontFamily : '微软雅黑',
-                fontSize : 15,
-                fontWeight : 'bolder'
-             }
-            }
+              textStyle: {
+                align: 'center',
+                baseline: 'middle',
+                fontFamily: '微软雅黑',
+                fontSize: 15,
+                fontWeight: 'bolder',
+              },
+            },
           },
           data: [
-            { value: 25, name: '省管干部后备' ,itemStyle: {color: '#FCB92C'} },
-            { value: 20, name: '集团高管正式' ,itemStyle: {color: '#FC922B'} },
-            { value: 30, name: '集团高管后备' ,itemStyle: {color: '#46A4B3'} },
-            { value: 25, name: '省管干部正式' ,itemStyle: {color: '#FB6566'} },
+            { value: 25, name: '省管干部后备', itemStyle: { color: '#FCB92C' } },
+            { value: 20, name: '集团高管正式', itemStyle: { color: '#FC922B' } },
+            { value: 30, name: '集团高管后备', itemStyle: { color: '#46A4B3' } },
+            { value: 25, name: '省管干部正式', itemStyle: { color: '#FB6566' } },
           ],
         },
       ],
-    }
-    return option
-  }
+    };
+    return option;
+  };
 
-  let onEvents = {
+  const onEvents = {
     click: onChartClick,
     legendselectchanged: onChartLegendselectchanged,
-  }
+  };
 
   return (
     <div className="cadre">
@@ -81,7 +81,7 @@ const CadreAccount = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CadreAccount;
