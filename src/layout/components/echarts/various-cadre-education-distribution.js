@@ -126,7 +126,6 @@ class VariousCadreEducationDistribution extends React.Component {
       <div className="education">
         <div className="parent-education">
           <ReactEcharts
-            ref="echarts_react"
             option={option}
             style={{ height: 300 }}
           />

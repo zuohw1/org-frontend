@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {
-  Form, Row, Col, Input
+  Form, Row, Col, Input,
 } from 'antd';
 import '../../assets/styles/advanced-search-form.css';
 
 const FormItem = Form.Item;
-const res = ["组织名称","组织类型","日期自","至","组织分类"];
+const res = ['组织名称', '组织类型', '日期自', '至', '组织分类'];
 
 class AdvancedSearchForm extends Component {
   getFields() {
-    console.log(this.props)
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
     const children = [];
-    for (let i = 0; i < res.length; i++) {
+    for (let i = 0; i < res.length; i += 1) {
       children.push(
         <Col span={12} key={i}>
           <FormItem label={`${res[i]}`}>
@@ -22,10 +22,10 @@ class AdvancedSearchForm extends Component {
                 message: 'Input something!',
               }],
             })(
-              <Input placeholder="" />
+              <Input placeholder="" />,
             )}
           </FormItem>
-        </Col>
+        </Col>,
       );
     }
     return children;

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {
-  Form, Row, Col, Input
+  Form, Row, Col, Input,
 } from 'antd';
 import '../../assets/styles/advanced-search-form.css';
 
 const FormItem = Form.Item;
-const res = ["续存实业对应省公司名","组织排序号","组织层级","南方/北方/子公司","地点地址","虚拟组织","所属省份","组织属性","组织撤销发文时间","组织更名-原组织","组织更名-新组织","划小单元"];
+const res = ['续存实业对应省公司名', '组织排序号', '组织层级', '南方/北方/子公司', '地点地址', '虚拟组织', '所属省份', '组织属性', '组织撤销发文时间', '组织更名-原组织', '组织更名-新组织', '划小单元'];
 
 class AdvancedSearchForm3 extends Component {
   getFields() {
-    console.log(this.props)
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
     const children = [];
-    for (let i = 0; i < res.length; i++) {
+    for (let i = 0; i < res.length; i += 1) {
       children.push(
         <Col span={12} key={i}>
           <FormItem label={`${res[i]}`}>
@@ -22,10 +22,10 @@ class AdvancedSearchForm3 extends Component {
                 message: 'Input something!',
               }],
             })(
-              <Input placeholder="" />
+              <Input placeholder="" />,
             )}
           </FormItem>
-        </Col>
+        </Col>,
       );
     }
     return children;
