@@ -1,72 +1,69 @@
+@import "Fun";
 .App {
-  width: 100%;
-  height: 100%;
+  .w_h();
   margin: 0;
   padding: 0;
+  &Header{
+    .w_h(100%,152px);
+  }
 }
-.AppHeader{
-  width: 100%;
-  height: 152px;
+.header{
+  &Top{
+    width: 100%;
+    height: 89px;
+    .w_h(100%,89px);
+    background-image: url(../images/1.png);
+    background-size: cover;
+    &L{
+      .w_h(92px,54px);
+      margin-left: 120px;
+      margin-top: 12px;
+      margin-right: 5px;
+      display: inline-block;
+      float: left;
+      > img{
+        .w_h(100%,54px);
+      }
+    }
+    &R{
+      .w_h(315px,37px);
+      margin-top: 27px;
+      float: left;
+      .ant-input-affix-wrapper .ant-input-suffix .ant-btn-primary {
+        color: #fff;
+        background-color: #fff;
+        border-color: #D8000F;
+        color: #D8000F;
+      }
+    }
+    &C{
+      .w_h(206px,24px);
+      font-size: 18px;
+      line-height: 24px;
+      float: left;
+      margin-right: 170px;
+      margin-top:40px;
+    }
+  }
+  &Bottom{
+    .w_h(100%,63px);
+    background-color: #D8000F;
+    >nav{
+      .w_h(420px,63px);
+      margin-left: 120px;
+      >a{
+        .w_h(128px,63px);
+        line-height: 63px;
+        font-size: 15px;
+        color: white;
+        display: inline-block;
+        text-align: center;
+      }
+    }
+  }
 }
-.headerTop{
-  width: 100%;
-  height: 89px;
-  background-image: url(../images/1.png);
-  background-size: cover;
-}
-.headerBottom{
-  width: 100%;
-  height: 63px;
-  background-color: #D8000F;
-}
-.headerTopL{
-  width: 92px;
-  height: 54px;
-  margin-left: 120px;
-  margin-top: 12px;
-  display: inline-block;
-  margin-right: 5px;
-  float: left;
-}
-.headerTopL>img{
-  width: 100%;
-  height: 54px;
-}
-.headerTopR{
-  width: 315px;
-  height: 37px;
-  margin-top: 27px;
-  float: left;
-}
-.headerTopC{
-  width: 206px;
-  height: 24px;
-  font-size: 18px;
-  line-height: 24px;
-  float: left;
-  margin-right: 170px;
-  margin-top:40px;
-}
-.headerTopR .ant-input-affix-wrapper .ant-input-suffix .ant-btn-primary {
-  color: #fff;
-  background-color: #fff;
-  border-color: #D8000F;
-  color: #D8000F;
-}
-.headerBottom>nav{
-  width: 420px;
-  height: 63px;
-  margin-left: 120px;
-}
-.headerBottom>nav>a{
-  width: 128px;
-  height: 63px;
-  line-height: 63px;
-  font-size: 15px;
-  color: white;
-  display: inline-block;
-  text-align: center;
-}
+
+
 .navActive{
   background-color: #B40710;
 }
