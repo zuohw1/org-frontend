@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker, Select, Icon,
 } from 'antd';
-import '../assets/styles/Orgsearch.css';
+import '../assets/styles/org-search.less';
 import AdvancedSearchForm from './components/advanced-search-form';
 import AdvancedSearchForm2 from './components/advanced-search-form2';
 import AdvancedSearchForm3 from './components/advanced-search-form3';

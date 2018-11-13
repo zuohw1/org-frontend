@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Main.css';
+import '../layout/components/assets/styles/main.less';
 import { Input, Icon, Table, Button } from 'antd';
 import axios from 'axios';
 const Search = Input.Search;

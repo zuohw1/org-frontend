@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Main.css';
+import '../layout/components/assets/styles/main.less';
 import axios from 'axios';
 import { TreeSelect, Tree } from 'antd';
 const TreeNode = Tree.TreeNode;
