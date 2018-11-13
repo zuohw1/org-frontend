@@ -56,7 +56,7 @@ class Manpower extends Component {
                   <div className="part1LeftBottom">
                     <Card
                       title="快速开始"
-                      extra={<a href="#">设置</a>}
+                      extra={<a href=" javascript:;">设置</a>}
                     >
                       <div className="part1LeftBottompart"><p>考群设置</p><p>项目考核</p></div>
                       <div className="part1LeftBottompart"><p>绩效手册设置</p><p>排版管理</p></div>
@@ -73,7 +73,7 @@ class Manpower extends Component {
                     <div className="part1RightLBottom">
                       <Card
                         title="编辑"
-                        extra={<a href="#">更多</a>}
+                        extra={<a href=" javascript:;">更多</a>}
                       >
                         <p>09:30&nbsp;&nbsp;1058房间新人......</p>
                         <p>13:30&nbsp;&nbsp;考核计划执行</p>
@@ -93,7 +93,7 @@ class Manpower extends Component {
               <div className="part2">
                 <Row gutter={16}>
                   <Col span={8}>
-                    <Card title="实时培训看板" extra={<a href="#">编辑</a>} bordered={false} className="part2SonFirst">
+                    <Card title="实时培训看板" extra={<a href=" javascript:;">编辑</a>} bordered={false} className="part2SonFirst">
                       <p className="part2SonFirstP"><i>[签到率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">产品经理课程</span></p>
                       <p className="part2SonFirstP"><i>[评价率]</i><span className="part2SonFirstPSpan1">20%</span><span className="part2SonFirstPSpan2">SPARK培训</span></p>
                       <p className="part2SonFirstP"><i>[报名率]</i><span className="part2SonFirstPSpan1">70%</span><span className="part2SonFirstPSpan2">OGG技术培训</span></p>

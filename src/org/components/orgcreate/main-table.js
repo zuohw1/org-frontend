@@ -136,11 +136,11 @@ export default ({
         width: 240,
         render: (text, records) => (
           <span>
-            <a href="#" onClick={() => onClickView(text, records)}>查看</a>
+            <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
             <Divider type="vertical" />
-            <a href="#" onClick={() => onClickEdit(text, records)}>修改</a>
+            <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
             <Divider type="vertical" />
-            <a href="#" onClick={() => onClickDelete(records)}>删除</a>
+            <a href=" javascript:;" onClick={() => onClickDelete(records)}>删除</a>
           </span>
         ),
       },
