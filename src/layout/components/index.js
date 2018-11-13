@@ -34,9 +34,9 @@ const MainLayout = (state) => {
         </div>
         <div className={app.headerBottom}>
           <nav>
-            <a href="#">员工服务大厅</a>
-            <a href="#" className={app.navActive}>人力业务管理</a>
-            <a href="#">数据决策中心</a>
+            <a href=" javascript:;">员工服务大厅</a>
+            <a href=" javascript:;" className={app.navActive}>人力业务管理</a>
+            <a href=" javascript:;">数据决策中心</a>
           </nav>
         </div>
       </div>

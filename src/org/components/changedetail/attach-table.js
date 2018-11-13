@@ -33,7 +33,7 @@ export default ({
         align: 'center',
         render: () => (
           <span>
-            <a href="#">下载</a>
+            <a href=" javascript:;">下载</a>
           </span>
         ),
       },
