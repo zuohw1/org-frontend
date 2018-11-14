@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Breadcrumb, Menu, Layout, Row, Col,
 } from 'antd';
-import '../../../assets/styles/module.less';
+import '../../../assets/styles/less/module.less';
 import {
   Route, Switch, Link,
 } from 'dva/router';

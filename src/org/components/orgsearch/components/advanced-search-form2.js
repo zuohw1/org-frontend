@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Form, Row, Col, Input,
 } from 'antd';
-import '../../assets/styles/advanced-search-form.css';
+import '../../assets/styles/advanced-search-form.less';
 
 const FormItem = Form.Item;
 const res = ['地点', '内部/外部', '国家(地区)', '省市', '地点地址', '邮编'];

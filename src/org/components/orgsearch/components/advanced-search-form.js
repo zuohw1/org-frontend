@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Form, Row, Col, Input,
 } from 'antd';
-import '../../assets/styles/advanced-search-form.css';
+import '../../assets/styles/advanced-search-form.less';
 
 const FormItem = Form.Item;
 const res = ['组织名称', '组织类型', '日期自', '至', '组织分类'];

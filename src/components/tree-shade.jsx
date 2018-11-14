@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Main.css';
+import '../layout/components/assets/styles/main.less';
 import { Tree, Input, Icon, Button } from 'antd';
 const TreeNode = Tree.TreeNode;
 const Search = Input.Search;

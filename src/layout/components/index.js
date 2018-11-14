@@ -5,7 +5,7 @@ import {
 import { Route, Switch, Link } from 'dva/router';
 import logoImg from '../../assets/images/logo.png';
 import 'antd/dist/antd.less';
-import app from '../../assets/styles/App.css';
+import app from '../../assets/styles/less/app.less';
 import Main from './main';
 import OrgSearch from '../../org/containers/org-search';
 import OrgApproval from '../../org/containers/approval';

@@ -6,7 +6,7 @@ import CadreAccount from './echarts/cadre-account';
 import SeniorCadreAccount from './echarts/senior-cadre-account';
 import VariousExamineAccount from './echarts/various-examine-account';
 import VariousCadreEducationDistribution from './echarts/various-cadre-education-distribution';
-import './assets/styles/main.css';
+import './assets/styles/main.less';
 
 const { Content } = Layout;
 

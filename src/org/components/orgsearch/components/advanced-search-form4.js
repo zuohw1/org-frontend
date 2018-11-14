@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Form, Row, Col, Input,
 } from 'antd';
-import '../../assets/styles/advanced-search-form.css';
+import '../../assets/styles/advanced-search-form.less';
 
 const FormItem = Form.Item;
 const res = ['公司名称', '企业组织代码', '成本信息', '公司段编码', '公司段说明', '成本中心编码', '成本中心说明', '专业段编码', '专业段说明'];

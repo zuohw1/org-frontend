@@ -1,0 +1,437 @@
+
+.w_h(@width:100%;@height:100%) {
+  width: @width;
+  height: @height;
+}
+
+.importantNum() {
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.important3Color() {
+  font-style: normal;
+  float: right;
+  padding: 0 5px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  display: inline-block;
+}
+#cov() {
+  .w_h();
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 0px 0px 5px black;
+}
+
+#con(@width;@height) {
+  .w_h(@width, @height);
+  display: none;
+  z-index: 1100;
+  background-color: white;
+  box-shadow: 0px 0px 15px black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.classNameHeader(){
+  .w_h(100%,30px);
+  line-height: 30px;
+  text-align: left;
+  padding-left: 3px;
+  font-size: 16px;
+}
+
+:global {
+  .Manpower {
+    .w_h(100%, auto);
+    .ant-layout {
+      .w_h(100%, auto);
+    }
+  }
+
+  .part {
+    .w_h(100%, auto);
+  }
+
+  .part1 {
+    .w_h(100%, 353px);
+    margin-bottom: 9px;
+    &Left {
+      .w_h(58%, 353px);
+      margin-right: 2%;
+      float: left;
+      &Top {
+        .w_h(100%, 220px);
+        margin-bottom: 24px;
+      }
+      &Bottom {
+        .w_h(100%, 113px);
+        .ant-card-bordered {
+          padding-top: 1px;
+          padding-bottom: 1px;
+          .ant-card-body {
+            display: flex;
+            justify-content: space-between;
+            .part1LeftBottompart {
+              display: inline-block;
+              p {
+                margin-bottom: 9px;
+              }
+            }
+          }
+          .ant-card-head .ant-card-head-wrapper .ant-card-extra {
+            padding: 5.5px 0;
+          }
+        }
+      }
+    }
+    &Right {
+      width: 40%;
+      height: 353px;
+      float: left;
+      display: flex;
+      background-color: white;
+      &L {
+        flex: 4;
+        height: 353px;
+        &Top {
+          width: 100%;
+          height: 135px;
+          background-image: url("../images/3130.png");
+          background-size: cover;
+        }
+        &Bottom {
+          width: 100%;
+          height: 218px;
+          .ant-card-bordered {
+            width: 100%;
+            height: 218px;
+            padding-top: 1px;
+            .ant-card-head {
+              min-height: 33px;
+              .ant-card-head-wrapper {
+                .ant-card-extra {
+                  padding: 3.5px 0;
+                  a {
+                    color: #D8000F;
+                  }
+                }
+                .ant-card-head-title {
+                  font-size: 14px;
+                  color: #D8000F;
+                }
+              }
+            }
+            .ant-card-body p {
+            font-size: 13px;
+          }
+          }
+        }
+      }
+      &R {
+        flex: 6;
+        height: 353px;
+        .kalendar {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .autoImg {
+    width: 100%;
+  }
+
+  .part2 {
+    .w_h(100%, 204px);
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    .ant-row {
+      width: 100%;
+      height: 204px;
+      display: flex;
+      .ant-col-8 {
+        flex: 1;
+        height: 204px;
+        .ant-card .ant-card-body {
+          height: 148px;
+        }
+      }
+    }
+    &SonFirst {
+      .ant-card-head .ant-card-head-wrapper {
+        .ant-card-extra {
+          padding: 5.5px 0;
+          padding-right: 8px;
+        }
+        .ant-card-head-title {
+          padding-left: 8px;
+        }
+      }
+      &P {
+        padding: 8px 8px;
+        margin-bottom: 0;
+        > i {
+          font-style: normal;
+          display: inline-block;
+          width: 29%;
+          color: #D8000F;
+        }
+        &Span1 {
+          display: inline-block;
+          width: 20%;
+        }
+        &Span2 {
+          display: inline-block;
+          width: 51%;
+        }
+      }
+    }
+    &SonSecond {
+      height: 335px;
+      &P {
+        padding: 14px 8px;
+        margin-bottom: 0;
+        &Span1 {
+          display: inline-block;
+          width: 62%;
+        }
+        &Span2 {
+          display: inline-block;
+          width: 17%;
+          > i {
+            font-style: normal;
+            display: inline-block;
+            color: #D8000F;
+            padding: 0px 3px;
+          }
+        }
+      }
+      &P1 {
+        padding: 8px 8px;
+        margin-bottom: 0;
+        font-family: "微软雅黑";
+        font-size: 15px;
+        margin-bottom: 4px;
+        margin-top: 7px;
+        > i {
+          font-style: normal;
+          display: inline-block;
+          color: #D8000F;
+        }
+      }
+    }
+  }
+
+  .part3 {
+    .w_h(100%, 320px);
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    &son {
+      width: 50%;
+    }
+    &son2 {
+    margin-left: 6px;
+  }
+  }
+
+  .Tree {
+    &shade {
+      .w_h();
+    }
+    &select {
+      .w_h();
+    }
+    &list {
+      .w_h();
+    }
+  }
+
+  .ant-card-bordered {
+    padding: 9px;
+    .ant-card-body {
+      padding-top: 11px;
+    }
+  }
+
+  .ant-card-head-wrapper > .ant-card-head-title {
+    text-indent: 0;
+  }
+
+  .important1 {
+    color: #D8000F;
+    margin-right: 6px;
+    .importantNum();
+  }
+
+  .important2 {
+    font-weight: normal;
+    .importantNum();
+  }
+
+  .important3 {
+    &red {
+      .important3Color();
+      border: #D8000F 1px solid;
+      background-color: blanchedalmond;
+    }
+    &green {
+      .important3Color();
+      border: lightgreen 1px solid;
+      background-color: mintcream;
+    }
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  #cov {
+    &Tree {
+      #cov();
+    }
+    &List {
+      #cov();
+    }
+    &Trli {
+      #cov();
+    }
+  }
+
+  #con {
+    &Tree {
+      #con(728px, 480px);
+    }
+    &List {
+      #con(760px, 512px);
+    }
+    &Trli {
+      #con(760px, 472px);
+    }
+  }
+
+  .tree {
+    &Header {
+      .classNameHeader();
+    }
+    &Content {
+      .w_h(100%, 420px);
+      &T {
+        .w_h(100%, 26px);
+        margin-bottom: 8px;
+      }
+      &B {
+        .w_h(100%, 386px);
+        overflow-y: auto;
+      }
+    }
+    &Footer {
+      .w_h(100%, 30px);
+      padding-right: 3px;
+      > button {
+        float: right;
+      }
+    }
+  }
+
+  .openTree {
+    width: 90px;
+    margin-right: 80px;
+    display: inline-block;
+  }
+
+  .shadeButton {
+    height: 28px;
+  }
+
+  .nodeInput {
+    display: inline-block;
+    width: 200px;
+  }
+
+  .Listshade {
+    .w_h();
+  }
+
+  .list {
+    &Header {
+      .classNameHeader();
+    }
+    &Content {
+      .w_h(100%, 452px);
+      &T {
+        .w_h(100%, 26px);
+        margin-bottom: 8px;
+      }
+      &B {
+        .w_h(100%, 439px);
+        overflow-y: auto;
+      }
+    }
+    &Footer {
+      .w_h(100%, 30px);
+      padding-right: 3px;
+      > button {
+        float: right;
+        margin-left: 12px;
+      }
+    }
+  }
+
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    padding: 6px 16px !important;
+  }
+
+  .ant-table-pagination.ant-pagination {
+    margin: 6px 0 !important;
+    float: right;
+  }
+
+  .trli {
+    &Header {
+      .classNameHeader();
+    }
+    &Content {
+      .w_h(100%, 412px);
+      display: flex;
+      &Left {
+        flex: 1;
+        height: 412px;
+        border: 1px solid #eee;
+      }
+      &Right {
+        flex: 3;
+        height: 412px;
+        border: 1px solid #eee;
+      }
+    }
+    &Footer {
+      .w_h(100%, 30px);
+      padding-right: 3px;
+      > button {
+        float: right;
+        margin-left: 12px;
+      }
+    }
+  }
+}
+
+
+
+

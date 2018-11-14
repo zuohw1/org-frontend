@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Main.css';
+import '../layout/components/assets/styles/main.less';
 import axios from 'axios';
 import { Tree, Table, Button } from 'antd';
 const DirectoryTree = Tree.DirectoryTree;
