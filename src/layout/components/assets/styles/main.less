@@ -157,19 +157,28 @@
 
   .part2 {
     .w_h(100%, 204px);
-    display: flex;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
     .ant-row {
       width: 100%;
       height: 204px;
       display: flex;
+      margin-left: 0px !important;
+      margin-right: 0px !important;
       .ant-col-8 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        margin-right: 6px;
+        margin-left: 6px;
         flex: 1;
         height: 204px;
         .ant-card .ant-card-body {
           height: 148px;
         }
+      }
+      .part2RowFirst{
+        margin-left: 0px;
+      }
+      .part2RowLast{
+        margin-right: 0px;
       }
     }
     &SonFirst {
@@ -226,8 +235,8 @@
         margin-bottom: 0;
         font-family: "微软雅黑";
         font-size: 15px;
-        margin-bottom: 4px;
-        margin-top: 7px;
+        margin-bottom: 7px;
+        margin-top: 8px;
         > i {
           font-style: normal;
           display: inline-block;
@@ -238,7 +247,7 @@
   }
 
   .part3 {
-    .w_h(100%, 320px);
+    .w_h(100%, 330px);
     display: flex;
     -webkit-justify-content: space-between;
     justify-content: space-between;

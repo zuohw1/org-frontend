@@ -10,7 +10,6 @@ import AttachTable from './attach-table';
 const FormItem = Form.Item;
 
 const ApprovalCard = (state) => {
-  console.log(state);
   const { form } = state;
   const { getFieldDecorator } = form;
 

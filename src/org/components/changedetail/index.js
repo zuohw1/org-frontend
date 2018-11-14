@@ -12,8 +12,7 @@ import OrgView from '../../containers/org-view';
 
 const { Content } = Layout;
 
-const ChangeDetail = (state) => {
-  console.log(state);
+const ChangeDetail = () => {
   return (
     <React.Fragment>
       <Content

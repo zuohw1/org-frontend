@@ -66,6 +66,7 @@ class VariousCadreEducationDistribution extends React.Component {
         {
           name: '研究生及以上',
           type: 'bar',
+          barWidth: 26,
           barGap: 0,
           label: labelOption,
           data: [60, 50, 40],
@@ -73,12 +74,14 @@ class VariousCadreEducationDistribution extends React.Component {
         {
           name: '本科',
           type: 'bar',
+          barWidth: 26,
           label: labelOption,
           data: [30, 25, 40],
         },
         {
           name: '专科及以下',
           type: 'bar',
+          barWidth: 26,
           label: labelOption,
           data: [10, 25, 20],
         },

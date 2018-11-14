@@ -1,10 +1,12 @@
-import { orgquery, orgSearchDetail } from '../services/org-search';
+import { orgInitialize, orgSearchDetail } from '../services/org-search';
 
 export default {
 
   namespace: 'orgSearch', // 命名空间
 
   state: {
+    login_name: 'hq-ehr',
+    resp_id: '200000515',
     value: '',
     id: '',
     children: [],
@@ -13,7 +15,7 @@ export default {
     dateTo: '',
     flexName: '',
     flexValue: '',
-    orgTree: [],
+    treeData: [],
     structureName: '',
     execute: true,
     // 下面的数据是组织结构查询右侧的数据
@@ -62,8 +64,8 @@ export default {
   },
 
   effects: {
-    *searchData({ payload }, { call, put }) {  // eslint-disable-line
-      const result = yield call(orgquery);// 如果使用  {参数}  ，则是一个对象
+    *searchData({ payload: { name, id } }, { call, put }) {
+      const result = yield call(orgInitialize, name, id);// 如果使用  {参数}  ，则是一个对象
       yield put({// 数据更新会带动页面重新渲染
         type: 'save', // reducers中的方法名
         payload: { // 网络返回的要保留的数据
@@ -72,7 +74,7 @@ export default {
           dateTo: result.dateTo,
           flexName: result.flexName,
           flexValue: result.flexValue,
-          orgTree: result.orgTree,
+          treeData: result.treeData,
           structureName: result.structureName,
         },
       });
@@ -115,11 +117,11 @@ export default {
         },
       });
     },
-    *getTreeChildren({ payload: { orgTree } }, { put }) {
+    *getTreeChildren({ payload: { treeData } }, { put }) {
       yield put({ // 更新树的数据
         type: 'stateUpdate',
         payload: {
-          orgTree: [...orgTree],
+          treeData: [...treeData],
         },
       });
     },
@@ -141,7 +143,6 @@ export default {
       });
     },
     *handleChange({ payload: { flexName } }, { put }) {
-      console.log(flexName);
       yield put({
         type: 'stateUpdate',
         payload: {

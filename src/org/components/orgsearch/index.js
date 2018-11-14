@@ -28,16 +28,13 @@ const Orgsearch = (state) => {
     children.push(<Option key={state.dataList[i].show}>{ state.dataList[i].show }</Option>);
   }
   if (state.execute === true) {
-    searchData();
+    searchData(state.login_name, state.resp_id);
     isTrueExecute();
   }
-  const select = (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
+  const select = () => {
+    // console.log('selected', selectedKeys, info);selectedKeys, info
   };
-  const handleChangeValue = (event, value) => {
-    console.log(`selected ${value}`);
-    console.log(event);
-    // console.log(666)
+  const handleChangeValue = (event) => {
     handleChange(event);
   };
   const onLoadData = (treeNode) => {
@@ -49,9 +46,9 @@ const Orgsearch = (state) => {
       }
       setTimeout(async () => {
         const id = dataRef.key;
-        const result = await request.get(`orgquery${id}`);
+        const result = await request.get(`organization/sub?topId=${id}&versionId=${state.flexValue}`);
         dataRef.children = result;
-        getTreeChildren(state.orgTree);
+        getTreeChildren(state.treeData);
         resolve();
       }, 1000);
     });
@@ -97,7 +94,7 @@ const Orgsearch = (state) => {
                   onSelect={select}
                   loadData={onLoadData}
                 >
-                  {renderTreeNodes(state.orgTree)}
+                  {renderTreeNodes(state.treeData)}
                 </Tree>
               </div>
             </Sider>

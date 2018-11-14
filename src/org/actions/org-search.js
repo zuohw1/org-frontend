@@ -1,7 +1,8 @@
-export function searchData() {
+export function searchData(name, id) {
   return {
     type: 'orgSearch/searchData',
     payload: {
+      name, id,
     },
   };
 }
@@ -13,11 +14,11 @@ export function isTrueExecute(execute) {
     },
   };
 }
-export function getTreeChildren(orgTree) {
+export function getTreeChildren(treeData) {
   return {
     type: 'orgSearch/getTreeChildren',
     payload: {
-      orgTree,
+      treeData,
     },
   };
 }
