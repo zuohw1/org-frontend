@@ -1,7 +1,7 @@
 
 /* -- please ignore this file, it will be generated dynamically -- */
 const config = {
-  api: 'https://www.easy-mock.com/mock/5b9f51bc8b5cc40f1f28a324/example',
+  api: 'http://10.10.14.13:8080/api',
   debug: true,
 };
 export default config;

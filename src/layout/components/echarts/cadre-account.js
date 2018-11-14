@@ -2,14 +2,14 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
 const CadreAccount = () => {
-  const onChartReady = (echart) => {
-    console.log('echart is ready', echart);
+  const onChartReady = () => {
+    // console.log('echart is ready', echart);echart
   };
-  const onChartLegendselectchanged = (param, echart) => {
-    console.log(param, echart);
+  const onChartLegendselectchanged = () => {
+    // console.log(param, echart);param, echart
   };
-  const onChartClick = (param, echart) => {
-    console.log(param, echart);
+  const onChartClick = () => {
+    // console.log(param, echart);param, echart
   };
   const getOtion = () => {
     const option = {

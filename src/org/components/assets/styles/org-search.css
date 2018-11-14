@@ -283,6 +283,7 @@
 :global(.siderTopC2 .ant-btn) {
     padding: 0;
     font-size: 13px;
+    margin: 4px 3px;
 }
 :global(.siderTopC2 .ant-btn > .anticon + span) {
     margin-left: 2px;

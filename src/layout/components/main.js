@@ -10,8 +10,8 @@ import './assets/styles/main.css';
 
 const { Content } = Layout;
 
-function onPanelChange(value, mode) {
-  console.log(value, mode);
+function onPanelChange() {
+  // console.log(value, mode);value, mode
 }
 
 class Manpower extends Component {

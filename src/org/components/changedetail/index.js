@@ -11,8 +11,7 @@ import SearchTable from '../../../components/search-table';
 
 const { Content } = Layout;
 
-const ChangeDetail = (state) => {
-  console.log(state);
+const ChangeDetail = () => {
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: '10px 0' }}>

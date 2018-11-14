@@ -28,7 +28,6 @@ const MainLayout = (state) => {
             <Input.Search
               placeholder="请输入功能或服务关键字"
               enterButton="搜索"
-              onSearch={value => console.log(value)}
             />
           </div>
         </div>
