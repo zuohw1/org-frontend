@@ -20,7 +20,7 @@ export default (props) => {
 
   const formItemLayout = {
     labelCol: { span: 8 },
-    wrapperCol: { span: 14 },
+    wrapperCol: { span: 16 },
   };
   const buttonItemLayout = {
     wrapperCol: { span: 14, offset: 4 },
@@ -224,12 +224,12 @@ export default (props) => {
     children.push(
       <FormItem {...buttonItemLayout}>
         <Button style={{
-          marginLeft: 50, marginRight: 30,
+          marginLeft: 100, marginRight: 30,
         }}
         >保存
         </Button>
         <Button style={{
-          marginLeft: 50, marginRight: 30,
+          marginRight: 30,
         }}
         >返回
         </Button>

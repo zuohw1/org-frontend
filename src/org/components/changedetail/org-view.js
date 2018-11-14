@@ -49,7 +49,17 @@ const OrgView = (state) => {
           <p><strong>组织变更涉及的组织的增设包括：</strong></p>
           <p>    1、新增的组织。     如果需要重新处理的，请进行删除后，重新处理。</p>
         </Card>
-        <Table columns={columns} loading={loading} dataSource={data} pagination={false} size="small" bordered />
+        <Table
+          styple={{
+            marginTop: 50,
+          }}
+          columns={columns}
+          loading={loading}
+          dataSource={data}
+          pagination={false}
+          size="small"
+          bordered
+        />
       </TabPane>
     </Tabs>
   );
