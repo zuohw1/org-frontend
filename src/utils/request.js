@@ -10,7 +10,7 @@ function parseJSON(response) {
 /**
  * Pre check http status.
  *
- * @param {object}  response  A response of http request gyjkghjk
+ * @param {object}  response  A response of http request
  */
 function checkStatus(response) {
   const [resolved, raw] = response;

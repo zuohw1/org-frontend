@@ -7,7 +7,6 @@ export default {
   state: {
     login_name: 'hq-ehr',
     resp_id: '200000515',
-    xx: "",
     value: '',
     id: '',
     children: [],
@@ -80,8 +79,8 @@ export default {
         },
       });
     },
-    *orgSearchDetailData({ call, put }) {
-      // console.log(payload);{ payload },
+    *orgSearchDetailData({ payload }, { call, put }) {
+      console.log(payload);
       const res = yield call(orgSearchDetail);
       yield put({
         type: 'save',
@@ -126,8 +125,8 @@ export default {
         },
       });
     },
-    *isTrueExecute({ put }) {
-      // console.log(payload);{ payload },
+    *isTrueExecute({ payload }, { put }) {
+      console.log(payload);
       yield put({
         type: 'stateUpdate',
         payload: {
