@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  Breadcrumb, Menu, Layout, Row, Col,
+  Menu, Layout, Row, Col,
 } from 'antd';
 import '../../../assets/styles/less/module.less';
 import {
   Route, Switch, Link,
 } from 'dva/router';
 import ApprovalCard from '../../containers/approval-card';
-import SearchTable from '../../../components/search-table';
+import OrgCard from '../../containers/org-card';
+import OrgView from '../../containers/org-view';
 
 const { Content } = Layout;
 
@@ -15,14 +16,6 @@ const ChangeDetail = (state) => {
   console.log(state);
   return (
     <React.Fragment>
-      <Breadcrumb style={{ margin: '10px 0' }}>
-        <Breadcrumb.Item>
-          组织管理
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <strong>组织新增</strong>
-        </Breadcrumb.Item>
-      </Breadcrumb>
       <Content
         className="page-module"
         style={{
@@ -34,21 +27,21 @@ const ChangeDetail = (state) => {
             <Menu defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
                 <Link to={{
-                  pathname: '/org/changedetail',
+                  pathname: '/org/changeDetail',
                 }}
                 ><span>变更依据</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
                 <Link to={{
-                  pathname: '/org/changedetail/org',
+                  pathname: '/org/changeDetail/org',
                 }}
                 ><span>业务操作</span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="3">
                 <Link to={{
-                  pathname: '/org/changedetail/list',
+                  pathname: '/org/changeDetail/view',
                 }}
                 ><span>查看</span>
                 </Link>
@@ -58,7 +51,8 @@ const ChangeDetail = (state) => {
           <Col span={20}>
             <Switch>
               <Route exact path="/org/changeDetail" component={ApprovalCard} />
-              <Route exact path="/org/changeDetail/org" component={SearchTable} />
+              <Route exact path="/org/changeDetail/org" component={OrgCard} />
+              <Route exact path="/org/changeDetail/view" component={OrgView} />
             </Switch>
           </Col>
         </Row>
