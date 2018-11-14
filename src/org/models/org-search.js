@@ -7,6 +7,7 @@ export default {
   state: {
     login_name: 'hq-ehr',
     resp_id: '200000515',
+    xx: "",
     value: '',
     id: '',
     children: [],
