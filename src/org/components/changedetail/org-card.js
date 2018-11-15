@@ -10,7 +10,7 @@ const OrgCard = (state) => {
   console.log(state);
   return (
     <div>
-      <Row gutter={50}>
+      <Row gutter={32}>
         <Col span={12}>
           <div>
             <Row>
