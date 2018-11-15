@@ -6,3 +6,6 @@ export function orgInitialize(name, id) {
 export function orgSearchDetail(topId, versionId) {
   return request.get(`organization/sub?topId=${topId}&versionId=${versionId}`);
 }
+export function orgSearchTreeNodes(orgTreeName) {
+  return request.get(`organization/list?orgName=${orgTreeName}`);
+}

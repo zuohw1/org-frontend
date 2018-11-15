@@ -38,3 +38,11 @@ export function handleChange(flexName) {
     },
   };
 }
+export function searchTreeNodes(orgTreeName) {
+  return {
+    type: 'orgSearch/searchTreeNodes',
+    payload: {
+      orgTreeName,
+    },
+  };
+}

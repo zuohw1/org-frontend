@@ -12,6 +12,7 @@ import request from '../../../utils/request';
 const { Sider, Content } = Layout;
 const { TreeNode } = Tree;
 const { Option } = Select;
+const { Search } = Input;
 const WrappedAdvancedSearchForm = Form.create()(AdvancedSearchForm);
 const WrappedAdvancedSearchForm2 = Form.create()(AdvancedSearchForm2);
 const WrappedAdvancedSearchForm3 = Form.create()(AdvancedSearchForm3);
@@ -21,7 +22,7 @@ const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 const Orgsearch = (state) => {
   const { actions } = state;
   const {
-    searchData, isTrueExecute, getTreeChildren, handleChange,
+    searchData, isTrueExecute, getTreeChildren, handleChange, searchTreeNodes,
   } = actions;
   const children = [];
   for (let i = 0; i < state.dataList.length; i += 1) {
@@ -31,6 +32,9 @@ const Orgsearch = (state) => {
     searchData(state.login_name, state.resp_id);
     isTrueExecute();
   }
+  const isRefresh = () => {
+    searchData(state.login_name, state.resp_id);
+  };
   const select = () => {
     // console.log('selected', selectedKeys, info);selectedKeys, info
   };
@@ -82,10 +86,9 @@ const Orgsearch = (state) => {
               </div>
               <div className="siderTopC2">
                 <span className="siderTopC2span1">组织名</span>
-                <input className="siderTopC2input1" type="text" />
-                <Button icon="search" className="siderTopC2span2">查找</Button>
-                <Button icon="reload" className="siderTopC2span3">刷新</Button>
-                <Button icon="layout" className="siderTopC2span4">组织结构图</Button>
+                <Search enterButton="查找" className="siderTopC2inputTree" onSearch={value => searchTreeNodes(value)} />
+                <Button className="siderTopC2span3" onClick={isRefresh}>刷新</Button>
+                <Button className="siderTopC2span4">组织结构图</Button>
               </div>
               <div className="siderTree">
                 <Tree

@@ -34,7 +34,7 @@ class AdvancedSearchForm extends Component {
   render() {
     return (
       <Form
-        className="ant-advanced-search-form form222"
+        className="ant-advanced-search-form form111"
       >
         <Row gutter={24}>{this.getFields()}</Row>
       </Form>

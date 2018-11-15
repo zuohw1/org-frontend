@@ -14,7 +14,7 @@ if (!env) {
   throw new Error('--env参数不能为空');
 }
 let debug = true;
-let api = 'http://10.10.14.13:8080/api';
+let api = 'http://10.10.14.13:8089/api';
 if (env !== 'development') {
   debug = false;
   api = 'http://10.0.210.93';//https://www.easy-mock.com/mock/5b9f51bc8b5cc40f1f28a324/example

@@ -1,4 +1,4 @@
-import { orgInitialize, orgSearchDetail } from '../services/org-search';
+import { orgInitialize, orgSearchDetail, orgSearchTreeNodes } from '../services/org-search';
 
 export default {
 
@@ -7,6 +7,7 @@ export default {
   state: {
     login_name: 'hq-ehr',
     resp_id: '200000515',
+    orgTreeName: '',
     value: '',
     id: '',
     children: [],
@@ -122,6 +123,15 @@ export default {
         type: 'stateUpdate',
         payload: {
           treeData: [...treeData],
+        },
+      });
+    },
+    *searchTreeNodes({ payload: { orgTreeName } }, { call, put }) {
+      const data = yield call(orgSearchTreeNodes, orgTreeName);
+      yield put({
+        type: 'stateUpdate',
+        payload: {
+          treeData: data,
         },
       });
     },
