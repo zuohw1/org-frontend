@@ -21,7 +21,7 @@ const ChangeDetail = () => {
           background: '#fff', padding: '15px', margin: 0, minHeight: 280,
         }}
       >
-        <Row gutter={50}>
+        <Row gutter={32}>
           <Col span={4}>
             <Menu defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">

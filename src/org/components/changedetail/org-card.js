@@ -1,4 +1,5 @@
 import React from 'react';
+import '../assets/styles/detail-org-form.less';
 import {
   Button, Tree, Row, Col, Input,
 } from 'antd';
@@ -10,8 +11,8 @@ const OrgCard = (state) => {
   console.log(state);
   return (
     <div>
-      <Row gutter={50}>
-        <Col span={12}>
+      <Row className="detail" gutter={8}>
+        <Col className="detail_tree" span={12}>
           <div>
             <Row>
               <Col span={4}>
@@ -40,7 +41,7 @@ const OrgCard = (state) => {
             </Tree>
           </div>
         </Col>
-        <Col span={12}>
+        <Col className="detail_form" span={12}>
           <OrgForm {...state} />
         </Col>
       </Row>
