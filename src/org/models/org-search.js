@@ -19,7 +19,6 @@ export default {
     treeData: [],
     structureName: '',
     execute: true,
-    // 下面的数据是组织结构查询右侧的数据
     orgName: '', // 基本信息组织名称
     orgType: '', // 基本信息组织类型
     dateBegin: '', // 日期自
@@ -40,7 +39,7 @@ export default {
     owenPrivince: '', // 附加信息 所属省份
     orgProprerties: '', // 附加信息 组织属性
     orgcancleDate: '', // 附加信息 组织撤销发文时间
-    cucorgmin: '', // 附加信息 最小基层单元
+    cucorgmin: '', // 附加信息 最小单元
     orgnizationName: '', // GRE/法律实体信息 公司名称
     orgCode: '', // GRE/法律实体信息 企业组织代码
     orgPeriodCode: '', // 成本信息 公司段编码
@@ -83,6 +82,7 @@ export default {
     *orgSearchDetailData({ payload }, { call, put }) {
       console.log(payload);
       const res = yield call(orgSearchDetail);
+      console.log(res);
       yield put({
         type: 'save',
         payload: {
@@ -112,7 +112,7 @@ export default {
           orgPeriodCode: res.orgPeriodCode,
           orgPeriodSHow: res.orgPeriodSHow,
           costCenterCode: res.costCenterCode,
-          costCenterShow: res.ostCenterShow,
+          costCenterShow: res.costCenterShow,
           majorCode: res.majorCode,
           majorSHow: res.majorSHow,
         },

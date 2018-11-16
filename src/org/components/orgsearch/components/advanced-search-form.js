@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import {
   Form, Row, Col, Input,
@@ -9,21 +10,21 @@ const res = ['组织名称', '组织类型', '日期自', '至', '组织分类']
 
 class AdvancedSearchForm extends Component {
   getFields() {
-    const { form } = this.props;
-    const { getFieldDecorator } = form;
+    const { sta } = this.props;
+    const { orgName, orgType, dateBegin, dateEnd, orgTypicalHR } = sta;
+    const form1Arr = [];
+    form1Arr.push(orgName);
+    form1Arr.push(orgType);
+    form1Arr.push(dateBegin);
+    form1Arr.push(dateEnd);
+    form1Arr.push("");
+    console.log(form1Arr);
     const children = [];
     for (let i = 0; i < res.length; i += 1) {
       children.push(
         <Col span={12} key={i}>
           <FormItem label={`${res[i]}`}>
-            {getFieldDecorator(`${i}`, {
-              rules: [{
-                required: true,
-                message: 'Input something!',
-              }],
-            })(
-              <Input placeholder="" />,
-            )}
+              <Input value={form1Arr[i]} />
           </FormItem>
         </Col>,
       );

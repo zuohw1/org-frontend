@@ -2,11 +2,13 @@ import React from 'react';
 import {
   Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker, Select, Icon,
 } from 'antd';
+import { Link } from 'dva/router';
 import '../assets/styles/org-search.less';
 import AdvancedSearchForm from './components/advanced-search-form';
 import AdvancedSearchForm2 from './components/advanced-search-form2';
 import AdvancedSearchForm3 from './components/advanced-search-form3';
 import AdvancedSearchForm4 from './components/advanced-search-form4';
+import AdvancedSearchForm5 from './components/advanced-search-form5';
 import request from '../../../utils/request';
 
 const { Sider, Content } = Layout;
@@ -17,12 +19,12 @@ const WrappedAdvancedSearchForm = Form.create()(AdvancedSearchForm);
 const WrappedAdvancedSearchForm2 = Form.create()(AdvancedSearchForm2);
 const WrappedAdvancedSearchForm3 = Form.create()(AdvancedSearchForm3);
 const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
-
+const WrappedAdvancedSearchForm5 = Form.create()(AdvancedSearchForm5);
 
 const Orgsearch = (state) => {
   const { actions } = state;
   const {
-    searchData, isTrueExecute, getTreeChildren, handleChange, searchTreeNodes,
+    searchData, isTrueExecute, getTreeChildren, handleChange, searchTreeNodes, orgSearchDetailData,
   } = actions;
   const children = [];
   for (let i = 0; i < state.dataList.length; i += 1) {
@@ -30,6 +32,7 @@ const Orgsearch = (state) => {
   }
   if (state.execute === true) {
     searchData(state.login_name, state.resp_id);
+    orgSearchDetailData();
     isTrueExecute();
   }
   const isRefresh = () => {
@@ -88,7 +91,7 @@ const Orgsearch = (state) => {
                 <span className="siderTopC2span1">组织名</span>
                 <Search enterButton="查找" className="siderTopC2inputTree" onSearch={value => searchTreeNodes(value)} />
                 <Button className="siderTopC2span3" onClick={isRefresh}>刷新</Button>
-                <Button className="siderTopC2span4">组织结构图</Button>
+                <Button className="siderTopC2span4"><Link to="/org/search/orgExportCondition" mytree={state.treeData}>组织结构图</Link></Button>
               </div>
               <div className="siderTree">
                 <Tree
@@ -132,6 +135,9 @@ const Orgsearch = (state) => {
                 </Card>
                 <Card title="GRE/法律实体信息">
                   <WrappedAdvancedSearchForm4 sta4={state} />
+                </Card>
+                <Card title="成本信息">
+                  <WrappedAdvancedSearchForm5 sta5={state} />
                 </Card>
               </div>
             </Content>

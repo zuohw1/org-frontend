@@ -8,6 +8,7 @@ import 'antd/dist/antd.less';
 import app from '../../assets/styles/less/app.less';
 import Main from './main';
 import OrgSearch from '../../org/containers/org-search';
+import OrgExportCondition from '../../org/components/orgsearch/components/org-export-condition';
 import OrgApproval from '../../org/containers/approval';
 import OrgCreate from '../../org/containers/org-create';
 import ChangeDetail from '../../org/containers/change-detail';
@@ -79,6 +80,7 @@ const MainLayout = (state) => {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/org/search" component={OrgSearch} />
+            <Route exact path="/org/search/orgExportCondition" component={OrgExportCondition} />
             <Route exact path="/org/approval" component={OrgApproval} />
             <Route exact path="/org/create" component={OrgCreate} />
             <Route path="/org/changeDetail" component={ChangeDetail} />

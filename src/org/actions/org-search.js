@@ -6,6 +6,13 @@ export function searchData(name, id) {
     },
   };
 }
+export function orgSearchDetailData() {
+  return {
+    type: 'orgSearch/orgSearchDetailData',
+    payload: {
+    },
+  };
+}
 export function isTrueExecute(execute) {
   return {
     type: 'orgSearch/isTrueExecute',
