@@ -1,0 +1,189 @@
+
+.w_h(@width:100%;@height:100%) {
+  width: @width;
+  height: @height;
+}
+.transinput() {
+    border: 0;
+    border-bottom: 1px solid #d9d9d9;
+    border-radius: 0;
+}
+
+
+:global {
+  .Transpro{
+  	.w_h();
+  	.ant-layout{
+  		.w_h();
+  		.ant-layout-content{
+  			.w_h();
+  			overflow-y: auto;
+			display: flex;
+			justify-content:center;
+			background: #fff;
+			padding: 24px 0;
+			font-family: "Microsoft YaHei";
+			.trans_container{
+				.w_h(66%, auto);
+				border: 1px #666 solid;
+				.trans_header{
+					.w_h(100%, 66px);
+					line-height: 66px;
+					font-size: 26px;
+    				text-align: center;
+    				word-wrap:break-word;
+    				.transInput_1{
+    					.w_h(99px, 33px);
+    					font-size: 18px;
+    					transform: translate(0%, -6%);
+    					.transinput();
+    				}
+				}
+				.trans_content{
+					.w_h(100%, auto);
+					.trans_content_1{
+						.w_h(100%, auto);
+						p{
+							.w_h(100%, auto);
+							.transInput_2{
+								.w_h(166px, 30px);
+		    					font-size: 18px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+						}
+						.firstlineindent_2{
+							text-indent: 2em; //首行缩进2个字
+							font-style: normal;
+							margin-bottom: 1em;
+							line-height: 36px;
+							.transInput_3{
+								.w_h(88px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.transInput_4{
+								.w_h(244px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.transInput_5{
+								.w_h(99px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.anticon-search{
+								width: 22px;
+    							display: inline-block;
+    							svg{
+    								transform: translate(-166%, 0%);
+    							}
+							}
+							.transInput_6{
+								.w_h(288px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.transDatePicker_1{
+								text-indent: 0;
+							}
+						}
+						.firstlineindent_3{
+							text-indent: 2em; //首行缩进2个字
+							font-style: normal;
+							margin-bottom: 1em;
+							line-height: 36px;
+							.transInput_7{
+								.w_h(88px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.transInput_8{
+								.w_h(199px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.transInputNumber_1{
+								height:28px;
+								font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+							.transInput_9{
+								.w_h(199px, 28px);
+		    					font-size: 16px;
+		    					transform: translate(0%, -6%);
+		    					.transinput();
+							}
+						}
+						.firstlineindent_4{
+							text-indent: 2em; //首行缩进2个字
+							font-style: normal;
+							margin-bottom: 1em;
+						}
+					}
+					.trans_content_2{
+						.w_h(100%, 188px);
+						display:flex;
+						.trans_content_2left{
+							.w_h(200px, 188px);
+							text-align: center;
+						    line-height: 188px;
+						    border: 1px solid #d9d9d9;
+						}
+						.trans_content_2right{
+							flex: 1;
+							height: 188px;
+							textarea{
+								.w_h();
+							}
+						}
+					}
+					.trans_content_3{
+						.w_h(100%, 39px);
+						display:flex;
+						.trans_content_3left{
+							.w_h(200px, 39px);
+							text-align: center;
+						    line-height: 36px;
+						    border: 1px solid #d9d9d9;
+						}
+						.trans_content_3right{
+							flex: 1;
+							height: 39px;
+							border: 1px solid #d9d9d9;
+							line-height: 39px;
+							.ant-form-item{
+								float: right;
+    							margin-right: 11px;
+								transform: translate(0%, -3%);
+							}
+						}
+					}
+					.trans_content_5{
+						.w_h(100%, 39px);
+						border: 1px solid #d9d9d9;
+						.lastTime{
+							float: right;
+						}
+					}
+					.trans_content_6{
+						.w_h(100%, 36px);
+						display :flex; 
+						display:-webkit-flex; 
+						align-items:center; 
+						-webkit-align-items:center; 
+						justify-content:center;
+					}
+				}
+			}
+  		}
+  	}
+  }
+}

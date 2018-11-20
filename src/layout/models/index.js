@@ -33,6 +33,13 @@ export default {
         pid: 1,
         iconUrl: 'sync',
       },
+      {
+        id: 104,
+        menuName: '跨省调动',
+        url: '/org/transpro',
+        pid: 1,
+        iconUrl: 'sync',
+      },
     ],
   },
   reducers: {
