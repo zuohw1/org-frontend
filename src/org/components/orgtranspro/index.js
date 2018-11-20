@@ -58,9 +58,9 @@ const OrgTranspro = (state) => {
                   </FormItem>
                 </div>
               </div>
-              <div className="trans_content_3">
-                <div className="trans_content_3left">附件：</div>
-                <div className="trans_content_3right">
+              <div className="trans_content_4">
+                <div className="trans_content_4left">附件：</div>
+                <div className="trans_content_4right">
                   <FormItem
                     {...formItemLayout}
                   >

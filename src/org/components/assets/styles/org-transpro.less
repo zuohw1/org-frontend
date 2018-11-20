@@ -7,6 +7,7 @@
     border: 0;
     border-bottom: 1px solid #d9d9d9;
     border-radius: 0;
+    transform: translate(0%, -6%);
 }
 
 
@@ -25,7 +26,7 @@
 			font-family: "Microsoft YaHei";
 			.trans_container{
 				.w_h(66%, auto);
-				border: 1px #666 solid;
+				border: 1px #d9d9d9 solid;
 				.trans_header{
 					.w_h(100%, 66px);
 					line-height: 66px;
@@ -35,7 +36,6 @@
     				.transInput_1{
     					.w_h(99px, 33px);
     					font-size: 18px;
-    					transform: translate(0%, -6%);
     					.transinput();
     				}
 				}
@@ -48,7 +48,6 @@
 							.transInput_2{
 								.w_h(166px, 30px);
 		    					font-size: 18px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 						}
@@ -60,19 +59,16 @@
 							.transInput_3{
 								.w_h(88px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.transInput_4{
 								.w_h(244px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.transInput_5{
 								.w_h(99px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.anticon-search{
@@ -85,11 +81,16 @@
 							.transInput_6{
 								.w_h(288px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.transDatePicker_1{
 								text-indent: 0;
+								div{
+									.ant-calendar-picker-input{
+										height: 28px;
+										.transinput();
+									}
+								}
 							}
 						}
 						.firstlineindent_3{
@@ -100,25 +101,21 @@
 							.transInput_7{
 								.w_h(88px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.transInput_8{
 								.w_h(199px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.transInputNumber_1{
 								height:28px;
 								font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 							.transInput_9{
 								.w_h(199px, 28px);
 		    					font-size: 16px;
-		    					transform: translate(0%, -6%);
 		    					.transinput();
 							}
 						}
@@ -136,12 +133,16 @@
 							text-align: center;
 						    line-height: 188px;
 						    border: 1px solid #d9d9d9;
+						    border-right: 0;
+						    border-left: 0;
 						}
 						.trans_content_2right{
 							flex: 1;
 							height: 188px;
 							textarea{
 								.w_h();
+								border-radius: 0;
+								border-right: 0;
 							}
 						}
 					}
@@ -153,11 +154,42 @@
 							text-align: center;
 						    line-height: 36px;
 						    border: 1px solid #d9d9d9;
+						    border-left: 0;
+    						border-top: 0;
+    						border-right: 0;
 						}
 						.trans_content_3right{
 							flex: 1;
 							height: 39px;
 							border: 1px solid #d9d9d9;
+    						border-top: 0;
+    						border-right: 0;
+							line-height: 39px;
+							.ant-form-item{
+								float: right;
+    							margin-right: 11px;
+								transform: translate(0%, -3%);
+							}
+						}
+					}
+					.trans_content_4{
+						.w_h(100%, 39px);
+						display:flex;
+						.trans_content_4left{
+							.w_h(200px, 39px);
+							text-align: center;
+						    line-height: 36px;
+						    border: 1px solid #d9d9d9;
+						    border-left: 0;
+    						border-top: 0;
+    						border-right: 0;
+						}
+						.trans_content_4right{
+							flex: 1;
+							height: 39px;
+							border: 1px solid #d9d9d9;
+							border-top: 0;
+    						border-right: 0;
 							line-height: 39px;
 							.ant-form-item{
 								float: right;
@@ -168,9 +200,22 @@
 					}
 					.trans_content_5{
 						.w_h(100%, 39px);
+						line-height: 39px;
 						border: 1px solid #d9d9d9;
+						border-left: 0;
+						border-top: 0;
+						border-right: 0;
 						.lastTime{
+							margin-right: 8px;
 							float: right;
+							.transDatePicker_2{
+								div{
+									.ant-calendar-picker-input{
+										height: 28px;
+										.transinput();
+									}
+								}
+							}
 						}
 					}
 					.trans_content_6{
