@@ -15,7 +15,6 @@ class AdvancedSearchForm4 extends Component {
     const form4Arr = [];
     form4Arr.push(orgnizationName);
     form4Arr.push(orgCode);
-    console.log(form4Arr);
     const children = [];
     for (let i = 0; i < res.length; i += 1) {
       children.push(

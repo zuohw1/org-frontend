@@ -9,3 +9,6 @@ export function orgSearchDetail() {
 export function orgSearchTreeNodes(orgTreeName) {
   return request.get(`organization/list?orgName=${orgTreeName}`);
 }
+export function orgSearchNewTree(topId, versionId) {
+  return request.get(`organization/rash?topId=${topId}&versionId=${versionId}`);
+}

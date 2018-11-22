@@ -19,7 +19,6 @@ class AdvancedSearchForm2 extends Component {
     form2Arr.push(privince);
     form2Arr.push(locationDetailInfo);
     form2Arr.push(postCode);
-    console.log(form2Arr);
     const children = [];
     for (let i = 0; i < res.length; i += 1) {
       children.push(

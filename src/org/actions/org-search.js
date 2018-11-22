@@ -6,6 +6,14 @@ export function searchData(name, id) {
     },
   };
 }
+export function searchNewTree(topId, versionId) {
+  return {
+    type: 'orgSearch/searchNewTree',
+    payload: {
+      topId, versionId,
+    },
+  };
+}
 export function orgSearchDetailData() {
   return {
     type: 'orgSearch/orgSearchDetailData',
@@ -50,6 +58,14 @@ export function searchTreeNodes(orgTreeName) {
     type: 'orgSearch/searchTreeNodes',
     payload: {
       orgTreeName,
+    },
+  };
+}
+export function changeReal(real) {
+  return {
+    type: 'orgSearch/changeReal',
+    payload: {
+      real,
     },
   };
 }

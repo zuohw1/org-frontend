@@ -18,7 +18,6 @@ class AdvancedSearchForm extends Component {
     form1Arr.push(dateBegin);
     form1Arr.push(dateEnd);
     form1Arr.push("");
-    console.log(form1Arr);
     const children = [];
     for (let i = 0; i < res.length; i += 1) {
       children.push(

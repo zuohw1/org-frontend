@@ -1,4 +1,5 @@
-import { orgInitialize, orgSearchDetail, orgSearchTreeNodes } from '../services/org-search';
+/* eslint-disable */
+import { orgInitialize, orgSearchDetail, orgSearchTreeNodes, orgSearchNewTree } from '../services/org-search';
 
 export default {
 
@@ -10,6 +11,7 @@ export default {
     orgTreeName: '',
     value: '',
     id: '',
+    real: '',
     children: [],
     dataList: [], // reducers中接收数据
     dateFrom: '',
@@ -128,10 +130,22 @@ export default {
     },
     *searchTreeNodes({ payload: { orgTreeName } }, { call, put }) {
       const data = yield call(orgSearchTreeNodes, orgTreeName);
+      if (data.flag === true){
+        yield put({
+          type: 'stateUpdate',
+          payload: {
+            treeData: data.dataTree,
+          },
+        });
+      };
+    },
+    *searchNewTree({ payload: { topId, versionId } }, { call, put }) {
+      const object = yield call(orgSearchNewTree, topId, versionId);
+      console.log(object);
       yield put({
-        type: 'stateUpdate',
+        type: 'save',
         payload: {
-          treeData: data,
+          treeData: object.treeDate,
         },
       });
     },
@@ -157,6 +171,14 @@ export default {
         type: 'stateUpdate',
         payload: {
           flexName,
+        },
+      });
+    },
+    *changeReal({ payload: { real } }, { put }) {
+      yield put({
+        type: 'stateUpdate',
+        payload: {
+          real,
         },
       });
     },

@@ -19,7 +19,6 @@ class AdvancedSearchForm5 extends Component {
     form5Arr.push(costCenterShow);
     form5Arr.push(majorCode);
     form5Arr.push(majorSHow);
-    console.log(form5Arr);
     const children = [];
     for (let i = 0; i < res.length; i += 1) {
       children.push(

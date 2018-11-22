@@ -24,7 +24,6 @@ class AdvancedSearchForm3 extends Component {
     form3Arr.push(cucOriOrgName);
     form3Arr.push(cucNewOrgName);
     form3Arr.push(cucorgmin);
-    console.log(form3Arr);
     const children = [];
     for (let i = 0; i < res.length; i += 1) {
       children.push(

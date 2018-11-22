@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Tree, Card, Form, Layout, Breadcrumb, Button, Input, DatePicker, Select, Icon,
@@ -22,9 +23,10 @@ const WrappedAdvancedSearchForm4 = Form.create()(AdvancedSearchForm4);
 const WrappedAdvancedSearchForm5 = Form.create()(AdvancedSearchForm5);
 
 const Orgsearch = (state) => {
+  console.log(state);
   const { actions } = state;
   const {
-    searchData, isTrueExecute, getTreeChildren, handleChange, searchTreeNodes, orgSearchDetailData,
+    searchData, isTrueExecute, getTreeChildren, handleChange, searchTreeNodes, orgSearchDetailData, searchNewTree, changeReal,
   } = actions;
   const children = [];
   for (let i = 0; i < state.dataList.length; i += 1) {
@@ -38,11 +40,20 @@ const Orgsearch = (state) => {
   const isRefresh = () => {
     searchData(state.login_name, state.resp_id);
   };
-  const select = () => {
-    // console.log('selected', selectedKeys, info);selectedKeys, info
+  const select = () => {};
+  const onSearchNewTree = (topId, versionId) => {
+    console.log(state.real);
+    searchNewTree(state.treeData[0].id, state.real);
   };
   const handleChangeValue = (event) => {
     handleChange(event);
+    if(state.dataList !== []){
+      for(var i = 0; i < state.dataList.length; i++){
+        if(state.dataList[i].show === event){
+          changeReal(state.dataList[i].real);
+        }
+      }
+    }
   };
   const onLoadData = (treeNode) => {
     const { dataRef } = treeNode.props;
@@ -122,7 +133,7 @@ const Orgsearch = (state) => {
                     <span>结束日期：</span>
                     <DatePicker className="contentTopItem2Third" />
                   </div>
-                  <div className="contentTopItem3"><Button className="contentTopItem3But">查找</Button></div>
+                  <div className="contentTopItem3"><Button className="contentTopItem3But" onClick={onSearchNewTree}>查找</Button></div>
                 </div>
                 <Card title="基本信息">
                   <WrappedAdvancedSearchForm sta={state} />

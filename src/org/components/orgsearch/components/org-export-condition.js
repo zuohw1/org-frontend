@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import {
-  Button, Layout, Select, TreeSelect,
+  Button, Layout, Select, TreeSelect, message,
 } from 'antd';
 import request from '../../../../utils/request';
 import { Link } from 'dva/router';
@@ -20,15 +20,15 @@ class OrgExportCondition extends React.Component {
 	    	treeData: [],
 	    	key: "1",
 	    	sta: {},
+	    	treeNodeId: "",
 	    };
 	}
 	async componentDidMount() {
 	    const result = await request.get(this.state.refUrl);
-	    console.log(result);
 	    this.setState({ treeData: result.treeData });
 	    this.setState({ sta: result });
 	}
-	orgReset = () => {
+	orgReset = ()=>{
 	    this.setState({ 
 	    	value: undefined,
 	    });
@@ -36,27 +36,35 @@ class OrgExportCondition extends React.Component {
 	    	key: "1",
 	    });
 	}
+	orgExportExcel = () => {
+		if(this.state.value === undefined){
+			message.warning('请选择根节点');
+		}else{
+			window.location.href=`http://10.10.14.13:8080/api/organization/all?topId=${this.state.treeNodeId}&lev=${this.state.key}`;
+			message.success('导出Excel成功');
+		}
+	    
+	}
 	changeKey = (event) => {
-	    console.log(event);
 	    this.setState({ 
 	    	key: event
 	    });
 	}
-	onChange = (value) => {
-	    console.log(value);
+	onChange = (value, label, extra) => {
+	    this.setState({ 
+	    	treeNodeId: extra.triggerNode.props.id,
+	    });
 	    this.setState({ value });
 	}
 	LoadData = (treeNode) => {
-		console.log(treeNode)
 	    return new Promise((resolve) => {
-	      if (treeNode.props.children !== []) {
+	      if(treeNode.props.children !== []) {
 	        resolve();
 	        return;
 	      }
 	      setTimeout(async () => {
 	        const id = treeNode.props.id;
 	        const result = await request.get(`organization/sub?topId=${id}&versionId=${this.state.sta.flexValue}`);
-	        console.log(result)
 	        treeNode.props.children = result;
 	        this.setState({
 	          treeData: [...this.state.treeData],
@@ -94,7 +102,7 @@ class OrgExportCondition extends React.Component {
 							<TreeSelect
 						        allowClear
 						        showSearch
-						        defaultExpandAll
+						        defaultExpandAll={true}
 						        value={this.state.value}
 						        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 						        placeholder="请选择"
@@ -109,7 +117,7 @@ class OrgExportCondition extends React.Component {
 							<Select value={this.state.key} onChange={this.changeKey}>{childItem4}</Select>
 						</span>
 						<span className="conditionContainerItem5">
-							<Button type="primary">导出</Button>
+							<Button type="primary" onClick={this.orgExportExcel}>导出</Button>
 							<Button type="primary" onClick={this.orgReset}>重置</Button>
 							<Button type="primary"><Link to="/org/search">返回</Link></Button>
 						</span>

@@ -1,9 +1,14 @@
-/* 获取列表数据 */
-export function listTable(search) {
+export function getJobNumber() {
   return {
-    type: 'orgCreate/fetch',
+    type: 'orgTranspro/getJobNumber',
     payload: {
-      search,
+    },
+  };
+}
+export function closeJobNumber() {
+  return {
+    type: 'orgTranspro/closeJobNumber',
+    payload: {
     },
   };
 }
