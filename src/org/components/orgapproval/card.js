@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import React from 'react';
 import {
   Form,
@@ -59,12 +60,6 @@ export default ({
 
   const rowSelection = {
     type: 'radio',
-    onSelect: (row) => {
-      refCodes.map((item) => {
-        /* eslint-disable no-param-reassign,no-return-assign */
-        return refSelectData[item.code] = row[item.refcode];
-      });
-    },
   };
   return (
     <div>
@@ -81,6 +76,8 @@ export default ({
           columns={refColumns}
           refUrl={refUrl}
           rowSelection={rowSelection}
+          refCodes={refCodes}
+          refSelectData={refSelectData}
         />
       </Modal>
       <Form>

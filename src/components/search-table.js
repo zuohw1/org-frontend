@@ -1,5 +1,7 @@
 import React from 'react';
-import { Input, Pagination, Table } from 'antd';
+import {
+  Input, Pagination, Table, Row,
+} from 'antd';
 import request from '../utils/request';
 
 /**
@@ -8,14 +10,10 @@ import request from '../utils/request';
  * columns={refColumns}//表格显示字段
  * refUrl={refUrl}//请求url
  * rowSelection={rowSelection}//行属性
+ * refCodes={refCodes}//字段对应
+ * refSelectData={refSelectData}//参照选中数据
  * const rowSelection = {
     type:'radio',//radio、checkbox
-    onSelect: (row, selected, selectedRows) => {
-      console.log(row);
-      refCodes.map((item) => {
-        record[item.code] = row[item.refcode];
-      });
-    },
   }
  * />
  */
@@ -24,8 +22,21 @@ class SearchTable extends React.PureComponent {
     search: {
       pageNumber: 1,
       pageSize: 10,
+      name: '',
     },
-    refData: [],
+    refData: {
+      current: 1, pages: 0, records: Array(0), size: 10, total: 0,
+    },
+    tableLoading: false,
+    selectedRowKeys: [],
+    onSelect: (row) => {
+      const { refCodes, refSelectData } = this.props;
+      this.setState({ selectedRowKeys: [row.key] });
+      refCodes.map((item) => {
+        /* eslint-disable no-param-reassign,no-return-assign */
+        return refSelectData[item.code] = row[item.refcode];
+      });
+    },
   };
 
   async componentDidMount() {
@@ -51,8 +62,9 @@ class SearchTable extends React.PureComponent {
   onSearch = (value) => {
     const { refUrl } = this.props;
     const { search } = this.state;
-    const searchF = { ...search, name: value };
-    this.refreshData(refUrl, searchF);
+    search.name = value;
+    this.setState(search);
+    this.refreshData(refUrl, search);
   };
 
   onChangePage = (pageNumber, pageSize) => {
@@ -70,6 +82,7 @@ class SearchTable extends React.PureComponent {
   };
 
   refreshData = (refUrl, search) => {
+    this.setState({ tableLoading: true });
     return new Promise(async (resolve) => {
       let url = `${refUrl}?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
       if (search.name && search.name !== '') {
@@ -77,40 +90,61 @@ class SearchTable extends React.PureComponent {
       }
       const tableData = await request.get(url);
       const formatTable = this.formatTableData(tableData);
-      this.setState({ refData: formatTable });
+      this.setState({ refData: formatTable, tableLoading: false });
       resolve();
     });
   };
 
   render() {
-    const { columns, rowSelection } = this.props;
-    const { refData } = this.state;
+    const {
+      columns, rowSelection, placeholder, refCodes, refSelectData,
+    } = this.props;
+    const {
+      refData, tableLoading, selectedRowKeys, onSelect,
+    } = this.state;
     const {
       current, size, total, records,
     } = refData;
 
+    const rowS = { ...rowSelection, selectedRowKeys, onSelect };
     return (
       <div>
-        <Input.Search style={{ width: 300 }} placeholder="Search" onSearch={this.onSearch} />
-        <Table
-          columns={columns}
-          dataSource={records}
-          pagination={false}
-          size="small"
-          rowSelection={rowSelection}
-        />
-        <Pagination
-          size="small"
-          showQuickJumper
-          current={current}
-          total={total}
-          pageSize={size}
-          onChange={this.onChangePage}
-          onShowSizeChange={this.onChangePageSize}
-          showTotal={tota => `共 ${tota} 条`}
-          showSizeChanger
-          style={{ marginTop: 10, float: 'right' }}
-        />
+        <Input.Search style={{ width: '300px', marginBottom: '5px' }} placeholder={placeholder} onSearch={this.onSearch} />
+        <Row>
+          <Table
+            columns={columns}
+            dataSource={records}
+            size="small"
+            rowSelection={rowS}
+            pagination={false}
+            bordered
+            scroll={{ y: 300 }}
+            loading={tableLoading}
+            onRow={(record) => {
+              return {
+                onClick: () => {
+                  this.setState({ selectedRowKeys: [record.key] });
+                  refCodes.map((item) => {
+                    /* eslint-disable no-param-reassign,no-return-assign */
+                    return refSelectData[item.code] = record[item.refcode];
+                  });
+                }, // 点击行
+              };
+            }}
+          />
+          <Pagination
+            size="small"
+            showQuickJumper
+            current={current}
+            total={total}
+            pageSize={size}
+            onChange={this.onChangePage}
+            onShowSizeChange={this.onChangePageSize}
+            showTotal={tota => `共 ${tota} 条`}
+            showSizeChanger
+            style={{ marginTop: 10, float: 'right' }}
+          />
+        </Row>
       </div>
     );
   }
