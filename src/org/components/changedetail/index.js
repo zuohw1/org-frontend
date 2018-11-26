@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Menu, Layout, Row, Col,
+  Menu, Layout, Row, Col, Button,
 } from 'antd';
 import '../../../assets/styles/less/module.less';
 import {
@@ -13,6 +13,9 @@ import OrgView from '../../containers/org-view';
 const { Content } = Layout;
 
 const ChangeDetail = () => {
+  const onClickCommit = () => {
+  };
+
   return (
     <React.Fragment>
       <Content
@@ -46,6 +49,11 @@ const ChangeDetail = () => {
                 </Link>
               </Menu.Item>
             </Menu>
+            <Button
+              onClick={onClickCommit}
+              style={{ margin: '100px 50px' }}
+            >提交审批
+            </Button>
           </Col>
           <Col span={20}>
             <Switch>

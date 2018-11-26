@@ -61,6 +61,7 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
+      console.log(history);
       return history.listen(({ pathname }) => {
         if (pathname === '/org/create') {
           dispatch({

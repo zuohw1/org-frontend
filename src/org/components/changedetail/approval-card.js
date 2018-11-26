@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Form,
   Input,
-  DatePicker, Radio, Row, Col,
+  DatePicker, Radio, Row, Col, Button,
 } from 'antd';
 import moment from 'moment';
 import AttachTable from './attach-table';
@@ -10,9 +10,15 @@ import AttachTable from './attach-table';
 const FormItem = Form.Item;
 
 const ApprovalCard = (state) => {
+  console.log(state);
   const { form } = state;
   const { getFieldDecorator } = form;
 
+  const onClickNext = () => {
+  };
+  const onClickReturn = () => {
+    state.history.goBack(-1);
+  };
   return (
     <div>
       <Form>
@@ -86,6 +92,18 @@ const ApprovalCard = (state) => {
         </Row>
       </Form>
       <AttachTable />
+      <div style={{ textAlign: 'right' }}>
+        <Button
+          onClick={onClickNext}
+          style={{ margin: '50px 20px 0px 0px' }}
+        >下一步
+        </Button>
+        <Button
+          onClick={onClickReturn}
+          style={{ margin: '50px 20px 0px 0px' }}
+        >返回
+        </Button>
+      </div>
     </div>
   );
 };

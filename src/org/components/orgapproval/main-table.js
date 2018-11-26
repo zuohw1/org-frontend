@@ -107,7 +107,7 @@ export default ({
     dataIndex: 'ATTRIBUTE9',
     key: 'ATTRIBUTE9',
     align: 'center',
-    width: 100,
+    width: 120,
   }, {
     title: '文件拟稿人',
     dataIndex: 'DOC_VERIFIER',
@@ -189,7 +189,7 @@ export default ({
         onClick={onClickAdd}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: document.body.scrollHeight - 460 }} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" bordered scroll={{ y: document.body.scrollHeight - 460 }} />
       <Pagination
         showQuickJumper
         current={current}

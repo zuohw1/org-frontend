@@ -106,12 +106,36 @@ export default ({
     align: 'center',
     width: 100,
     render: (text) => {
-      if (text === '0') {
-        return '暂存中';
-      } else if (text === '1') {
+      if (text === 'S') {
+        return '暂存';
+      } else if (text === 'E1') {
         return '审批中';
-      } else if (text === '2') {
-        return '审批完成';
+      } else if (text === 'C') {
+        return '退回';
+      } else if (text === 'E2') {
+        return '成本维护';
+      } else if (text === 'E3') {
+        return '人事处理';
+      } else if (text === 'E4') {
+        return '组织撤销';
+      } else if (text === 'E5') {
+        return '等待撤销';
+      } else if (text === 'T1') {
+        return '等待同步';
+      } else if (text === 'T2') {
+        return '同步中';
+      } else if (text === 'T3') {
+        return '同步成功';
+      } else if (text === 'T4') {
+        return '同步错误';
+      } else if (text === 'T5') {
+        return '同步异常';
+      } else if (text === 'T6') {
+        return '撤销异常';
+      } else if (text === 'T7') {
+        return '撤销成功';
+      } else if (text === 'O') {
+        return '结束';
       }
     },
   }, {
@@ -134,15 +158,81 @@ export default ({
         key: 'action',
         align: 'center',
         width: 240,
-        render: (text, records) => (
-          <span>
-            <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
-            <Divider type="vertical" />
-            <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
-            <Divider type="vertical" />
-            <a href=" javascript:;" onClick={() => onClickDelete(records)}>删除</a>
-          </span>
-        ),
+        render: (text, records) => {
+          if (records.docStatus === 'S') {
+            if (records.batchId !== '') {
+              return (
+                <span>
+                  <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>删除</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>前置流程</a>
+                </span>
+              );
+            } else {
+              return (
+                <span>
+                  <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>删除</a>
+                </span>
+              );
+            }
+          }
+          if (records.docStatus === 'C') {
+            if (records.batchId !== '') {
+              return (
+                <span>
+                  <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>删除</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>查看原因</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>前置流程</a>
+                </span>);
+            } else {
+              return (
+                <span>
+                  <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>修改</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>删除</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>查看原因</a>
+                </span>);
+            }
+          }
+          if (records.docStatus !== 'S' && records.docStatus !== 'C') {
+            if (records.batchId !== '') {
+              return (
+                <span>
+                  <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>查看流程图</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickDelete(records)}>前置流程</a>
+                </span>
+              );
+            } else {
+              return (
+                <span>
+                  <a href=" javascript:;" onClick={() => onClickView(text, records)}>查看</a>
+                  <Divider type="vertical" />
+                  <a href=" javascript:;" onClick={() => onClickEdit(text, records)}>查看流程图</a>
+                </span>
+              );
+            }
+          }
+        },
       },
     );
     return children;
@@ -156,7 +246,7 @@ export default ({
         style={{ margin: '10px 0' }}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" scroll={{ y: document.body.scrollHeight - 460 }} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" bordered scroll={{ y: document.body.scrollHeight - 460 }} />
       <Pagination
         showQuickJumper
         current={current}

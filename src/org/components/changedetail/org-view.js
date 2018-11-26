@@ -50,7 +50,7 @@ const OrgView = (state) => {
           <p>    1、新增的组织。     如果需要重新处理的，请进行删除后，重新处理。</p>
         </Card>
         <Table
-          styple={{
+          style={{
             marginTop: 50,
           }}
           columns={columns}
