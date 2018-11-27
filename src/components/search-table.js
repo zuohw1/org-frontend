@@ -6,6 +6,27 @@ import request from '../utils/request';
 
 /**
  * 表格参照
+ * const refCodes = [{ code: 'DOC_CODE', refcode: 'docCode' },
+ * { code: 'DOC_VERIFIER', refcode: 'docVerifier' }];
+ * const refColumns = [{
+ *   title: '序号',
+    dataIndex: 'key',
+    key: 'key',
+    align: 'center',
+  }, {
+    title: '文件名称和文号',
+    dataIndex: 'docCode',
+    key: 'docCode',
+    align: 'center',
+  }, {
+    title: '文件拟稿人',
+    dataIndex: 'docVerifier',
+    key: 'docVerifier',
+    align: 'center',
+  }];
+
+ const refUrl = 'orgHeaderBatch/list';
+
  * <SearchTable
  * columns={refColumns}//表格显示字段
  * refUrl={refUrl}//请求url
