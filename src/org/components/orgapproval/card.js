@@ -29,6 +29,11 @@ export default ({
     setRefSelectData(data, false);
   };
 
+  const onConfirm = () => {
+    const data = { ...record, ...refSelectData };
+    setRefSelectData(data, false);
+  };
+
   const onRefCancel = (e) => {
     e.preventDefault();
     setRefSelectData(null, false);
@@ -44,16 +49,19 @@ export default ({
     dataIndex: 'key',
     key: 'key',
     align: 'center',
+    width: 80,
   }, {
     title: '文件名称和文号',
     dataIndex: 'docCode',
     key: 'docCode',
     align: 'center',
+    width: 200,
   }, {
     title: '文件拟稿人',
     dataIndex: 'docVerifier',
     key: 'docVerifier',
     align: 'center',
+    width: 80,
   }];
 
   const refUrl = 'orgHeaderBatch/list';
@@ -78,6 +86,7 @@ export default ({
           rowSelection={rowSelection}
           refCodes={refCodes}
           refSelectData={refSelectData}
+          onConfirm={onConfirm}
         />
       </Modal>
       <Form>

@@ -89,7 +89,7 @@ export default ({
     dataIndex: 'key',
     key: 'key',
     align: 'center',
-    width: 50,
+    width: 80,
   }, {
     title: '文件名称和文号',
     dataIndex: 'DOC_CODE',
