@@ -3,6 +3,7 @@ import {
   Tree, Table, Row, Col, Input, Pagination,
 } from 'antd';
 import request from '../utils/request';
+import './assets/styles/tree-list.less';
 
 const { Search } = Input;
 
