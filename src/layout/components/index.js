@@ -12,6 +12,7 @@ import OrgExportCondition from '../../org/components/orgsearch/components/org-ex
 import OrgApproval from '../../org/containers/approval';
 import OrgCreate from '../../org/containers/org-create';
 import ChangeDetail from '../../org/containers/change-detail';
+import DocumentLoad from '../../org/containers/document-load';
 
 
 const { SubMenu } = Menu;
@@ -84,6 +85,7 @@ const MainLayout = (state) => {
             <Route exact path="/org/approval" component={OrgApproval} />
             <Route exact path="/org/create" component={OrgCreate} />
             <Route path="/org/changeDetail" component={ChangeDetail} />
+            <Route exact path="/org/documentLoad" component={DocumentLoad} />
           </Switch>
         </Layout>
       </Layout>
