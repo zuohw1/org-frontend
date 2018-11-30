@@ -80,7 +80,7 @@ export default (props) => {
           <Col span={6} key={i} style={{ display: i < count ? 'block' : 'none' }}>
             <FormItem label={queryCols[i].itemName}>
               {getFieldDecorator('model', {
-                initialValue: '组织名称',
+                initialValue: '组织管理',
               })(
                 <Select disabled={!formEdit} />,
               )}
