@@ -7,7 +7,7 @@ import request from '../utils/request';
  * const refUrl = 'org/allData?id=';
  * <SyncTreeSelect treeId={37838} treeSelectChange={treeSelectChange} refUrl={refUrl} checkbox/>
  */
-class syncTreeSelect extends React.PureComponent {
+class SyncTreeSelect extends React.PureComponent {
   state = {
     value: undefined,
     treeData: [],
@@ -57,4 +57,4 @@ class syncTreeSelect extends React.PureComponent {
     );
   }
 }
-export default syncTreeSelect;
+export default SyncTreeSelect;

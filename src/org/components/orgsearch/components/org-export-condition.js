@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import {
-  Button, Layout, Select, TreeSelect, message,
+  Button, Layout, Select, TreeSelect, message, Tree,
 } from 'antd';
 import request from '../../../../utils/request';
 import { Link } from 'dva/router';
@@ -9,6 +9,7 @@ import '../../assets/styles/org-export-condition.less';
 
 const { Header, Content } = Layout;
 const Option = Select.Option;
+const { TreeNode } = Tree;
 
 class OrgExportCondition extends React.Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ class OrgExportCondition extends React.Component {
 	    this.state = {
 	    	refUrl: `organization/list?login_name=hq-ehr&resp_id=200000515`,
 	    	treeId: "",
-	    	value: undefined,
+	    	rootValue: undefined,
 	    	treeData: [],
 	    	key: "1",
 	    	sta: {},
@@ -30,44 +31,49 @@ class OrgExportCondition extends React.Component {
 	}
 	orgReset = ()=>{
 	    this.setState({ 
-	    	value: undefined,
+	    	rootValue: undefined,
 	    });
 	    this.setState({ 
 	    	key: "1",
 	    });
 	}
 	orgExportExcel = () => {
-		if(this.state.value === undefined){
+		if(this.state.rootValue === undefined){
 			message.warning('请选择根节点');
 		}else{
 			window.location.href=`http://10.10.14.13:8080/api/organization/all?topId=${this.state.treeNodeId}&lev=${this.state.key}`;
 			message.success('导出Excel成功');
 		}
-	    
 	}
 	changeKey = (event) => {
 	    this.setState({ 
 	    	key: event
 	    });
 	}
-	onChange = (value, label, extra) => {
-	    this.setState({ 
-	    	treeNodeId: extra.triggerNode.props.id,
-	    });
-	    this.setState({ value });
+	handleChange = (rootValue, label, extra) => {
+		console.log(rootValue, label, extra);
+	    this.setState({ rootValue });
+	    if(rootValue !== undefined){
+	    	this.setState({
+		    	treeNodeId: extra.triggerNode.props.eventKey
+		    });
+	    }
 	}
 	LoadData = (treeNode) => {
-	    return new Promise((resolve) => {
-	      if(treeNode.props.children !== []) {
+		console.log(treeNode);
+		const { dataRef } = treeNode.props;
+		return new Promise((resolve) => {
+	      if (treeNode.props.children) {
+	      	console.log(111);
 	        resolve();
 	        return;
 	      }
 	      setTimeout(async () => {
-	        const id = treeNode.props.id;
+	        const id = dataRef.id;
 	        const result = await request.get(`organization/sub?topId=${id}&versionId=${this.state.sta.flexValue}`);
-	        treeNode.props.children = result;
+	        dataRef.children = result;
 	        this.setState({
-	          treeData: [...this.state.treeData],
+	          treeData: [...this.state.treeData]
 	        });
 	        resolve();
 	      }, 1000);
@@ -77,15 +83,14 @@ class OrgExportCondition extends React.Component {
     	return data.map((item) => {
 		    if (item.children) {
 		        return (
-		          <TreeNode title={item.title} key={item.key} dataRef={item}>
-		            {renderTreeNodes(item.children)}
+		          <TreeNode {...item} dataRef={item}>
+		            {this.renderTreeNodes(item.children)}
 		          </TreeNode>
 		        );
 		    }
 		    return <TreeNode {...item} dataRef={item} />;
 	    });
-	};
-	select = () => {}
+	}
 	render() {
 		const childItem4 = [];
 		for (let i = 1; i < 11; i += 1) {
@@ -101,16 +106,16 @@ class OrgExportCondition extends React.Component {
 						<span className="conditionContainerItem2">
 							<TreeSelect
 						        allowClear
-						        showSearch
+						        showSearch={false}
 						        defaultExpandAll={true}
-						        value={this.state.value}
+						        value={this.state.rootValue}
 						        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
 						        placeholder="请选择"
-						        onSelect={this.select}
-						        onChange={this.onChange}
-						        treeData={this.state.treeData}
+						        onChange={this.handleChange}
 						        loadData={this.LoadData}
-						    />
+						    >
+						    	{this.renderTreeNodes(this.state.treeData)}
+						    </TreeSelect>	
 						</span>
 						<span className="conditionContainerItem3">展示层数：</span>
 						<span className="conditionContainerItem4">
