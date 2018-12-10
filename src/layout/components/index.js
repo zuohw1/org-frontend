@@ -11,6 +11,9 @@ import OrgSearch from '../../org/containers/org-search';
 import OrgExportCondition from '../../org/components/orgsearch/components/org-export-condition';
 import OrgApproval from '../../org/containers/approval';
 import OrgCreate from '../../org/containers/org-create';
+import OrgMerge from '../../org/containers/org-merge';
+import OrgRename from '../../org/containers/org-rename';
+import OrgDelete from '../../org/containers/org-delete';
 import ChangeDetail from '../../org/containers/change-detail';
 import DocumentLoad from '../../org/containers/document-load';
 
@@ -84,6 +87,9 @@ const MainLayout = (state) => {
             <Route exact path="/org/search/orgExportCondition" component={OrgExportCondition} />
             <Route exact path="/org/approval" component={OrgApproval} />
             <Route exact path="/org/create" component={OrgCreate} />
+            <Route exact path="/org/merge" component={OrgMerge} />
+            <Route exact path="/org/rename" component={OrgRename} />
+            <Route exact path="/org/delete" component={OrgDelete} />
             <Route path="/org/changeDetail" component={ChangeDetail} />
             <Route exact path="/org/documentLoad" component={DocumentLoad} />
           </Switch>

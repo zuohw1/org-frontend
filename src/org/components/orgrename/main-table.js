@@ -246,7 +246,7 @@ export default ({
         style={{ margin: '10px 0' }}
       >新增
       </Button>
-      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" bordered scroll={{ y: document.body.scrollHeight - 460 }} />
+      <Table columns={getFields()} loading={loading} dataSource={data} pagination={false} size="small" bordered scroll={{ y: true }} />
       <Pagination
         showQuickJumper
         current={current}

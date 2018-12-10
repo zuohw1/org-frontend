@@ -35,6 +35,27 @@ export default {
       },
       {
         id: 104,
+        menuName: '组织合并',
+        url: '/org/merge',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
+        id: 105,
+        menuName: '组织更名',
+        url: '/org/rename',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
+        id: 106,
+        menuName: '组织撤销',
+        url: '/org/delete',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
+        id: 104,
         menuName: '文档下载',
         url: '/org/documentLoad',
         pid: 1,

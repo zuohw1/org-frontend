@@ -44,7 +44,7 @@ export default ({
   return (
     <div>
       <Button style={{ marginTop: 50 }}>上传附件</Button>
-      <Table columns={getFields()} loading={loading} dataSource={attachData} pagination={false} />
+      <Table size="small" bordered columns={getFields()} loading={loading} dataSource={attachData} pagination={false} />
     </div>
   );
 };

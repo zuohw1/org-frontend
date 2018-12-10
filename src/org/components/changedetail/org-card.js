@@ -1,14 +1,54 @@
+/* eslint-disable no-debugger */
 import React from 'react';
 import '../assets/styles/detail-org-form.less';
 import {
   Button, Tree, Row, Col, Input,
 } from 'antd';
 import OrgForm from './org-form';
+import request from '../../../utils/request';
 
 const { TreeNode } = Tree;
 
 const OrgCard = (state) => {
   console.log(state);
+
+  const { actions } = state;
+  const {
+    getTreeChildren,
+  } = actions;
+
+  const onLoadData = (treeNode) => {
+    const { dataRef } = treeNode.props;
+    return new Promise((resolve) => {
+      if (treeNode.props.children) {
+        resolve();
+        return;
+      }
+      setTimeout(async () => {
+        const id = dataRef.key;
+        const result = await request.get(`organization/getSubTreeByPid?topId=${id}`);
+        dataRef.children = result;
+        getTreeChildren(state.treeData);
+        resolve();
+      }, 1000);
+    });
+  };
+
+  const renderTreeNodes = (data) => {
+    if (data.length > 0) {
+      return data.map((item) => {
+        if (item.children) {
+          return (
+            <TreeNode title={item.title} key={item.key} dataRef={item}>
+              {renderTreeNodes(item.children)}
+            </TreeNode>
+          );
+        }
+        return <TreeNode {...item} dataRef={item} />;
+      });
+    }
+  };
+
   return (
     <div>
       <Row className="detail" gutter={8}>
@@ -16,7 +56,7 @@ const OrgCard = (state) => {
           <div>
             <Row>
               <Col span={4}>
-                <span>关键词</span>
+                <span>组织名</span>
               </Col>
               <Col span={10}>
                 <Input size="small" />
@@ -26,18 +66,11 @@ const OrgCard = (state) => {
                 <Button icon="reload" size="small">刷新</Button>
               </Col>
             </Row>
-            <Tree showLine>
-              <TreeNode title="全部" key="0-0">
-                <TreeNode title="技术序列" key="0-0-0">
-                  <TreeNode title="计划规划" key="0-0-0-0" />
-                  <TreeNode title="技术研发与管理" key="0-0-0-1" />
-                  <TreeNode title="工程设计" key="0-0-0-2" />
-                </TreeNode>
-                <TreeNode title="支撑序列" key="0-0-1">
-                  <TreeNode title="战略运营" key="0-0-1-0" />
-                  <TreeNode title="人力资源管理" key="0-0-1-1" />
-                </TreeNode>
-              </TreeNode>
+            <Tree
+              defaultExpandAll
+              loadData={onLoadData}
+            >
+              {renderTreeNodes(state.treeData)}
             </Tree>
           </div>
         </Col>

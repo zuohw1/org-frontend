@@ -15,13 +15,13 @@ const OrgView = (state) => {
     width: 200,
   }, {
     title: '创建日期',
-    dataIndex: 'age',
-    key: 'age',
+    dataIndex: 'create_date',
+    key: 'create_date',
     width: 50,
   }, {
     title: '状态',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'status',
+    key: 'status',
     width: 50,
   }, {
     title: '处理',
@@ -57,6 +57,7 @@ const OrgView = (state) => {
           loading={loading}
           dataSource={data}
           pagination={false}
+          defaultExpandAllRows
           size="small"
           bordered
         />

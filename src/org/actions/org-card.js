@@ -7,3 +7,12 @@ export function setToggle(expand) {
     },
   };
 }
+
+export function getTreeChildren(treeData) {
+  return {
+    type: 'orgCard/getTreeChildren',
+    payload: {
+      treeData,
+    },
+  };
+}

@@ -1,8 +1,8 @@
-/* eslint-disable no-debugger */
 import React from 'react';
 import {
-  Form, Button, Input, Select, DatePicker, Icon,
+  Form, Button, Input, Select, DatePicker, Icon, Checkbox,
 } from 'antd';
+import '../assets/styles/org-create.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -12,6 +12,7 @@ export default (props) => {
     form,
     actions,
     expand,
+    refList,
   } = props;
 
   console.log(props);
@@ -28,93 +29,118 @@ export default (props) => {
 
   const formCols = [{
     itemName: '父组织',
-    itemKey: 'isApprove',
+    itemKey: 'parentOrgName',
     itemType: 'String',
     required: true,
+    editFlag: false,
+    placeholder: '勾选左侧组织树获取',
+  },
+  {
+    itemKey: 'parentOrgId',
+    itemType: 'hidden',
   },
   {
     itemName: '新增组织名称',
-    itemKey: 'docCode',
+    itemKey: 'orgName',
     itemType: 'String',
-    required: false,
+    required: true,
+    editFlag: true,
+  },
+  {
+    itemKey: 'tOrgId',
+    itemType: 'hidden',
   },
   {
     itemName: '起始日期',
-    itemKey: 'docStatus',
+    itemKey: 'dateFrom',
     itemType: 'Date',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '上市/非上市/存续/实业组织',
-    itemKey: 'docVerifier',
+    itemKey: 'appearMarket',
     itemType: 'String',
     required: false,
+    editFlag: true,
+    list: refList,
   },
   {
     itemName: '组织层级',
-    itemKey: 'docDateS',
+    itemKey: 'orgHierarchyName',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '所属省份',
-    itemKey: 'docDateE',
+    itemKey: 'subordinateProvinces',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '虚拟组织',
-    itemKey: 'docDateE',
+    itemKey: 'virtualOrg',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '存续实业组织对应省公司',
-    itemKey: 'docDateE',
+    itemKey: 'orgCompanyName',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '组织类型',
-    itemKey: 'docDateE',
+    itemKey: 'orgType',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '南方/北方/子公司',
-    itemKey: 'docDateE',
+    itemKey: 'subsidiary',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '划小单元',
-    itemKey: 'docDateE',
+    itemKey: 'minUnit',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '组织排序号',
-    itemKey: 'docDateE',
+    itemKey: 'orgOrderNumber',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '是否隶属于省本部',
-    itemKey: 'docDateE',
-    itemType: 'String',
+    itemKey: 'subordinateProvince',
+    itemType: 'checkbox',
     required: false,
+    editFlag: true,
   },
   {
     itemName: '组织地点',
-    itemKey: 'docDateE',
+    itemKey: 'locationCode',
     itemType: 'String',
     required: false,
+    editFlag: true,
   },
   {
     itemName: 'GRE法律实体',
-    itemKey: 'docDateE',
-    itemType: 'String',
+    itemKey: 'greOrg',
+    itemType: 'checkbox',
     required: false,
+    editFlag: true,
   }];
 
   const toggle = () => {
@@ -137,7 +163,7 @@ export default (props) => {
                 message: '不能为空!',
               }],
             })(
-              <Input placeholder="请输入" />,
+              <Input placeholder={formCols[i].placeholder == null ? '请输入' : formCols[i].placeholder} disabled={!formCols[i].editFlag} />,
             )}
           </FormItem>,
         );
@@ -166,6 +192,30 @@ export default (props) => {
             )}
           </FormItem>,
         );
+      } else if (formCols[i].itemType === 'checkbox') {
+        children.push(
+          <FormItem label={formCols[i].itemName} {...formItemLayout}>
+            {getFieldDecorator(formCols[i].itemKey, {
+              rules: [{
+                required: formCols[i].required,
+              }],
+            })(
+              <Checkbox />,
+            )}
+          </FormItem>,
+        );
+      } else if (formCols[i].itemType === 'hidden') {
+        children.push(
+          <div style={{ display: 'none' }}>
+            <FormItem>
+              {getFieldDecorator(formCols[i].itemKey, {
+                initialValue: '',
+              })(
+                <Input type="hidden" />,
+              )}
+            </FormItem>
+          </div>,
+        );
       }
     }
 
@@ -188,7 +238,7 @@ export default (props) => {
                   message: '不能为空!',
                 }],
               })(
-                <Input placeholder="请输入" />,
+                <Input placeholder="请输入" disabled={!formCols[i].editFlag} />,
               )}
             </FormItem>,
           );
@@ -214,6 +264,18 @@ export default (props) => {
                 }],
               })(
                 <DatePicker />,
+              )}
+            </FormItem>,
+          );
+        } else if (formCols[i].itemType === 'checkbox') {
+          children.push(
+            <FormItem label={formCols[i].itemName} {...formItemLayout}>
+              {getFieldDecorator(formCols[i].itemKey, {
+                rules: [{
+                  required: formCols[i].required,
+                }],
+              })(
+                <Checkbox />,
               )}
             </FormItem>,
           );

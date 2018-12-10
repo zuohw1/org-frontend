@@ -42,6 +42,6 @@ export default ({
   }
 
   return (
-    <Table columns={getFields()} loading={loading} dataSource={attachData} pagination={false} />
+    <Table size="small" bordered columns={getFields()} loading={loading} dataSource={attachData} pagination={false} />
   );
 };

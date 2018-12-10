@@ -25,9 +25,9 @@ const ChangeDetail = (state) => {
           background: '#fff', padding: '15px', margin: 0, minHeight: 280,
         }}
       >
-        <Row gutter={32}>
-          <Col span={4}>
-            <Menu defaultSelectedKeys={['1']} mode="inline">
+        <Row gutter={10}>
+          <Col span={2}>
+            <Menu defaultSelectedKeys={['1']} mode="inline" selectedKeys={state.menuSelectedKeys}>
               <Menu.Item key="1">
                 <Link to={{
                   pathname: '/org/changeDetail',
@@ -52,11 +52,11 @@ const ChangeDetail = (state) => {
             </Menu>
             <Button
               onClick={onClickCommit}
-              style={{ margin: '100px 50px' }}
+              style={{ margin: '100px 0px' }}
             >提交审批
             </Button>
           </Col>
-          <Col span={20}>
+          <Col span={22}>
             <Switch>
               <Route exact path="/org/changeDetail" component={ApprovalCard} />
               <Route exact path="/org/changeDetail/org" component={OrgCard} />
