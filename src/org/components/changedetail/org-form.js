@@ -13,9 +13,10 @@ export default (props) => {
     actions,
     expand,
     refList,
+    record,
+    location,
   } = props;
 
-  console.log(props);
   const { setToggle } = actions;
   const { getFieldDecorator } = form;
 
@@ -37,6 +38,10 @@ export default (props) => {
   },
   {
     itemKey: 'parentOrgId',
+    itemType: 'hidden',
+  },
+  {
+    itemKey: 'docHeaderId',
     itemType: 'hidden',
   },
   {
@@ -158,6 +163,7 @@ export default (props) => {
         children.push(
           <FormItem label={formCols[i].itemName} {...formItemLayout}>
             {getFieldDecorator(formCols[i].itemKey, {
+              initialValue: record.itemKey,
               rules: [{
                 required: formCols[i].required,
                 message: '不能为空!',
@@ -170,7 +176,9 @@ export default (props) => {
       } else if (formCols[i].itemType === 'Select') {
         children.push(
           <FormItem label={formCols[i].itemName} {...formItemLayout}>
-            {getFieldDecorator(formCols[i].itemKey)(
+            {getFieldDecorator(formCols[i].itemKey, {
+              initialValue: record.itemKey,
+            })(
               <Select placeholder="请选择" allowClear>
                 {
                   formCols[i].list.map(apply)
@@ -183,6 +191,7 @@ export default (props) => {
         children.push(
           <FormItem label={formCols[i].itemName} {...formItemLayout}>
             {getFieldDecorator(formCols[i].itemKey, {
+              initialValue: record.itemKey,
               rules: [{
                 required: formCols[i].required,
                 message: '不能为空!',
@@ -196,6 +205,7 @@ export default (props) => {
         children.push(
           <FormItem label={formCols[i].itemName} {...formItemLayout}>
             {getFieldDecorator(formCols[i].itemKey, {
+              initialValue: record.itemKey,
               rules: [{
                 required: formCols[i].required,
               }],
@@ -204,12 +214,24 @@ export default (props) => {
             )}
           </FormItem>,
         );
+      } else if (formCols[i].itemType === 'hidden' && formCols[i].itemKey === 'docHeaderId') {
+        children.push(
+          <div style={{ display: 'none' }}>
+            <FormItem>
+              {getFieldDecorator(formCols[i].itemKey, {
+                initialValue: location.pathData.id,
+              })(
+                <Input type="hidden" />,
+              )}
+            </FormItem>
+          </div>,
+        );
       } else if (formCols[i].itemType === 'hidden') {
         children.push(
           <div style={{ display: 'none' }}>
             <FormItem>
               {getFieldDecorator(formCols[i].itemKey, {
-                initialValue: '',
+                initialValue: record.itemKey,
               })(
                 <Input type="hidden" />,
               )}
@@ -233,6 +255,7 @@ export default (props) => {
           children.push(
             <FormItem label={formCols[i].itemName} {...formItemLayout}>
               {getFieldDecorator(formCols[i].itemKey, {
+                initialValue: record.itemKey,
                 rules: [{
                   required: formCols[i].required,
                   message: '不能为空!',
@@ -245,7 +268,9 @@ export default (props) => {
         } else if (formCols[i].itemType === 'Select') {
           children.push(
             <FormItem label={formCols[i].itemName} {...formItemLayout}>
-              {getFieldDecorator(formCols[i].itemKey)(
+              {getFieldDecorator(formCols[i].itemKey, {
+                initialValue: record.itemKey,
+              })(
                 <Select placeholder="请选择" allowClear>
                   {
                     formCols[i].list.map(apply)
@@ -258,6 +283,7 @@ export default (props) => {
           children.push(
             <FormItem label={formCols[i].itemName} {...formItemLayout}>
               {getFieldDecorator(formCols[i].itemKey, {
+                initialValue: record.itemKey,
                 rules: [{
                   required: formCols[i].required,
                   message: '不能为空!',
@@ -271,6 +297,7 @@ export default (props) => {
           children.push(
             <FormItem label={formCols[i].itemName} {...formItemLayout}>
               {getFieldDecorator(formCols[i].itemKey, {
+                initialValue: record.itemKey,
                 rules: [{
                   required: formCols[i].required,
                 }],

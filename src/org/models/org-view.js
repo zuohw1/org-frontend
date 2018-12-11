@@ -26,7 +26,26 @@ export default {
     },
   },
   effects: {
+    *getInitData({ payload: { docHeaderId } }, { put }) {
+      console.log(docHeaderId);
+      yield put({
+        type: 'changeDetail/stateWillUpdate',
+        payload: {
+          menuSelectedKeys: ['3'],
+        },
+      });
+    },
   },
   subscriptions: {
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/org/changeDetail/view') {
+          dispatch({
+            type: 'getInitData',
+            payload: { docHeaderId: '200000515' },
+          });
+        }
+      });
+    },
   },
 };

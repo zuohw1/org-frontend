@@ -13,7 +13,6 @@ import OrgView from '../../containers/org-view';
 const { Content } = Layout;
 
 const ChangeDetail = (state) => {
-  console.log(state.location.state);
   const onClickCommit = () => {
   };
 

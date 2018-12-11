@@ -8,6 +8,9 @@ export default {
     treeData: [],
     login_name: 'hq-ehr',
     resp_id: '200000515',
+    checkedKeys: [],
+    record: {},
+    orgDeleteMsg: {},
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -41,15 +44,29 @@ export default {
         },
       });
     },
+    *checkOrgIsDelete({ payload: { docHeaderId, orgId } }, { call, put }) {
+      const data = yield call(service.checkOrgIsDelete, docHeaderId, orgId);
+      yield put({ // 更新树的数据
+        type: 'stateUpdate',
+        payload: {
+          orgDeleteMsg: data.msg,
+        },
+      });
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname === '/org/changeDetail/org') {
-          dispatch({
-            type: 'getInitTree',
-            payload: { login_name: 'hq-ehr', resp_id: '200000515' },
-          });
+          if (history.location.pathData !== undefined
+            && history.location.pathData.id !== undefined) {
+            dispatch({
+              type: 'getInitTree',
+              payload: { login_name: 'hq-ehr', resp_id: '200000515' },
+            });
+          } else {
+            history.goBack(-1);
+          }
         }
       });
     },

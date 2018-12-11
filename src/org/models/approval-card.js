@@ -64,32 +64,25 @@ export default {
     * newRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const myRecord = formatRecord(record);
-      const id = yield call(service.add, myRecord);
-      yield put({
-        type: 'redirect',
-        payload: { pathname: '/org/changeDetail/org', state: id },
-      });
+      const vo = yield call(service.add, myRecord);
+      const pathData = { id: vo.id };
       yield put({
         type: 'stateWillUpdate',
         payload: { record: myRecord },
       });
+      yield put(routerRedux.push({ pathname: '/org/changeDetail/org', pathData }));
     },
     /* 修改保存 */
     * updateRecord({ payload: { record } }, { call, put }) {
       /* 格式化数据 */
       const myRecord = formatRecord(record);
       yield call(service.update, myRecord);
-      yield put({
-        type: 'redirect',
-        payload: { pathname: '/org/changeDetail/org', state: myRecord.DOC_HEADER_ID },
-      });
+      const pathData = { id: myRecord.DOC_HEADER_ID };
       yield put({
         type: 'stateWillUpdate',
         payload: { record: myRecord },
       });
-    },
-    * redirect({ payload: { pathname, state } }, { put }) {
-      yield put(routerRedux.push({ pathname, state }));
+      yield put(routerRedux.push({ pathname: '/org/changeDetail/org', pathData }));
     },
   },
   subscriptions: {

@@ -2,7 +2,7 @@
 import React from 'react';
 import '../assets/styles/detail-org-form.less';
 import {
-  Button, Tree, Row, Col, Input,
+  Button, Tree, Row, Col, Input, Modal,
 } from 'antd';
 import OrgForm from './org-form';
 import request from '../../../utils/request';
@@ -10,11 +10,9 @@ import request from '../../../utils/request';
 const { TreeNode } = Tree;
 
 const OrgCard = (state) => {
-  console.log(state);
-
-  const { actions } = state;
+  const { actions, checkedKeys, orgDeleteMsg } = state;
   const {
-    getTreeChildren,
+    getTreeChildren, setTreeCheckedKeys, checkOrgIsDelete,
   } = actions;
 
   const onLoadData = (treeNode) => {
@@ -32,6 +30,22 @@ const OrgCard = (state) => {
         resolve();
       }, 1000);
     });
+  };
+
+  const onCheck = (_, info) => {
+    checkOrgIsDelete(state.location.pathData.id, info.node.props.id);
+    if (orgDeleteMsg !== '') {
+      Modal.error({
+        title: '提示',
+        content: orgDeleteMsg,
+      });
+    } else {
+      setTreeCheckedKeys([info.node.props.id]);
+      state.form.setFieldsValue({
+        parentOrgId: info.node.props.id,
+        parentOrgName: info.node.props.title,
+      });
+    }
   };
 
   const renderTreeNodes = (data) => {
@@ -68,7 +82,10 @@ const OrgCard = (state) => {
             </Row>
             <Tree
               defaultExpandAll
+              checkable
               loadData={onLoadData}
+              onCheck={onCheck}
+              checkedKeys={checkedKeys}
             >
               {renderTreeNodes(state.treeData)}
             </Tree>

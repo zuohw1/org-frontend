@@ -27,7 +27,7 @@ export default ({
   } = actions;
 
   const onClickAdd = () => {
-    redirectDetail('/org/changeDetail', { name: 'main-table' });
+    redirectDetail('/org/changeDetail');
   };
 
   const onClickView = (_, row) => {

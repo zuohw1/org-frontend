@@ -16,3 +16,23 @@ export function getTreeChildren(treeData) {
     },
   };
 }
+
+/* 设置树选择项 */
+export function setTreeCheckedKeys(checkedKeys) {
+  return {
+    type: 'orgCard/stateWillUpdate',
+    payload: {
+      checkedKeys,
+    },
+  };
+}
+
+/* 校验所选父组织是否删除 */
+export function checkOrgIsDelete(docHeaderId, orgId) {
+  return {
+    type: 'orgCard/checkOrgIsDelete',
+    payload: {
+      docHeaderId, orgId,
+    },
+  };
+}

@@ -55,7 +55,7 @@ export default {
         iconUrl: 'sync',
       },
       {
-        id: 104,
+        id: 107,
         menuName: '文档下载',
         url: '/org/documentLoad',
         pid: 1,
