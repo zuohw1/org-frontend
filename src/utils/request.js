@@ -1,10 +1,9 @@
 import fetch from 'dva/fetch';
+import Cookies from 'js-cookie';
 import JsonBig from 'json-bigint';
-import history from './history';
 import Configuration from '../env.config';
 
 function parseJSON(response) {
-  // return response.json();
   return response.text().then(JsonBig.parse);
 }
 /**
@@ -18,9 +17,10 @@ function checkStatus(response) {
     return resolved;
   }
   if (raw.status === 401) {
-    window.sessionStorage.clear();
-    history.push('/login');
+    window.localStorage.clear();
     throw new Error('请登录');
+  } else if (raw.status === 403) {
+    throw new Error('你不能进行此操作!');
   } else {
     throw new Error(resolved ? resolved.msg : raw.statusText);
   }
@@ -63,11 +63,17 @@ function genrateRequestHeader(method) {
     headers: {
       'Content-Type': 'application/json',
     },
+    // credentials: 'include',
   };
+  const functionId = Cookies.get('x-function-id');
+  if (functionId) {
+    Object.assign(header.headers, {
+      'X-Function-Id': functionId,
+    });
+  }
   try {
     Object.assign(header.headers, {
-      'x-business-group': 101,
-      'x-token-code': 'xjMjL0m2A6d1mOIsb9uFk+wuBIcKxrg4',
+      Authorization: Configuration.debug ? 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjbGFpbSIsImJ1c2luZXNzR3JvdXBJZCI6IjEwMSIsImxvZ2luTmFtZSI6Imdhb3pob25nbWluZyIsImlzcyI6IlNlcnZpY2UiLCJwZXJzb25JZCI6IjIwMTg5NCIsInVzZXJOYW1lIjoi6auY5Luy5piOIiwiZXhwIjoxNTQ2NjAxMTQzLCJpYXQiOjE1NDM5MjI3NDMsIm9yZ0lkIjoiMjQzMTgiLCJlbXBsb3llZU51bWJlciI6IjAwMDI0ODMifQ.hhTTGwJhmARHRPMU0B_PXeDfeW7MEj2xRcDvHzQYGWw' : `Bearer ${Cookies.get('token')}`,
     });
   } catch (e) {
     return header;
