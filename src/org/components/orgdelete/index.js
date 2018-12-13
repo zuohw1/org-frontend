@@ -20,7 +20,7 @@ const orgDelete = (state) => {
       <Content
         className="page-module"
         style={{
-          background: '#fff', padding: '15px', margin: 0, minHeight: 280,
+          background: '#fff', padding: '15px', margin: 0, minHeight: 452,
         }}
       >
         <Search {...state} />
