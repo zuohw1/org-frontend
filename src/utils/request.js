@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import fetch from 'dva/fetch';
 import Cookies from 'js-cookie';
 import JsonBig from 'json-bigint';
