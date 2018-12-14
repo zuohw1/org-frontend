@@ -62,6 +62,7 @@ export default {
         iconUrl: 'sync',
       },
     ],
+    headless: false,
   },
   reducers: {
     willUpdateState(state, { payload }) {
@@ -90,7 +91,14 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      return history.listen(({ pathname }) => {
+      return history.listen(({ pathname, search }) => {
+        const headless = search.indexOf('headless=true') >= 0;
+        dispatch({
+          type: 'willUpdateState',
+          payload: {
+            headless,
+          },
+        });
         if (pathname && pathname === '/') {
           /* 跳转页面后初始化左侧菜单数据 */
           dispatch({

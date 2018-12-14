@@ -21,7 +21,25 @@ import DocumentLoad from '../../org/containers/document-load';
 const { SubMenu } = Menu;
 
 const MainLayout = (state) => {
-  return (
+  const route = (
+    <Switch>
+      <Route exact path="/" component={Main} />
+      <Route exact path="/org/search" component={OrgSearch} />
+      <Route exact path="/org/search/orgExportCondition" component={OrgExportCondition} />
+      <Route exact path="/org/approval" component={OrgApproval} />
+      <Route exact path="/org/create" component={OrgCreate} />
+      <Route exact path="/org/merge" component={OrgMerge} />
+      <Route exact path="/org/rename" component={OrgRename} />
+      <Route exact path="/org/delete" component={OrgDelete} />
+      <Route path="/org/changeDetail" component={ChangeDetail} />
+      <Route exact path="/org/documentLoad" component={DocumentLoad} />
+    </Switch>
+  );
+  const ret = state.headless ? (
+    <Layout style={{ padding: '5px' }}>
+      {route}
+    </Layout>
+  ) : (
     <div className={app.App}>
       <div className={app.AppHeader}>
         <div className={app.headerTop}>
@@ -54,49 +72,38 @@ const MainLayout = (state) => {
           <div className={app.logo} />
           <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
             {
-              state.menus.map((item) => {
-                if (item.pid === 0) {
-                  const children = state.menus.filter(i => i.pid === item.id);
-                  return children.length !== 0 ? (
-                    <SubMenu
-                      key={item.id}
-                      title={<span><Icon type={item.iconUrl} /><span>{item.menuName}</span></span>}
-                    >
-                      {children.map(ele => (
-                        <Menu.Item key={ele.id}>
-                          <Link to={ele.url || ''}><span>{ele.menuName}</span></Link>
-                        </Menu.Item>
-                      ))}
-                    </SubMenu>
-                  ) : (
-                    <Menu.Item key={item.id}>
-                      <Link to={item.url || ''}><Icon type={item.iconUrl} /><span>{item.menuName}</span></Link>
-                    </Menu.Item>
-                  );
-                } else {
-                  return '';
-                }
-              })
-            }
+            state.menus.map((item) => {
+              if (item.pid === 0) {
+                const children = state.menus.filter(i => i.pid === item.id);
+                return children.length !== 0 ? (
+                  <SubMenu
+                    key={item.id}
+                    title={<span><Icon type={item.iconUrl} /><span>{item.menuName}</span></span>}
+                  >
+                    {children.map(ele => (
+                      <Menu.Item key={ele.id}>
+                        <Link to={ele.url || ''}><span>{ele.menuName}</span></Link>
+                      </Menu.Item>
+                    ))}
+                  </SubMenu>
+                ) : (
+                  <Menu.Item key={item.id}>
+                    <Link to={item.url || ''}><Icon type={item.iconUrl} /><span>{item.menuName}</span></Link>
+                  </Menu.Item>
+                );
+              } else {
+                return '';
+              }
+            })
+          }
           </Menu>
         </Layout.Sider>
         <Layout style={{ padding: '5px' }}>
-          <Switch>
-            <Route exact path="/" component={Main} />
-            <Route exact path="/org/search" component={OrgSearch} />
-            <Route exact path="/org/search/orgExportCondition" component={OrgExportCondition} />
-            <Route exact path="/org/approval" component={OrgApproval} />
-            <Route exact path="/org/create" component={OrgCreate} />
-            <Route exact path="/org/merge" component={OrgMerge} />
-            <Route exact path="/org/rename" component={OrgRename} />
-            <Route exact path="/org/delete" component={OrgDelete} />
-            <Route path="/org/changeDetail" component={ChangeDetail} />
-            <Route exact path="/org/documentLoad" component={DocumentLoad} />
-          </Switch>
+          {route}
         </Layout>
       </Layout>
-    </div>
-  );
+    </div>);
+  return ret;
 };
 
 export default MainLayout;
