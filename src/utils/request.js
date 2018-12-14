@@ -77,7 +77,7 @@ function genrateRequestHeader(method) {
       'X-Person-Id': 2,
       'X-Org-Id': 37838,
       'X-Roles': '',
-      'X-Data-Permission': '[{"id":"1072821543177232385","pdType":1,"include":1,"pdMain":"0","pdValue":"101","pdContain":"1","slaveList":[]}]',
+      'X-Data-Permission': '[{"id":"1072821543177232385","pdType":1,"include":1,"pdMain":"0","pdValue":"37838","pdContain":"1","slaveList":[]}]',
       'X-Business-Group-Id': 101,
     });
   }
