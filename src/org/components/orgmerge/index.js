@@ -20,7 +20,7 @@ const orgMerge = (state) => {
       <Content
         className="page-module"
         style={{
-          background: '#fff', padding: '15px', margin: 0, minHeight: 452,
+          background: '#fff', padding: '15px', margin: 0,
         }}
       >
         <Search {...state} />
