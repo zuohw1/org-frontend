@@ -92,7 +92,7 @@ const Orgsearch = (state) => {
             <Breadcrumb.Item>组织管理</Breadcrumb.Item>
             <Breadcrumb.Item>组织结构查询</Breadcrumb.Item>
           </Breadcrumb>
-          <div className="humanlaout" style={{ minHeight: '439px' }}>
+          <div className="humanlaout">
             <Sider className="sider">
               <div className="siderTop">
                 <b className="siderTopL">结构版本</b>
