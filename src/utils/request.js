@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import fetch from 'dva/fetch';
 import Cookies from 'js-cookie';
 import JsonBig from 'json-bigint';
@@ -69,6 +70,15 @@ function genrateRequestHeader(method) {
   if (functionId) {
     Object.assign(header.headers, {
       'X-Function-Id': functionId,
+    });
+  }
+  if (Configuration.debug) {
+    Object.assign(header.headers, {
+      'X-Person-Id': 2,
+      'X-Org-Id': 37838,
+      'X-Roles': '',
+      'X-Data-Permission': '[{"id":"1072821543177232385","pdType":1,"include":1,"pdMain":"0","pdValue":"101","pdContain":"1","slaveList":[]}]',
+      'X-Business-Group-Id': 101,
     });
   }
   try {
