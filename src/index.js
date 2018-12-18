@@ -11,6 +11,7 @@ import Configure from './env.config';
 import customizedHistory from './utils/history';
 import { debounce } from './utils/helper';
 import 'moment/locale/zh-cn';
+import frameHook from './utils/framehook';
 
 moment.locale('zh-cn');
 
@@ -21,6 +22,7 @@ const app = dva({
   }, 1.5),
 });
 app.use(createLoading());
+app.use(frameHook());
 if (Configure.debug) {
   app.use({
     onAction: createLogger(),
