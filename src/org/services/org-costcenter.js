@@ -2,7 +2,7 @@ import request from '../../utils/request';
 
 export default {
   list(search) {
-    let url = `orgCreate/list?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
+    let url = `orgCostCenter/list?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
     if (search.docCode && search.docCode !== '') {
       url += `&docCode=${search.docCode}`;
     }
@@ -22,8 +22,5 @@ export default {
       url += `&docDateE=${search.docDateE.format('YYYY-MM-DD')}`;
     }
     return request.get(url);
-  },
-  delete(id) {
-    return request.delete(`orgCreate/delete/${id}`);
   },
 };

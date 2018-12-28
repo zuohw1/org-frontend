@@ -27,3 +27,13 @@ export function redirectDetail(pathname, state) {
     },
   };
 }
+
+/* 删除数据 */
+export function deleteRecord(record) {
+  return {
+    type: 'orgCreate/deleteRecord',
+    payload: {
+      record,
+    },
+  };
+}

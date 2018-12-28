@@ -1,21 +1,20 @@
-/* eslint-disable no-debugger */
-import React from 'react';
-import '../assets/styles/detail-org-form.less';
+/*eslint-disable*/
 import {
-  Button, Tree, Row, Col, Input, Modal,
+  Button, Col, Row, Tree, Input, Modal,
 } from 'antd';
-import OrgForm from './org-form';
-import request from '../../../utils/request';
+import React from 'react';
+import request from '../../../../utils/request';
 
 const { TreeNode } = Tree;
 const { Search } = Input;
 
-const OrgCard = (state) => {
+export default (props) => {
   const {
-    actions, checkedKeys, expandKeys, loadedKeys,
-  } = state;
+    treeData, actions, checkedKeys, expandKeys, loadedKeys, form, history, showDisabled,
+  } = props;
+
   const {
-    getTreeChildren, setTreeCheckedKeys, refreshTree, getTreeByName, onExpandKeys,
+    refreshTree, getTreeChildren, setTreeCheckedKeys, onExpandKeys, getTreeByName,
   } = actions;
 
   const onLoadData = (treeNode) => {
@@ -27,9 +26,10 @@ const OrgCard = (state) => {
       }
       setTimeout(async () => {
         const id = dataRef.key;
-        const result = await request.get(`organization/getAuthSubOrgs?topId=${id}`);
+        const versionId = history.location.state.id;
+        const result = await request.get(`orgStructure/getSubTree?orgId=${id}&versionId=${versionId}&showDisabled=${showDisabled}`);
         dataRef.children = result;
-        getTreeChildren(state.treeData);
+        getTreeChildren(treeData);
         resolve();
       }, 1000);
     });
@@ -38,7 +38,7 @@ const OrgCard = (state) => {
   const onCheck = (_, info) => {
     if (info.checked && info.node.props.id !== '~') {
       setTimeout(async () => {
-        const docHeaderId = state.location.pathData.id;
+        const docHeaderId = props.location.pathData.id;
         const orgId = info.node.props.id;
         const result = await request.get(`orgCreate/checkOrgIsDelete?docHeaderId=${docHeaderId}&orgId=${orgId}`);
         if (result.head !== '') {
@@ -58,7 +58,7 @@ const OrgCard = (state) => {
           });
         } else {
           setTreeCheckedKeys([info.node.props.id]);
-          state.form.setFieldsValue({
+          form.setFieldsValue({
             parentOrgId: info.node.props.id,
             parentOrgName: info.node.props.title,
           });
@@ -66,15 +66,11 @@ const OrgCard = (state) => {
       }, 1000);
     } else {
       setTreeCheckedKeys([]);
-      state.form.setFieldsValue({
+      form.setFieldsValue({
         parentOrgId: '',
         parentOrgName: '',
       });
     }
-  };
-
-  const onExpand = (expandedKeys) => {
-    onExpandKeys(expandedKeys);
   };
 
   const onSearch = (value) => {
@@ -83,6 +79,10 @@ const OrgCard = (state) => {
 
   const onRefresh = () => {
     refreshTree();
+  };
+
+  const onExpand = (expandedKeys) => {
+    onExpandKeys(expandedKeys);
   };
 
   const renderTreeNodes = (data) => {
@@ -102,37 +102,29 @@ const OrgCard = (state) => {
 
   return (
     <div>
-      <Row className="detail" gutter={8}>
-        <Col span={12}>
-          <Row>
-            <Col span={4}>
-              <span>组织名</span>
-            </Col>
-            <Col span={14}>
-              <Search onSearch={value => onSearch(value)} style={{ width: 200 }} />
-              <Button icon="reload" size="small" onClick={onRefresh}>刷新</Button>
-            </Col>
-          </Row>
-          <div className="detail_tree">
-            <Tree
-              checkable
-              loadData={onLoadData}
-              onCheck={onCheck}
-              checkedKeys={checkedKeys}
-              checkStrictly
-              onExpand={onExpand}
-              expandedKeys={expandKeys}
-              loadedKeys={loadedKeys}
-            >
-              {renderTreeNodes(state.treeData)}
-            </Tree>
-          </div>
+      <Row>
+        <Col span={4}>
+          <span>组织名</span>
         </Col>
-        <Col className="detail_form" span={12}>
-          <OrgForm {...state} />
+        <Col span={20}>
+          <Search onSearch={value => onSearch(value)} style={{ width: 200 }} />
+          <Button icon="reload" size="small" onClick={onRefresh}>刷新</Button>
         </Col>
+      </Row>
+      <Row className="detail_tree">
+        <Tree
+          checkable
+          loadData={onLoadData}
+          onCheck={onCheck}
+          checkedKeys={checkedKeys}
+          checkStrictly
+          onExpand={onExpand}
+          expandedKeys={expandKeys}
+          loadedKeys={loadedKeys}
+        >
+          {renderTreeNodes(treeData)}
+        </Tree>
       </Row>
     </div>
   );
 };
-export default OrgCard;

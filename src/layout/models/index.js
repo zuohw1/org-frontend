@@ -55,6 +55,13 @@ export default {
         iconUrl: 'sync',
       },
       {
+        id: 108,
+        menuName: '组织结构业务维护',
+        url: '/org/structure',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
         id: 107,
         menuName: '文档下载',
         url: '/org/documentLoad',

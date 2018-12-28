@@ -36,3 +36,37 @@ export function checkOrgIsDelete(docHeaderId, orgId) {
     },
   };
 }
+
+/**
+ * 刷新树
+ * @returns {{type: string}}
+ */
+export function refreshTree() {
+  return {
+    type: 'orgCard/refreshTree',
+  };
+}
+
+/**
+ * 根据名称查询树
+ * @param name
+ * @returns {{type: string, payload: {name: *}}}
+ */
+export function getTreeByName(name) {
+  return {
+    type: 'orgCard/getTreeByName',
+    payload: {
+      name,
+    },
+  };
+}
+
+export function onExpandKeys(expandedKeys) {
+  return {
+    type: 'orgCard/stateWillUpdate',
+    payload: {
+      expandKeys: expandedKeys,
+      loadedKeys: expandedKeys,
+    },
+  };
+}

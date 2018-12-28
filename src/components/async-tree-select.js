@@ -93,14 +93,16 @@ class AsyncTreeSelect extends React.PureComponent {
 
   render() {
     const { treeData, value } = this.state;
+    const { placeholder } = this.props;
     return (
       <TreeSelect
         treeDefaultExpandAll
         value={value}
         dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
         loadData={this.onLoadData}
-        placeholder="请选择"
+        placeholder={placeholder || '请选择'}
         onChange={this.onChange}
+        showSearch
       >
         {this.renderTreeNodes(treeData)}
       </TreeSelect>

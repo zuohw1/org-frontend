@@ -6,11 +6,13 @@ export default {
   state: {
     expand: false,
     treeData: [],
+    expandKeys: [],
+    loadedKeys: [],
+    defaultExpandedKeys: ['37838'],
     login_name: 'hq-ehr',
     resp_id: '200000515',
     checkedKeys: [],
     record: {},
-    orgDeleteMsg: {},
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -33,6 +35,7 @@ export default {
         type: 'stateWillUpdate', // reducers中的方法名
         payload: { // 网络返回的要保留的数据
           treeData: result,
+          defaultExpandedKeys: ['~'],
         },
       });
     },
@@ -44,12 +47,33 @@ export default {
         },
       });
     },
-    *checkOrgIsDelete({ payload: { docHeaderId, orgId } }, { call, put }) {
-      const data = yield call(service.checkOrgIsDelete, docHeaderId, orgId);
-      yield put({ // 更新树的数据
-        type: 'stateUpdate',
+    *checkOrgIsDelete({ payload: { docHeaderId, orgId } }, { call }) {
+      return yield call(service.checkOrgIsDelete, docHeaderId, orgId);
+    },
+    *refreshTree(_, { call, put }) {
+      yield put({
+        type: 'stateWillUpdate',
         payload: {
-          orgDeleteMsg: data.msg,
+          treeData: [],
+          expandKeys: [],
+        },
+      });
+      const result = yield call(service.getInitTree);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          treeData: result,
+          expandKeys: [],
+          loadedKeys: [],
+        },
+      });
+    },
+    *getTreeByName({ payload: { name } }, { call, put }) {
+      const result = yield call(service.getTreeByName, name);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          treeData: result,
         },
       });
     },

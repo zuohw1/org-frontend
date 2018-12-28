@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import React from 'react';
 import {
   Table,
@@ -31,7 +32,8 @@ export default ({
   };
 
   const onClickView = (_, row) => {
-    getRecord(row, true, false);
+    debugger;
+    redirectDetail('/org/managerView', { id: row.docHeaderId });
   };
 
   const onClickEdit = (_, row) => {

@@ -156,6 +156,10 @@ export default (props) => {
     return (<Option value={item.id} key={item.id}> {item.title} </Option>);
   };
 
+  const onClickReturn = () => {
+    props.history.goBack(-1);
+  };
+
   function getFields() {
     const children = [];
     for (let i = 0; i < formCols.length - 3; i += 1) {
@@ -219,7 +223,7 @@ export default (props) => {
           <div style={{ display: 'none' }}>
             <FormItem>
               {getFieldDecorator(formCols[i].itemKey, {
-                initialValue: location.pathData.id,
+                initialValue: location.pathData ? location.pathData.id : '',
               })(
                 <Input type="hidden" />,
               )}
@@ -314,7 +318,7 @@ export default (props) => {
       <FormItem {...buttonItemLayout}>
         <Button className="preserve">保存
         </Button>
-        <Button className="go_back">返回
+        <Button className="go_back" onClick={onClickReturn}>返回
         </Button>
       </FormItem>,
     );

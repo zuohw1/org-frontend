@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { routerRedux } from 'dva/router';
 import Service from '../services/org-create';
 
@@ -57,6 +58,14 @@ export default {
     },
     * redirect({ payload: { pathname, state } }, { put }) {
       yield put(routerRedux.push({ pathname, state }));
+    },
+    /* 删除 */
+    * deleteRecord({ payload: { record } }, { call, put }) {
+      yield call(Service.delete, record.docHeaderId);
+      yield put({
+        type: 'fetch',
+        payload: { search: { pageNumber: 1, pageSize: 10 } },
+      });
     },
   },
   subscriptions: {
