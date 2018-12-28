@@ -13,37 +13,25 @@ import request from '../utils/request';
  *   title: '序号',
     dataIndex: 'key',
     key: 'key',
-    align: 'center',
   }, {
     title: '文件名称和文号',
     dataIndex: 'docCode',
     key: 'docCode',
-    align: 'center',
   }, {
     title: '文件拟稿人',
     dataIndex: 'docVerifier',
     key: 'docVerifier',
-    align: 'center',
   }];
-
  const refUrl = 'orgHeaderBatch/list';
- const onConfirm = () => {
-    form.setFieldsValue({
-      org_id: `${refSelectData.orgId}`,
-      orgName: `${refSelectData.orgName}`,
-    });
-    updateOrgRefModelShow(false);
-  };
  * <SearchTable
- * columns={refColumns}//表格显示字段
- * refUrl={refUrl}//请求url
- * rowSelection={rowSelection}//行属性
- * refCodes={refCodes}//字段对应
- * refSelectData={refSelectData}//参照选中数据
- * onConfirm={onConfirm}
- * const rowSelection = {
-    type:'radio',//radio、checkbox
-  }
+ * refUrl={refUrl}
+ * columns={refColumns}
+ * refCodes={refCodes}
+ * refSelectData={refSelectData} 临时存参照选中记录
+ * setRefModeShow={setRefModeShow} 更新是否弹出属性方法
+ * refModal={refModal} 参照modal框是否弹出
+ * parentForm={form} 父表单，用于回写参照选择的数据到父表单
+ * placeholder="名称"
  * />
  */
 class SearchTable extends React.PureComponent {
