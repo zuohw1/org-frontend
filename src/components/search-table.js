@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Input, Pagination, Table, Row,
+  Input, Pagination, Table, Row, Modal,
 } from 'antd';
+import moment from 'moment';
 import request from '../utils/request';
 
 /**
@@ -62,7 +63,11 @@ class SearchTable extends React.PureComponent {
       this.setState({ selectedRowKeys: [row.key] });
       refCodes.map((item) => {
         /* eslint-disable no-param-reassign,no-return-assign */
-        return refSelectData[item.code] = row[item.refcode];
+        if (item.type && item.type === 'Date') {
+          return refSelectData[item.code] = moment(row[item.refcode], 'YYYY/MM/DD');
+        } else {
+          return refSelectData[item.code] = row[item.refcode];
+        }
       });
     },
   };
@@ -118,14 +123,14 @@ class SearchTable extends React.PureComponent {
       }
       const tableData = await request.get(url);
       const formatTable = this.formatTableData(tableData);
-      this.setState({ refData: formatTable, tableLoading: false });
+      this.setState({ refData: formatTable, tableLoading: false, selectedRowKeys: [] });
       resolve();
     });
   };
 
   render() {
     const {
-      columns, rowSelection, placeholder, refCodes, refSelectData, onConfirm,
+      columns, placeholder, refCodes, refSelectData, setRefModeShow, refModal, parentForm,
     } = this.props;
     const {
       refData, tableLoading, selectedRowKeys, onSelect,
@@ -134,16 +139,38 @@ class SearchTable extends React.PureComponent {
       current, size, total, records,
     } = refData;
 
-    const rowS = { ...rowSelection, selectedRowKeys, onSelect };
+    const rowSelection = { columnWidth: '30px', selectedRowKeys, onSelect };
+
+    const onRefSubmit = () => {
+      parentForm.setFieldsValue(refSelectData);
+      setRefModeShow(false);
+    };
+
+    const onRefCancel = () => {
+      refCodes.map((item) => {
+        /* eslint-disable no-param-reassign,no-return-assign */
+        return refSelectData[item.code] = '';
+      });
+      setRefModeShow(null, false);
+    };
+
     return (
-      <div>
+      <Modal
+        title="参照"
+        visible={refModal}
+        onOk={onRefSubmit}
+        onCancel={onRefCancel}
+        maskClosable={false}
+        destroyOnClose
+        width={900}
+      >
         <Input.Search style={{ width: '300px', marginBottom: '5px' }} placeholder={placeholder} onSearch={this.onSearch} />
         <Row>
           <Table
             columns={columns}
             dataSource={records}
             size="small"
-            rowSelection={rowS}
+            rowSelection={rowSelection}
             pagination={false}
             bordered
             scroll={{ y: 300 }}
@@ -154,13 +181,16 @@ class SearchTable extends React.PureComponent {
                 onClick: () => {
                   this.setState({ selectedRowKeys: [record.key] });
                   refCodes.map((item) => {
-                    /* eslint-disable no-param-reassign,no-return-assign */
-                    return refSelectData[item.code] = record[item.refcode];
+                    if (item.type && item.type === 'Date') {
+                      return refSelectData[item.code] = moment(record[item.refcode], 'YYYY/MM/DD');
+                    } else {
+                      return refSelectData[item.code] = record[item.refcode];
+                    }
                   });
                 },
                 /* 双击行事件，执行确定动作，回写选中数据，关闭modal框 */
                 onDoubleClick: () => {
-                  onConfirm();
+                  onRefSubmit();
                 },
               };
             }}
@@ -178,7 +208,7 @@ class SearchTable extends React.PureComponent {
             style={{ marginTop: 10, float: 'right' }}
           />
         </Row>
-      </div>
+      </Modal>
     );
   }
 }

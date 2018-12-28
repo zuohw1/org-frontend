@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-  Form,
-  Input,
-  DatePicker, Radio, Row, Col, Button, Modal, Select,
+  Button, Col, DatePicker, Form, Input, Radio, Row, Select,
 } from 'antd';
 import moment from 'moment';
 import AttachTable from './attach-table';
@@ -17,7 +15,7 @@ const ApprovalCard = (state) => {
   } = state;
   const { getFieldDecorator } = form;
   const {
-    setRefModeShow, setRefSelectData, setRecord, updateRecord,
+    setRefModeShow, setRecord, updateRecord,
   } = actions;
 
   const onClickNext = () => {
@@ -36,25 +34,6 @@ const ApprovalCard = (state) => {
     return (<Option value={item.id} key={item.id}> {item.title} </Option>);
   };
 
-  const onRefSubmit = (e) => {
-    e.preventDefault();
-    refSelectData.DOC_DATE = moment(refSelectData.DOC_DATE, 'YYYY/MM/DD');
-    form.setFieldsValue(refSelectData);
-    setRefModeShow(false);
-  };
-
-  const onConfirm = () => {
-    form.setFieldsValue(refSelectData);
-    refSelectData.DOC_DATE = moment(refSelectData.DOC_DATE, 'YYYY/MM/DD');
-    form.setFieldsValue(refSelectData);
-    setRefModeShow(false);
-  };
-
-  const onRefCancel = (e) => {
-    e.preventDefault();
-    setRefSelectData(null, false);
-  };
-
   const onRadioChange = (e) => {
     record.ATTRIBUTE5 = e.target.value;
     if (e.target.value === 'Y') {
@@ -68,59 +47,42 @@ const ApprovalCard = (state) => {
   const refUrl = 'orgHeaderBatch/selectListByEmNum';
   const refCodes = [{ code: 'DOC_CODE', refcode: 'DOC_CODE' },
     { code: 'DOC_VERIFIER', refcode: 'DOC_VERIFIER' },
-    { code: 'DOC_DATE', refcode: 'DOC_DATE' },
+    { code: 'DOC_DATE', refcode: 'DOC_DATE', type: 'Date' },
     { code: 'BATCH_HEADER_ID', refcode: 'BATCH_HEADER_ID' },
     { code: 'DOC_SUBJECT', refcode: 'DOC_SUBJECT' }];
   const refColumns = [{
-    title: '文件名称和文号',
+    title: '名称和文号',
     dataIndex: 'DOC_CODE',
     key: 'DOC_CODE',
-    align: 'center',
-    width: 200,
+    width: '20%',
   }, {
-    title: '文件印发日期',
+    title: '印发日期',
     dataIndex: 'DOC_DATE',
     key: 'DOC_DATE',
-    align: 'center',
-    width: 150,
+    width: '15%',
   }, {
-    title: '文件拟稿人',
+    title: '拟稿人',
     dataIndex: 'DOC_VERIFIER',
     key: 'DOC_VERIFIER',
-    align: 'center',
-    width: 150,
+    width: '15%',
   }, {
     title: '组织变更主要内容',
     dataIndex: 'DOC_SUBJECT',
     key: 'DOC_SUBJECT',
-    align: 'center',
-    width: 200,
   }];
-  const rowSelection = {
-    columnWidth: '30',
-    type: 'radio',
-  };
 
   return (
     <div>
-      <Modal
-        title="参照"
-        visible={refModal}
-        maskClosable={false}
-        destroyOnClose
-        onOk={onRefSubmit}
-        onCancel={onRefCancel}
-        width={700}
-      >
-        <SearchTable
-          columns={refColumns}
-          refUrl={refUrl}
-          refCodes={refCodes}
-          refSelectData={refSelectData}
-          rowSelection={rowSelection}
-          onConfirm={onConfirm}
-        />
-      </Modal>
+      <SearchTable
+        refUrl={refUrl}
+        columns={refColumns}
+        refCodes={refCodes}
+        refSelectData={refSelectData}
+        setRefModeShow={setRefModeShow}
+        refModal={refModal}
+        parentForm={form}
+        placeholder="名称"
+      />
       <Form>
         <Row type="flex">
           <Col span={24} style={{ display: 'block' }}>

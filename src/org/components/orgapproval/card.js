@@ -1,9 +1,7 @@
-/* eslint-disable no-debugger */
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import {
-  Form,
-  Input,
-  DatePicker, Radio, Row, Col, Modal,
+  Col, DatePicker, Form, Input, Radio, Row,
 } from 'antd';
 import moment from 'moment';
 import AttachTable from './attach-table';
@@ -21,26 +19,13 @@ export default ({
 }) => {
   const { getFieldDecorator } = form;
 
-  const { setRefModeShow, setRefSelectData } = actions;
+  const { setRefModeShow } = actions;
 
-  const onRefSubmit = (e) => {
-    e.preventDefault();
-    const data = { ...record, ...refSelectData };
-    setRefSelectData(data, false);
-  };
-
-  const onConfirm = () => {
-    const data = { ...record, ...refSelectData };
-    setRefSelectData(data, false);
-  };
-
-  const onRefCancel = (e) => {
-    e.preventDefault();
-    setRefSelectData(null, false);
-  };
-
-  const onRadioChange = () => {
-    setRefModeShow(true);
+  const onRadioChange = (e) => {
+    record.ATTRIBUTE5 = e.target.value;
+    if (e.target.value === 'Y') {
+      setRefModeShow(true);
+    }
   };
 
   const refCodes = [{ code: 'DOC_CODE', refcode: 'docCode' }, { code: 'DOC_VERIFIER', refcode: 'docVerifier' }];
@@ -49,46 +34,34 @@ export default ({
     dataIndex: 'key',
     key: 'key',
     align: 'center',
-    width: 80,
+    width: '12%',
   }, {
     title: '文件名称和文号',
     dataIndex: 'docCode',
     key: 'docCode',
     align: 'center',
-    width: 200,
   }, {
     title: '文件拟稿人',
     dataIndex: 'docVerifier',
     key: 'docVerifier',
     align: 'center',
-    width: 80,
+    width: '20%',
   }];
 
   const refUrl = 'orgHeaderBatch/list';
 
-  const rowSelection = {
-    type: 'radio',
-  };
   return (
     <div>
-      <Modal
-        title="参照"
-        visible={refModal}
-        onOk={onRefSubmit}
-        onCancel={onRefCancel}
-        maskClosable={false}
-        destroyOnClose
-        width={700}
-      >
-        <SearchTable
-          columns={refColumns}
-          refUrl={refUrl}
-          rowSelection={rowSelection}
-          refCodes={refCodes}
-          refSelectData={refSelectData}
-          onConfirm={onConfirm}
-        />
-      </Modal>
+      <SearchTable
+        refUrl={refUrl}
+        columns={refColumns}
+        refCodes={refCodes}
+        refSelectData={refSelectData}
+        setRefModeShow={setRefModeShow}
+        refModal={refModal}
+        parentForm={form}
+        placeholder="名称"
+      />
       <Form>
         <Row gutter={24}>
           <Col span={24} style={{ display: 'block' }}>
