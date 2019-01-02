@@ -26,8 +26,8 @@ export default {
   getInitTree(versionId, showDisabled) {
     return request.get(`orgStructure/getInitTree?versionId=${versionId}&showDisabled=${showDisabled}`);
   },
-  getTreeByName(name) {
-    return request.get(`organization/getTreeByName?name=${name}`);
+  getTreeByName(name, versionId, showDisabled) {
+    return request.get(`orgStructure/getSubTreeByName?versionId=${versionId}&name=${name}&showDisabled=${showDisabled}`);
   },
   getSelectData() {
     return request.get('orgStructure/getSelectData');

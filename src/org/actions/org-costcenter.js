@@ -1,7 +1,7 @@
 /* 设置是否展开查询 */
 export function setToggle(expand) {
   return {
-    type: 'orgStructure/stateWillUpdate',
+    type: 'orgCostCenter/stateWillUpdate',
     payload: {
       expand,
     },
@@ -11,7 +11,7 @@ export function setToggle(expand) {
 /* 跳转页面 */
 export function redirectDetail(pathname, state) {
   return {
-    type: 'orgStructure/redirect',
+    type: 'orgCostCenter/redirect',
     payload: {
       pathname, state,
     },
@@ -21,7 +21,7 @@ export function redirectDetail(pathname, state) {
 
 export function getTreeChildren(treeData) {
   return {
-    type: 'orgStructure/getTreeChildren',
+    type: 'orgCostCenter/getTreeChildren',
     payload: {
       treeData,
     },
@@ -31,7 +31,7 @@ export function getTreeChildren(treeData) {
 /* 设置树选择项 */
 export function setTreeCheckedKeys(checkedKeys) {
   return {
-    type: 'orgStructure/stateWillUpdate',
+    type: 'orgCostCenter/stateWillUpdate',
     payload: {
       checkedKeys,
     },
@@ -44,7 +44,7 @@ export function setTreeCheckedKeys(checkedKeys) {
  */
 export function refreshTree(versionId, showDisabled) {
   return {
-    type: 'orgStructure/refreshTree',
+    type: 'orgCostCenter/refreshTree',
     payload: {
       versionId, showDisabled,
     },
@@ -58,7 +58,7 @@ export function refreshTree(versionId, showDisabled) {
  */
 export function getTreeByName(name, versionId, showDisabled) {
   return {
-    type: 'orgStructure/getTreeByName',
+    type: 'orgCostCenter/getTreeByName',
     payload: {
       name, versionId, showDisabled,
     },
@@ -67,7 +67,7 @@ export function getTreeByName(name, versionId, showDisabled) {
 
 export function onExpandKeys(expandedKeys) {
   return {
-    type: 'orgStructure/stateWillUpdate',
+    type: 'orgCostCenter/stateWillUpdate',
     payload: {
       expandKeys: expandedKeys,
       loadedKeys: expandedKeys,
@@ -82,7 +82,7 @@ export function onExpandKeys(expandedKeys) {
  */
 export function setPersonModel(personModal) {
   return {
-    type: 'orgStructure/stateWillUpdate',
+    type: 'orgCostCenter/stateWillUpdate',
     payload: {
       personModal,
     },
@@ -92,19 +92,9 @@ export function setPersonModel(personModal) {
 /* 获取列表数据 */
 export function listTable(search) {
   return {
-    type: 'orgStructure/fetch',
+    type: 'orgCostCenter/fetch',
     payload: {
       search,
-    },
-  };
-}
-
-/* 是否显示失效 */
-export function updateShowDisabled(showDisabled) {
-  return {
-    type: 'orgStructure/stateWillUpdate',
-    payload: {
-      showDisabled,
     },
   };
 }

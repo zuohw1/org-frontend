@@ -6,7 +6,7 @@ import '../../../assets/styles/module.less';
 
 const { Content } = Layout;
 
-const orgStructure = (state) => {
+const orgCostCenter = (state) => {
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: '10px 0' }}>
@@ -14,7 +14,7 @@ const orgStructure = (state) => {
           组织管理
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <strong>组织结构业务维护</strong>
+          <strong>组织成本变更维护</strong>
         </Breadcrumb.Item>
       </Breadcrumb>
       <Content
@@ -30,4 +30,4 @@ const orgStructure = (state) => {
   );
 };
 
-export default orgStructure;
+export default orgCostCenter;

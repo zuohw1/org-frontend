@@ -1,6 +1,5 @@
-/* eslint-disable no-debugger */
 import {
-  Button, Col, Row, Tree, Input, Modal, Checkbox,
+  Button, Col, Row, Tree, Input, Modal,
 } from 'antd';
 import React from 'react';
 import request from '../../../../utils/request';
@@ -10,7 +9,7 @@ const { Search } = Input;
 
 export default (props) => {
   const {
-    treeData, actions, checkedKeys, expandKeys, loadedKeys, form, history, showDisabled,
+    treeData, actions, checkedKeys, expandKeys, loadedKeys, form,
   } = props;
 
   const {
@@ -19,10 +18,7 @@ export default (props) => {
     setTreeCheckedKeys,
     onExpandKeys,
     getTreeByName,
-    updateShowDisabled,
   } = actions;
-
-  const versionId = history.location.state.id;
 
   const onLoadData = (treeNode) => {
     const { dataRef } = treeNode.props;
@@ -33,7 +29,7 @@ export default (props) => {
       }
       setTimeout(async () => {
         const id = dataRef.key;
-        const result = await request.get(`orgStructure/getSubTree?orgId=${id}&versionId=${versionId}&showDisabled=${showDisabled}`);
+        const result = await request.get(`auth/getAuthSubOrgs?topId=${id}`);
         dataRef.children = result;
         getTreeChildren(treeData);
         resolve();
@@ -80,19 +76,15 @@ export default (props) => {
   };
 
   const onSearch = (value) => {
-    getTreeByName(value, versionId, showDisabled);
+    getTreeByName(value);
   };
 
   const onRefresh = () => {
-    refreshTree(versionId, showDisabled);
+    refreshTree();
   };
 
   const onExpand = (expandedKeys) => {
     onExpandKeys(expandedKeys);
-  };
-
-  const onChange = (e) => {
-    updateShowDisabled(e.target.checked ? 'Y' : 'N');
   };
 
   const renderTreeNodes = (data) => {
@@ -118,7 +110,6 @@ export default (props) => {
         </Col>
         <Col span={21}>
           <Search onSearch={value => onSearch(value)} style={{ width: 200 }} />
-          <Checkbox onChange={onChange}>显示失效</Checkbox>
           <Button icon="reload" size="small" onClick={onRefresh}>刷新</Button>
         </Col>
       </Row>

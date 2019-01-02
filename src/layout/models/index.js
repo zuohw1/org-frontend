@@ -62,6 +62,13 @@ export default {
         iconUrl: 'sync',
       },
       {
+        id: 109,
+        menuName: '组织成本变更维护',
+        url: '/org/costCenter',
+        pid: 1,
+        iconUrl: 'sync',
+      },
+      {
         id: 107,
         menuName: '文档下载',
         url: '/org/documentLoad',

@@ -11,7 +11,7 @@ const formatTableData = (tableData) => {
 };
 
 export default {
-  namespace: 'orgStructure',
+  namespace: 'orgCostCenter',
   state: {
     /* 列表数据 */
     tableData: {
@@ -40,10 +40,6 @@ export default {
     treeData: [],
     expandKeys: [],
     loadedKeys: [],
-    /* 组织树显示停用 */
-    showDisabled: 'N',
-    /* 下拉列表数据 */
-    selectData: {},
     /* 查询框员工编码 */
     searchEmpNumber: {},
   },
@@ -67,20 +63,11 @@ export default {
         },
       });
     },
-    * getSelectData(_, { call, put }) {
-      const selectData = yield call(Service.getSelectData);
-      yield put({
-        type: 'stateWillUpdate',
-        payload: {
-          selectData,
-        },
-      });
-    },
     * redirect({ payload: { pathname, state } }, { put }) {
       yield put(routerRedux.push({ pathname, state }));
     },
-    *getInitTree({ payload: { versionId, showDisabled } }, { call, put }) {
-      const result = yield call(Service.getInitTree, versionId, showDisabled);
+    *getInitTree(_, { call, put }) {
+      const result = yield call(Service.getInitTree);
       yield put({
         type: 'stateWillUpdate',
         payload: {
@@ -97,15 +84,8 @@ export default {
         },
       });
     },
-    *refreshTree({ payload: { versionId, showDisabled } }, { call, put }) {
-      yield put({
-        type: 'stateWillUpdate',
-        payload: {
-          treeData: [],
-          expandKeys: [],
-        },
-      });
-      const result = yield call(Service.getInitTree, versionId, showDisabled);
+    *refreshTree(_, { call, put }) {
+      const result = yield call(Service.getInitTree);
       yield put({
         type: 'stateWillUpdate',
         payload: {
@@ -115,8 +95,8 @@ export default {
         },
       });
     },
-    *getTreeByName({ payload: { name, versionId, showDisabled } }, { call, put }) {
-      const result = yield call(Service.getTreeByName, name, versionId, showDisabled);
+    *getTreeByName({ payload: { name } }, { call, put }) {
+      const result = yield call(Service.getTreeByName, name);
       yield put({
         type: 'stateWillUpdate',
         payload: {
@@ -128,24 +108,15 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
-        if (pathname === '/org/structure') {
+        if (pathname === '/org/costCenter') {
           dispatch({
             type: 'fetch',
             payload: { search: { pageNumber: 1, pageSize: 10 } },
           });
+        } else if (pathname === '/org/costCenter/view') {
           dispatch({
-            type: 'getSelectData',
+            type: 'getInitTree',
           });
-        } else if (pathname === '/org/structure/view') {
-          if (history.location.state !== undefined
-            && history.location.state.id !== undefined) {
-            dispatch({
-              type: 'getInitTree',
-              payload: { versionId: history.location.state.id, showDisabled: 'N' },
-            });
-          } else {
-            history.goBack(-1);
-          }
         }
       });
     },
