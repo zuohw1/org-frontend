@@ -116,6 +116,7 @@ export default (props) => {
       <Row className="detail_tree">
         <Tree
           checkable
+          defaultExpandAll
           loadData={onLoadData}
           onCheck={onCheck}
           checkedKeys={checkedKeys}

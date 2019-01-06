@@ -22,6 +22,10 @@ export default (props) => {
     setDetailData(true, records);
   };
 
+  const onClickDelete = (_, records) => {
+    setDetailData(true, records);
+  };
+
   const columns = [
     {
       title: '序号',
@@ -36,10 +40,10 @@ export default (props) => {
       align: 'center',
     }, {
       title: '变更成本信息',
-      dataIndex: 'operator',
-      key: 'operator',
+      dataIndex: 'change',
+      key: 'change',
       align: 'center',
-      width: '10%',
+      width: '20%',
       render: (text, records) => {
         return (
           <span>
@@ -52,13 +56,26 @@ export default (props) => {
       dataIndex: 'updateState',
       key: 'updateState',
       align: 'center',
-      width: '10%',
+      width: '20%',
     }, {
       title: '同步状态',
       dataIndex: 'status',
       key: 'status',
       align: 'center',
+      width: '20%',
+    }, {
+      title: '操作',
+      dataIndex: 'operator',
+      key: 'operator',
+      align: 'center',
       width: '10%',
+      render: (text, records) => {
+        return (
+          <span>
+            <a href=" javascript:;" onClick={() => onClickDelete(text, records)}>删除</a>
+          </span>
+        );
+      },
     },
   ];
 
@@ -86,7 +103,7 @@ export default (props) => {
               {getFieldDecorator('costDate', {
                 initialValue: costCenterData.costDate ? moment(costCenterData.costDate, 'YYYY-MM-DD') : null,
               })(
-                <DatePicker disabled />,
+                <DatePicker />,
               )}
             </FormItem>
           </Col>
@@ -95,7 +112,7 @@ export default (props) => {
               {getFieldDecorator('employeeName', {
                 initialValue: costCenterData.employeeName,
               })(
-                <Input disabled />,
+                <Input />,
               )}
             </FormItem>
           </Col>
@@ -106,7 +123,7 @@ export default (props) => {
               {getFieldDecorator('costDescription', {
                 initialValue: costCenterData.costDescription,
               })(
-                <TextArea disabled rows={3} />,
+                <TextArea rows={3} />,
               )}
             </FormItem>
           </Col>

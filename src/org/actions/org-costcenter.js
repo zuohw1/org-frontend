@@ -98,3 +98,31 @@ export function listTable(search) {
     },
   };
 }
+
+/**
+ * 变更弹出框
+ * @param detailModel
+ * @returns {{type: string, payload: {detailModel: *}}}
+ */
+export function setDetailModel(detailModel) {
+  return {
+    type: 'orgCostCenter/stateWillUpdate',
+    payload: {
+      detailModel,
+    },
+  };
+}
+
+/**
+ * 变更弹出框
+ * @param detailModel
+ * @returns {{type: string, payload: {detailModel: *}}}
+ */
+export function setDetailData(detailModel, detailRecord) {
+  return {
+    type: 'orgCostCenter/stateWillUpdate',
+    payload: {
+      detailModel, detailRecord,
+    },
+  };
+}

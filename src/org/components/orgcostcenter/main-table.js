@@ -20,11 +20,11 @@ export default ({
   } = actions;
 
   const onClickView = (_, row) => {
-    redirectDetail('/org/costCenter/view', { id: row.orgStructureVersionId });
+    redirectDetail('/org/costCenter/view', { id: row.costHeaderId });
   };
 
   const onClickEdit = (_, row) => {
-    redirectDetail('/org/costCenter/edit', { id: row.orgStructureVersionId });
+    redirectDetail('/org/costCenter/modify', { id: row.costHeaderId });
   };
 
   const data = tableData.records;

@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  Breadcrumb, Layout,
+  Breadcrumb, Col, Layout, Row,
 } from 'antd';
 import '../../../../assets/styles/module.less';
 import OrgForm from './org-form';
+import OrgTree from './org-tree';
 
 const { Content } = Layout;
 
-const orgCostCenterView = (state) => {
+const orgCostCenterModify = (state) => {
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: '10px 0' }}>
@@ -25,11 +26,18 @@ const orgCostCenterView = (state) => {
         }}
       >
         <div>
-          <OrgForm {...state} />
+          <Row className="detail" gutter={8}>
+            <Col span={8}>
+              <OrgTree {...state} />
+            </Col>
+            <Col className="detail_form" span={16}>
+              <OrgForm {...state} />
+            </Col>
+          </Row>
         </div>
       </Content>
     </React.Fragment>
   );
 };
 
-export default orgCostCenterView;
+export default orgCostCenterModify;

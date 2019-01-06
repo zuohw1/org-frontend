@@ -20,4 +20,7 @@ export default {
   getTreeByName(name) {
     return request.get(`auth/getTreeByName?name=${name}`);
   },
+  getCostDataById(costHeaderId) {
+    return request.get(`orgCostHeader/getCostDataById?costHeaderId=${costHeaderId}`);
+  },
 };

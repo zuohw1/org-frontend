@@ -21,6 +21,7 @@ import OrgStructure from '../../org/containers/org-structure';
 import OrgStructureView from '../../org/containers/org-structure-view';
 import OrgCostCenter from '../../org/containers/org-costcenter';
 import OrgCostCenterView from '../../org/containers/org-costcenter-view';
+import OrgCostCenterModify from '../../org/containers/org-costcenter-modify';
 
 
 const { SubMenu } = Menu;
@@ -43,6 +44,7 @@ const MainLayout = (state) => {
       <Route exact path="/org/structure/view" component={OrgStructureView} />
       <Route exact path="/org/costCenter" component={OrgCostCenter} />
       <Route exact path="/org/costCenter/view" component={OrgCostCenterView} />
+      <Route exact path="/org/costCenter/modify" component={OrgCostCenterModify} />
     </Switch>
   );
   const ret = state.headless ? (

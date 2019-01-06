@@ -1,5 +1,5 @@
 import { routerRedux } from 'dva/router';
-import Service from '../services/org-structure';
+import Service from '../services/org-costcenter';
 
 /* 格式化table数据 */
 const formatTableData = (tableData) => {
@@ -42,6 +42,12 @@ export default {
     loadedKeys: [],
     /* 查询框员工编码 */
     searchEmpNumber: {},
+    /* 成本中心明细信息 */
+    costCenterData: {},
+    /* 变更记录框 */
+    detailModel: false,
+    /* 选中的变更明细记录 */
+    detailRecord: {},
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -72,7 +78,6 @@ export default {
         type: 'stateWillUpdate',
         payload: {
           treeData: result,
-          defaultExpandedKeys: ['~'],
         },
       });
     },
@@ -104,6 +109,15 @@ export default {
         },
       });
     },
+    *getCostDataById({ payload: { costHeaderId } }, { call, put }) {
+      const result = yield call(Service.getCostDataById, costHeaderId);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          costCenterData: result,
+        },
+      });
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -114,9 +128,28 @@ export default {
             payload: { search: { pageNumber: 1, pageSize: 10 } },
           });
         } else if (pathname === '/org/costCenter/view') {
-          dispatch({
-            type: 'getInitTree',
-          });
+          if (history.location.state !== undefined
+            && history.location.state.id !== undefined) {
+            dispatch({
+              type: 'getCostDataById',
+              payload: { costHeaderId: history.location.state.id },
+            });
+          } else {
+            history.goBack(-1);
+          }
+        } else if (pathname === '/org/costCenter/modify') {
+          if (history.location.state !== undefined
+            && history.location.state.id !== undefined) {
+            dispatch({
+              type: 'getCostDataById',
+              payload: { costHeaderId: history.location.state.id },
+            });
+            dispatch({
+              type: 'getInitTree',
+            });
+          } else {
+            history.goBack(-1);
+          }
         }
       });
     },
