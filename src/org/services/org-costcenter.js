@@ -23,4 +23,16 @@ export default {
   getCostDataById(costHeaderId) {
     return request.get(`orgCostHeader/getCostDataById?costHeaderId=${costHeaderId}`);
   },
+  deleteCostInfoById(costId) {
+    return request.delete(`orgCostHeader/deleteCostInfoById/${costId}`);
+  },
+  saveCostData(records) {
+    return request.post('orgCostHeader/save', records);
+  },
+  saveCostInfor(record) {
+    return request.post('orgCostHeader/saveOrgCostInfor', record);
+  },
+  syncData(costDate, costHeaderId) {
+    return request.get(`orgCostHeader/syncData?costHeaderId=${costHeaderId}&costDate=${costDate}`);
+  },
 };

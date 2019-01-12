@@ -36,6 +36,7 @@ import request from '../utils/request';
  */
 class SearchTable extends React.PureComponent {
   state = {
+    init: true,
     search: {
       pageNumber: 1,
       pageSize: 10,
@@ -60,18 +61,6 @@ class SearchTable extends React.PureComponent {
     },
   };
 
-  async componentDidMount() {
-    const { refUrl } = this.props;
-    const { search } = this.state;
-    let url = `${refUrl}?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
-    if (search.name && search.name !== '') {
-      url += `&name=${search.name}`;
-    }
-    const tableData = await request.get(url);
-    const formatTable = this.formatTableData(tableData);
-    this.setState({ refData: formatTable });
-  }
-
   formatTableData = (tableData) => {
     const num = tableData.current * 10 - 10;
     const table = tableData.records.map((item, index) => {
@@ -81,37 +70,41 @@ class SearchTable extends React.PureComponent {
   };
 
   onSearch = (value) => {
-    const { refUrl } = this.props;
+    const { refUrl, refPid } = this.props;
     const { search } = this.state;
     search.name = value;
     this.setState(search);
-    this.refreshData(refUrl, search);
+    this.refreshData(refUrl, refPid, search);
   };
 
   onChangePage = (pageNumber, pageSize) => {
-    const { refUrl } = this.props;
+    const { refUrl, refPid } = this.props;
     const { search } = this.state;
     const searchF = { ...search, pageSize, pageNumber };
-    this.refreshData(refUrl, searchF);
+    this.refreshData(refUrl, refPid, searchF);
   };
 
   onChangePageSize = (current, size) => {
-    const { refUrl } = this.props;
+    const { refUrl, refPid } = this.props;
     const { search } = this.state;
     const searchF = { ...search, pageSize: size, pageNumber: current };
-    this.refreshData(refUrl, searchF);
+    this.refreshData(refUrl, refPid, searchF);
   };
 
-  refreshData = (refUrl, search) => {
-    this.setState({ tableLoading: true });
+  refreshData = (refUrl, refPid, search) => {
     return new Promise(async (resolve) => {
-      let url = `${refUrl}?pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
+      let url = `${refUrl}pageNumber=${search.pageNumber}&pageSize=${search.pageSize}`;
       if (search.name && search.name !== '') {
         url += `&name=${search.name}`;
       }
+      if (refPid) {
+        url += `&pid=${refPid}`;
+      }
       const tableData = await request.get(url);
       const formatTable = this.formatTableData(tableData);
-      this.setState({ refData: formatTable, tableLoading: false, selectedRowKeys: [] });
+      this.setState({
+        refData: formatTable, tableLoading: false, selectedRowKeys: [], init: false,
+      });
       resolve();
     });
   };
@@ -121,11 +114,17 @@ class SearchTable extends React.PureComponent {
       columns, placeholder, refCodes, refSelectData, setRefModeShow, refModal, parentForm,
     } = this.props;
     const {
-      refData, tableLoading, selectedRowKeys, onSelect,
+      refData, tableLoading, selectedRowKeys, onSelect, init,
     } = this.state;
     const {
       current, size, total, records,
     } = refData;
+
+    if (refModal === true && init === true) {
+      const { refUrl, refPid } = this.props;
+      const { search } = this.state;
+      this.refreshData(refUrl, refPid, search);
+    }
 
     const rowSelection = { columnWidth: '30px', selectedRowKeys, onSelect };
 

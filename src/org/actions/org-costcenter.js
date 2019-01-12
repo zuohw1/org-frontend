@@ -29,13 +29,29 @@ export function getTreeChildren(treeData) {
 }
 
 /* 设置树选择项 */
-export function setTreeCheckedKeys(checkedKeys) {
-  return {
-    type: 'orgCostCenter/stateWillUpdate',
-    payload: {
-      checkedKeys,
-    },
-  };
+export function setTreeCheckedKeys(props, costCenterData) {
+  if (props) {
+    let { detailList } = costCenterData;
+    const newData = {
+      key: detailList.length + 1,
+      tOrgId: props.id,
+      tOrgName: props.title,
+    };
+    detailList = [...detailList, newData];
+    return {
+      type: 'orgCostCenter/stateWillUpdate',
+      payload: {
+        checkedKeys: [props.id], costCenterData: { ...costCenterData, detailList },
+      },
+    };
+  } else {
+    return {
+      type: 'orgCostCenter/stateWillUpdate',
+      payload: {
+        checkedKeys: [],
+      },
+    };
+  }
 }
 
 /**
@@ -123,6 +139,87 @@ export function setDetailData(detailModel, detailRecord) {
     type: 'orgCostCenter/stateWillUpdate',
     payload: {
       detailModel, detailRecord,
+    },
+  };
+}
+
+/**
+ * 删除成本变更行
+ * @param costId
+ * @param costHeaderId
+ * @returns {{type: string, payload: {costId: *, costHeaderId: *}}}
+ */
+export function deleteDetailData(costId, costHeaderId) {
+  return {
+    type: 'orgCostCenter/deleteDetailData',
+    payload: {
+      costId, costHeaderId,
+    },
+  };
+}
+
+/* 更新table数据 */
+export function setDetailList(costCenterData) {
+  return {
+    type: 'orgCostCenter/stateWillUpdate',
+    payload: {
+      costCenterData,
+    },
+  };
+}
+
+/* 保存数据 */
+export function saveCostData(record) {
+  return {
+    type: 'orgCostCenter/saveCostData',
+    payload: {
+      record,
+    },
+  };
+}
+
+export function setCorpModel(corpModel) {
+  return {
+    type: 'orgCostCenter/stateWillUpdate',
+    payload: {
+      corpModel,
+    },
+  };
+}
+
+export function setCostCenterModel(costCenterModel, refPid) {
+  return {
+    type: 'orgCostCenter/stateWillUpdate',
+    payload: {
+      costCenterModel, refPid,
+    },
+  };
+}
+
+export function setMajorModel(majorModel) {
+  return {
+    type: 'orgCostCenter/stateWillUpdate',
+    payload: {
+      majorModel,
+    },
+  };
+}
+
+/* 更新数据 */
+export function updateCostInfor(record) {
+  return {
+    type: 'orgCostCenter/updateCostInfor',
+    payload: {
+      record,
+    },
+  };
+}
+
+export function syncData(costDate, costHeaderId) {
+  return {
+    type: 'orgCostCenter/syncData',
+    payload: {
+      costDate, costHeaderId,
     },
   };
 }

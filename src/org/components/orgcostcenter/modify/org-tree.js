@@ -1,5 +1,5 @@
 import {
-  Button, Col, Row, Tree, Input, Modal,
+  Button, Col, Row, Tree, Input,
 } from 'antd';
 import React from 'react';
 import request from '../../../../utils/request';
@@ -9,7 +9,7 @@ const { Search } = Input;
 
 export default (props) => {
   const {
-    treeData, actions, checkedKeys, expandKeys, loadedKeys, form,
+    treeData, actions, checkedKeys, expandKeys, loadedKeys, costCenterData,
   } = props;
 
   const {
@@ -39,39 +39,18 @@ export default (props) => {
 
   const onCheck = (_, info) => {
     if (info.checked && info.node.props.id !== '~') {
-      setTimeout(async () => {
-        const docHeaderId = props.location.pathData.id;
-        const orgId = info.node.props.id;
-        const result = await request.get(`orgCreate/checkOrgIsDelete?docHeaderId=${docHeaderId}&orgId=${orgId}`);
-        if (result.head !== '') {
-          Modal.error({
-            title: '提示',
-            content: (
-              <div>
-                <p>{result.head}</p>
-                {
-                  result.list.map((item) => {
-                    return <p>{item}</p>;
-                  })
-                }
-                <p>{result.tail}</p>
-              </div>
-            ),
-          });
-        } else {
-          setTreeCheckedKeys([info.node.props.id]);
-          form.setFieldsValue({
-            parentOrgId: info.node.props.id,
-            parentOrgName: info.node.props.title,
-          });
+      const { detailList } = costCenterData;
+      let isSame = false;
+      for (let i = 0; i < detailList.length; i += 1) {
+        if (detailList[i].tOrgId === info.node.props.id) {
+          isSame = true;
         }
-      }, 1000);
+      }
+      if (isSame === false) {
+        setTreeCheckedKeys(info.node.props, costCenterData);
+      }
     } else {
-      setTreeCheckedKeys([]);
-      form.setFieldsValue({
-        parentOrgId: '',
-        parentOrgName: '',
-      });
+      setTreeCheckedKeys(null);
     }
   };
 

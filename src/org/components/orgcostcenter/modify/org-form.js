@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Form, Input, Card, Col, Row, Table, DatePicker, Modal,
+  Form, Input, Card, Col, Row, Table, DatePicker, Modal, Button,
 } from 'antd';
 import moment from 'moment';
 import DetailForm from './detail-form';
@@ -11,10 +11,27 @@ const WapperDetailForm = Form.create()(DetailForm);
 
 export default (props) => {
   const {
-    form, costCenterData, detailRecord, actions, detailModel,
+    form,
+    costCenterData,
+    detailRecord,
+    actions,
+    detailModel,
+    corpModel,
+    costCenterModel,
+    majorModel,
+    refSelectData,
+    refPid,
   } = props;
 
-  const { setDetailModel, setDetailData } = actions;
+  const {
+    setDetailModel,
+    setDetailData,
+    deleteDetailData,
+    setDetailList,
+    saveCostData,
+    updateCostInfor,
+    syncData,
+  } = actions;
 
   const { getFieldDecorator } = form;
 
@@ -23,7 +40,90 @@ export default (props) => {
   };
 
   const onClickDelete = (_, records) => {
-    setDetailData(true, records);
+    let bool = false;
+    for (let i = 0; i < costCenterData.detailList.length; i += 1) {
+      if (!costCenterData.detailList[i].costId) {
+        bool = true;
+      }
+    }
+    if (bool === true) {
+      Modal.info({
+        title: '提示',
+        content: (
+          <div>
+            <p>还有未保存的记录,请先保存</p>
+          </div>
+        ),
+      });
+    } else {
+      deleteDetailData(records.costId, records.docHeaderId);
+    }
+  };
+
+  const onClickCancel = (_, records) => {
+    const dataSource = [...costCenterData.detailList];
+    dataSource.splice(records.key - 1, 1);
+    const detailList = dataSource.map((item, index) => {
+      return { ...item, key: index + 1 };
+    });
+    setDetailList({ ...costCenterData, detailList });
+  };
+
+  const onClickSave = () => {
+    form.validateFields((err, values) => {
+      if (!err) {
+        if (costCenterData.detailList.length > 0) {
+          let ids = '';
+          for (let i = 0; i < costCenterData.detailList.length; i += 1) {
+            if (!costCenterData.detailList[i].costId) {
+              ids += `${costCenterData.detailList[i].tOrgId},`;
+            }
+          }
+          saveCostData({ ...values, ids });
+        } else {
+          Modal.info({
+            title: '提示',
+            content: (
+              <div>
+                <p>没有需要保存的记录</p>
+              </div>
+            ),
+          });
+        }
+      }
+    });
+  };
+
+  const onClickSync = () => {
+    if (costCenterData.detailList.length > 0) {
+      let noSave = false;
+      for (let i = 0; i < costCenterData.detailList.length; i += 1) {
+        if (!costCenterData.detailList[i].costId) {
+          noSave = true;
+        }
+      }
+      if (noSave === true) {
+        Modal.info({
+          title: '提示',
+          content: (
+            <div>
+              <p>还有未保存的记录,请先保存</p>
+            </div>
+          ),
+        });
+      } else {
+        syncData(costCenterData.costDate, costCenterData.costHeaderId);
+      }
+    } else {
+      Modal.info({
+        title: '提示',
+        content: (
+          <div>
+            <p>没有记录不能进行同步</p>
+          </div>
+        ),
+      });
+    }
   };
 
   const columns = [
@@ -45,11 +145,13 @@ export default (props) => {
       align: 'center',
       width: '20%',
       render: (text, records) => {
-        return (
-          <span>
-            <a href=" javascript:;" onClick={() => onClickView(text, records)}>变更</a>
-          </span>
-        );
+        if (records.costId) {
+          return (
+            <span>
+              <a href=" javascript:;" onClick={() => onClickView(text, records)}>变更</a>
+            </span>
+          );
+        }
       },
     }, {
       title: '修改状态',
@@ -70,32 +172,37 @@ export default (props) => {
       align: 'center',
       width: '10%',
       render: (text, records) => {
-        return (
-          <span>
-            <a href=" javascript:;" onClick={() => onClickDelete(text, records)}>删除</a>
-          </span>
-        );
+        if (records.costId) {
+          return (
+            <span>
+              <a href=" javascript:;" onClick={() => onClickDelete(text, records)}>删除</a>
+            </span>
+          );
+        } else {
+          return (
+            <span>
+              <a href=" javascript:;" onClick={() => onClickCancel(text, records)}>取消</a>
+            </span>
+          );
+        }
       },
     },
   ];
 
-  const onRefSubmit = () => {
-    setDetailModel(false);
-  };
-
   return (
     <div>
-      <Modal
-        title="成本信息"
-        visible={detailModel}
-        onOk={onRefSubmit}
-        onCancel={onRefSubmit}
-        maskClosable={false}
-        width={900}
-        destroyOnClose
-      >
-        <WapperDetailForm record={detailRecord} />
-      </Modal>
+      <WapperDetailForm
+        record={detailRecord}
+        actions={actions}
+        corpModel={corpModel}
+        costCenterModel={costCenterModel}
+        majorModel={majorModel}
+        refSelectData={refSelectData}
+        refPid={refPid}
+        detailModel={detailModel}
+        setDetailModel={setDetailModel}
+        updateCostInfor={updateCostInfor}
+      />
       <Form className="ant-advanced-search-form">
         <Row gutter={8}>
           <Col span={12} key={1}>
@@ -127,11 +234,20 @@ export default (props) => {
               )}
             </FormItem>
           </Col>
+          {getFieldDecorator('costHeaderId', {
+            initialValue: costCenterData.costHeaderId,
+          })(
+            <Input hidden />,
+          )}
         </Row>
       </Form>
       <Card
         title="以下是变更的组织信息"
       >
+        <div>
+          <Button onClick={onClickSave} style={{ marginRight: 10 }}>保存变更组织</Button>
+          <Button onClick={onClickSync}>同步数据</Button>
+        </div>
         <Row>
           <Table columns={columns} dataSource={costCenterData.detailList} size="small" bordered pagination={false} />
         </Row>

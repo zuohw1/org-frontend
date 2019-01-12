@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { routerRedux } from 'dva/router';
 import Service from '../services/org-costcenter';
 
@@ -8,6 +9,16 @@ const formatTableData = (tableData) => {
     return { ...item, key: index + 1 + num };
   });
   return { ...tableData, records: table };
+};
+
+/* 格式化添加修改数据 */
+const formatRecord = (record) => {
+  const format = {
+    ...record,
+    /* 格式化日期 */
+    costDate: record.costDate.format('YYYY-MM-DD'),
+  };
+  return format;
 };
 
 export default {
@@ -40,6 +51,8 @@ export default {
     treeData: [],
     expandKeys: [],
     loadedKeys: [],
+    /* 勾选记录key */
+    checkedKeys: [],
     /* 查询框员工编码 */
     searchEmpNumber: {},
     /* 成本中心明细信息 */
@@ -48,6 +61,12 @@ export default {
     detailModel: false,
     /* 选中的变更明细记录 */
     detailRecord: {},
+    /* 参照选中数据 */
+    refSelectData: {},
+    corpModel: false,
+    costCenterModel: false,
+    majorModel: false,
+    refPid: '',
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -110,6 +129,47 @@ export default {
       });
     },
     *getCostDataById({ payload: { costHeaderId } }, { call, put }) {
+      const result = yield call(Service.getCostDataById, costHeaderId);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          costCenterData: result,
+        },
+      });
+    },
+    *deleteDetailData({ payload: { costId, costHeaderId } }, { call, put }) {
+      yield call(Service.deleteCostInfoById, costId);
+      const result = yield call(Service.getCostDataById, costHeaderId);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          costCenterData: result,
+        },
+      });
+    },
+    *saveCostData({ payload: { record } }, { call, put }) {
+      const records = formatRecord(record);
+      yield call(Service.saveCostData, records);
+      const result = yield call(Service.getCostDataById, record.costHeaderId);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          costCenterData: result,
+        },
+      });
+    },
+    *updateCostInfor({ payload: { record } }, { call, put }) {
+      yield call(Service.saveCostInfor, record);
+      const result = yield call(Service.getCostDataById, record.docHeaderId);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          costCenterData: result,
+        },
+      });
+    },
+    *syncData({ payload: { costDate, costHeaderId } }, { call, put }) {
+      yield call(Service.syncData, costDate, costHeaderId);
       const result = yield call(Service.getCostDataById, costHeaderId);
       yield put({
         type: 'stateWillUpdate',
