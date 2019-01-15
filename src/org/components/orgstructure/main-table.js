@@ -24,7 +24,7 @@ export default ({
   };
 
   const onClickEdit = (_, row) => {
-    redirectDetail('/org/structure/view', { id: row.orgStructureVersionId });
+    redirectDetail('/org/structure/modify', { id: row.orgStructureVersionId });
   };
 
   const data = tableData.records;

@@ -70,7 +70,6 @@ export function onExpandKeys(expandedKeys) {
     type: 'orgStructure/stateWillUpdate',
     payload: {
       expandKeys: expandedKeys,
-      loadedKeys: expandedKeys,
     },
   };
 }
@@ -105,6 +104,56 @@ export function updateShowDisabled(showDisabled) {
     type: 'orgStructure/stateWillUpdate',
     payload: {
       showDisabled,
+    },
+  };
+}
+
+/**
+ * 新组织参照
+ * @param orgModel
+ * @returns {{type: string, payload: {personModel: *}}}
+ */
+export function setOrgModel(orgModel) {
+  return {
+    type: 'orgStructure/stateWillUpdate',
+    payload: {
+      orgModel,
+    },
+  };
+}
+
+export function setUpdateOrgModel(updateOrgModel) {
+  return {
+    type: 'orgStructure/stateWillUpdate',
+    payload: {
+      updateOrgModel,
+    },
+  };
+}
+
+export function saveOrgManualInfo(entity) {
+  return {
+    type: 'orgStructure/saveOrgManualInfo',
+    payload: {
+      entity,
+    },
+  };
+}
+
+export function updateIsCreateNewVer(newVersionFlag, versionId) {
+  return {
+    type: 'orgStructure/updateIsCreateNewVer',
+    payload: {
+      newVersionFlag, versionId,
+    },
+  };
+}
+
+export function deleteOrgManualById(id, operationType, data) {
+  return {
+    type: 'orgStructure/deleteOrgManualById',
+    payload: {
+      id, operationType, data,
     },
   };
 }

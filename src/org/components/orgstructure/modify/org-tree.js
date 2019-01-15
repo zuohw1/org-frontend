@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import {
   Button, Col, Row, Tree, Input, Modal, Checkbox,
 } from 'antd';
@@ -10,19 +9,17 @@ const { Search } = Input;
 
 export default (props) => {
   const {
-    treeData, actions, checkedKeys, expandKeys, loadedKeys, form, history, showDisabled,
+    treeData, actions, checkedKeys, versionId, showDisabled, expandKeys,
   } = props;
 
   const {
     refreshTree,
     getTreeChildren,
     setTreeCheckedKeys,
-    onExpandKeys,
     getTreeByName,
     updateShowDisabled,
+    onExpandKeys,
   } = actions;
-
-  const versionId = history.location.state.id;
 
   const onLoadData = (treeNode) => {
     const { dataRef } = treeNode.props;
@@ -44,38 +41,23 @@ export default (props) => {
   const onCheck = (_, info) => {
     if (info.checked && info.node.props.id !== '~') {
       setTimeout(async () => {
-        const docHeaderId = props.location.pathData.id;
         const orgId = info.node.props.id;
-        const result = await request.get(`orgCreate/checkOrgIsDelete?docHeaderId=${docHeaderId}&orgId=${orgId}`);
-        if (result.head !== '') {
-          Modal.error({
+        const result = await request.get(`orgStructure/getManalAndbusinessCount?orgId=${orgId}`);
+        if (result > 0) {
+          Modal.info({
             title: '提示',
             content: (
               <div>
-                <p>{result.head}</p>
-                {
-                  result.list.map((item) => {
-                    return <p>{item}</p>;
-                  })
-                }
-                <p>{result.tail}</p>
+                <p>非常抱歉，该组织或其子组织正在进行组织结构变更或结构业务调整，目前不能再进行结构调整，请等变更同步成功后进行！</p>
               </div>
             ),
           });
         } else {
           setTreeCheckedKeys([info.node.props.id]);
-          form.setFieldsValue({
-            parentOrgId: info.node.props.id,
-            parentOrgName: info.node.props.title,
-          });
         }
-      }, 1000);
+      }, 0);
     } else {
       setTreeCheckedKeys([]);
-      form.setFieldsValue({
-        parentOrgId: '',
-        parentOrgName: '',
-      });
     }
   };
 
@@ -87,25 +69,39 @@ export default (props) => {
     refreshTree(versionId, showDisabled);
   };
 
-  const onExpand = (expandedKeys) => {
-    onExpandKeys(expandedKeys);
-  };
-
   const onChange = (e) => {
     updateShowDisabled(e.target.checked ? 'Y' : 'N');
+  };
+
+  const onExpand = (expandedKeys) => {
+    onExpandKeys(expandedKeys);
   };
 
   const renderTreeNodes = (data) => {
     if (data.length > 0) {
       return data.map((item) => {
         if (item.children) {
-          return (
-            <TreeNode {...item} dataRef={item}>
-              {renderTreeNodes(item.children)}
-            </TreeNode>
-          );
+          if (item.isDisabled === 'Y') {
+            const msg = '<失效>';
+            return (
+              <TreeNode {...item} disabled dataRef={item} title={<span>{item.title}<span style={{ color: 'red' }}>{msg}</span></span>}>
+                {renderTreeNodes(item.children)}
+              </TreeNode>
+            );
+          } else {
+            return (
+              <TreeNode {...item} dataRef={item}>
+                {renderTreeNodes(item.children)}
+              </TreeNode>
+            );
+          }
         }
-        return <TreeNode {...item} dataRef={item} />;
+        if (item.isDisabled === 'Y') {
+          const msg = '<失效>';
+          return <TreeNode {...item} disabled dataRef={item} title={<span>{item.title}<span style={{ color: 'red' }}>{msg}</span></span>} />;
+        } else {
+          return <TreeNode {...item} dataRef={item} />;
+        }
       });
     }
   };
@@ -129,9 +125,8 @@ export default (props) => {
           onCheck={onCheck}
           checkedKeys={checkedKeys}
           checkStrictly
-          onExpand={onExpand}
           expandedKeys={expandKeys}
-          loadedKeys={loadedKeys}
+          onExpand={onExpand}
         >
           {renderTreeNodes(treeData)}
         </Tree>

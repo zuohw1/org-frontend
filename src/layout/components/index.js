@@ -19,6 +19,7 @@ import DocumentLoad from '../../org/containers/document-load';
 import OrgManagerView from '../../org/containers/org-manager-view';
 import OrgStructure from '../../org/containers/org-structure';
 import OrgStructureView from '../../org/containers/org-structure-view';
+import OrgStructureModify from '../../org/containers/org-structure-modify';
 import OrgCostCenter from '../../org/containers/org-costcenter';
 import OrgCostCenterView from '../../org/containers/org-costcenter-view';
 import OrgCostCenterModify from '../../org/containers/org-costcenter-modify';
@@ -42,6 +43,7 @@ const MainLayout = (state) => {
       <Route exact path="/org/managerView" component={OrgManagerView} />
       <Route exact path="/org/structure" component={OrgStructure} />
       <Route exact path="/org/structure/view" component={OrgStructureView} />
+      <Route exact path="/org/structure/modify" component={OrgStructureModify} />
       <Route exact path="/org/costCenter" component={OrgCostCenter} />
       <Route exact path="/org/costCenter/view" component={OrgCostCenterView} />
       <Route exact path="/org/costCenter/modify" component={OrgCostCenterModify} />

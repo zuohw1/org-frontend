@@ -38,14 +38,27 @@ export default {
     personModal: false,
     /* 组织树数据 */
     treeData: [],
+    checkedKeys: [],
     expandKeys: [],
-    loadedKeys: [],
     /* 组织树显示停用 */
     showDisabled: 'N',
     /* 下拉列表数据 */
     selectData: {},
     /* 查询框员工编码 */
     searchEmpNumber: {},
+
+    /* 查看、修改界面Form信息 */
+    orgStructureInfo: {},
+    /* 查看界面列表信息 */
+    requestList: [],
+    versionId: '',
+    newAddOrgList: [],
+    updateParentOrgList: [],
+
+    /* 修改界面新组织参照 */
+    orgModel: false,
+    updateOrgModel: false,
+    refSelectData: {},
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -85,7 +98,7 @@ export default {
         type: 'stateWillUpdate',
         payload: {
           treeData: result,
-          defaultExpandedKeys: ['~'],
+          expandKeys: [result[0].key],
         },
       });
     },
@@ -98,20 +111,12 @@ export default {
       });
     },
     *refreshTree({ payload: { versionId, showDisabled } }, { call, put }) {
-      yield put({
-        type: 'stateWillUpdate',
-        payload: {
-          treeData: [],
-          expandKeys: [],
-        },
-      });
       const result = yield call(Service.getInitTree, versionId, showDisabled);
       yield put({
         type: 'stateWillUpdate',
         payload: {
           treeData: result,
-          expandKeys: [],
-          loadedKeys: [],
+          expandKeys: [result[0].key],
         },
       });
     },
@@ -121,8 +126,61 @@ export default {
         type: 'stateWillUpdate',
         payload: {
           treeData: result,
+          expandKeys: [],
         },
       });
+    },
+    *getOrgStructureInfoByVID({ payload: { versionId, type } }, { call, put }) {
+      const result = yield call(Service.getOrgStructureInfoByVID, versionId, type);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: {
+          orgStructureInfo: result.orgStructureInfo,
+          requestList: result.requestList ? result.requestList : [],
+          versionId,
+          newAddOrgList: result.newAddOrgList ? result.newAddOrgList : [],
+          updateParentOrgList: result.updateParentOrgList ? result.updateParentOrgList : [],
+        },
+      });
+    },
+    * saveOrgManualInfo({ payload: { entity } }, { call, put }) {
+      const result = yield call(Service.saveOrgManualInfo, entity);
+      if (entity.operationType === 'ADD') {
+        yield put({
+          type: 'stateWillUpdate',
+          payload: {
+            newAddOrgList: result,
+          },
+        });
+      } else {
+        yield put({
+          type: 'stateWillUpdate',
+          payload: {
+            updateParentOrgList: result,
+          },
+        });
+      }
+    },
+    * updateIsCreateNewVer({ payload: { newVersionFlag, versionId } }, { call }) {
+      yield call(Service.updateIsCreateNewVer, newVersionFlag, versionId);
+    },
+    * deleteOrgManualById({ payload: { id, operationType, data } }, { call, put }) {
+      yield call(Service.deleteOrgManualById, id);
+      if (operationType === 'ADD') {
+        yield put({
+          type: 'stateWillUpdate',
+          payload: {
+            newAddOrgList: data,
+          },
+        });
+      } else {
+        yield put({
+          type: 'stateWillUpdate',
+          payload: {
+            updateParentOrgList: data,
+          },
+        });
+      }
     },
   },
   subscriptions: {
@@ -139,6 +197,20 @@ export default {
         } else if (pathname === '/org/structure/view') {
           if (history.location.state !== undefined
             && history.location.state.id !== undefined) {
+            dispatch({
+              type: 'getOrgStructureInfoByVID',
+              payload: { versionId: history.location.state.id, type: 'VIEW' },
+            });
+          } else {
+            history.goBack(-1);
+          }
+        } else if (pathname === '/org/structure/modify') {
+          if (history.location.state !== undefined
+            && history.location.state.id !== undefined) {
+            dispatch({
+              type: 'getOrgStructureInfoByVID',
+              payload: { versionId: history.location.state.id, type: 'MODIFY' },
+            });
             dispatch({
               type: 'getInitTree',
               payload: { versionId: history.location.state.id, showDisabled: 'N' },

@@ -32,4 +32,16 @@ export default {
   getSelectData() {
     return request.get('orgStructure/getSelectData');
   },
+  getOrgStructureInfoByVID(versionId, type) {
+    return request.get(`orgStructure/getOrgStructureInfoByVID?versionId=${versionId}&type=${type}`);
+  },
+  saveOrgManualInfo(entity) {
+    return request.post('orgStructure/saveOrgManualInfo', entity);
+  },
+  updateIsCreateNewVer(newVersionFlag, versionId) {
+    return request.get(`orgStructure/updateIsCreateNewVer?newVersionFlag=${newVersionFlag}&versionId=${versionId}`);
+  },
+  deleteOrgManualById(id) {
+    return request.delete(`orgStructure/deleteOrgManualById/${id}`);
+  },
 };
