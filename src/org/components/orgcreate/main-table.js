@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import React from 'react';
 import {
   Table,
@@ -28,12 +27,11 @@ export default ({
   } = actions;
 
   const onClickAdd = () => {
-    redirectDetail('/org/changeDetail');
+    redirectDetail('/org/create/add');
   };
 
   const onClickView = (_, row) => {
-    debugger;
-    redirectDetail('/org/managerView', { id: row.docHeaderId });
+    redirectDetail('/org/create/view', { id: row.docHeaderId });
   };
 
   const onClickEdit = (_, row) => {

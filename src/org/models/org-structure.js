@@ -58,7 +58,6 @@ export default {
     /* 修改界面新组织参照 */
     orgModel: false,
     updateOrgModel: false,
-    refSelectData: {},
   },
   reducers: {
     stateWillUpdate(state, { payload }) {

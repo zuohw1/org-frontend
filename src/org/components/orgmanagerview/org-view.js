@@ -6,8 +6,6 @@ import {
 const { TabPane } = Tabs;
 
 const OrgView = (state) => {
-  console.log(state);
-
   const columns = [{
     title: '组织名称',
     dataIndex: 'name',
@@ -25,7 +23,7 @@ const OrgView = (state) => {
     width: 50,
   }];
 
-  const { loading, data } = state;
+  const { loading, viewData } = state;
 
   return (
     <Tabs>
@@ -36,7 +34,7 @@ const OrgView = (state) => {
           }}
           columns={columns}
           loading={loading}
-          dataSource={data}
+          dataSource={viewData}
           pagination={false}
           defaultExpandAllRows
           size="small"

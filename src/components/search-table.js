@@ -27,7 +27,6 @@ import request from '../utils/request';
  * refUrl={refUrl}
  * columns={refColumns}
  * refCodes={refCodes}
- * refSelectData={refSelectData} 临时存参照选中记录
  * setRefModeShow={setRefModeShow} 更新是否弹出属性方法
  * refModal={refModal} 参照modal框是否弹出
  * parentForm={form} 父表单，用于回写参照选择的数据到父表单
@@ -42,13 +41,15 @@ class SearchTable extends React.PureComponent {
       pageSize: 10,
       name: '',
     },
+    refSelectData: {},
     refData: {
       current: 1, pages: 0, records: Array(0), size: 10, total: 0,
     },
     tableLoading: false,
     selectedRowKeys: [],
     onSelect: (row) => {
-      const { refCodes, refSelectData } = this.props;
+      const { refCodes } = this.props;
+      const { refSelectData } = this.state;
       this.setState({ selectedRowKeys: [row.key] });
       refCodes.map((item) => {
         /* eslint-disable no-param-reassign,no-return-assign */
@@ -111,10 +112,10 @@ class SearchTable extends React.PureComponent {
 
   render() {
     const {
-      columns, placeholder, refCodes, refSelectData, setRefModeShow, refModal, parentForm,
+      columns, placeholder, refCodes, setRefModeShow, refModal, parentForm, title,
     } = this.props;
     const {
-      refData, tableLoading, selectedRowKeys, onSelect, init,
+      refData, tableLoading, selectedRowKeys, onSelect, init, refSelectData,
     } = this.state;
     const {
       current, size, total, records,
@@ -143,7 +144,7 @@ class SearchTable extends React.PureComponent {
 
     return (
       <Modal
-        title="参照"
+        title={title}
         visible={refModal}
         onOk={onRefSubmit}
         onCancel={onRefCancel}

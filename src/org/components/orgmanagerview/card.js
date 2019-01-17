@@ -1,15 +1,14 @@
-/* eslint-disable no-debugger */
 import React from 'react';
 import {
   Col, DatePicker, Form, Input, Row,
 } from 'antd';
 import moment from 'moment';
-import AttachTable from './attach-table';
+import AttachTable from '../../../components/attach-table';
 
 const FormItem = Form.Item;
 
 export default ({
-  form,
+  form, info, attachData,
 }) => {
   const { getFieldDecorator } = form;
 
@@ -23,8 +22,8 @@ export default ({
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 12 }}
             >
-              {getFieldDecorator('DOC_CODE', {
-                initialValue: '',
+              {getFieldDecorator('docCode', {
+                initialValue: info.docCode,
               })(
                 <Input disabled />,
               )}
@@ -36,8 +35,8 @@ export default ({
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 12 }}
             >
-              {getFieldDecorator('DOC_VERIFIER', {
-                initialValue: '',
+              {getFieldDecorator('docVerifier', {
+                initialValue: info.docVerifier,
               })(
                 <Input disabled />,
               )}
@@ -45,8 +44,8 @@ export default ({
           </Col>
           <Col span={8} style={{ display: 'block' }}>
             <FormItem label="批文日期" labelCol={{ span: 8 }}>
-              {getFieldDecorator('DOC_DATE', {
-                initialValue: moment(),
+              {getFieldDecorator('docDate', {
+                initialValue: info.docDate ? moment(info.docDate) : moment(),
               })(
                 <DatePicker disabled />,
               )}
@@ -54,14 +53,14 @@ export default ({
           </Col>
           <Col span={24} style={{ display: 'block' }}>
             <FormItem label="主题">
-              {getFieldDecorator('DOC_SUBJECT', {
-                initialValue: '',
+              {getFieldDecorator('docSubject', {
+                initialValue: info.docSubject,
               })(<Input.TextArea disabled rows={2} />)}
             </FormItem>
           </Col>
         </Row>
       </Form>
-      <AttachTable />
+      <AttachTable attachData={attachData} />
     </div>
   );
 };

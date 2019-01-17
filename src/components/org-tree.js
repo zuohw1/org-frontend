@@ -14,6 +14,7 @@ class OrgTree extends React.PureComponent {
     showDisabled: 'N',
     init: true,
     expandKeys: [],
+    refSelectData: {},
   }
 
   onSearch = (value) => {
@@ -98,7 +99,8 @@ class OrgTree extends React.PureComponent {
 
   onCheck = (_, info) => {
     if (info.checked && info.node.props.id !== '~') {
-      const { refCodes, refSelectData } = this.props;
+      const { refCodes } = this.props;
+      const { refSelectData } = this.state;
       refCodes.map((item) => {
         /* eslint-disable no-param-reassign,no-return-assign */
         return refSelectData[item.code] = info.node.props[item.refcode];
@@ -111,11 +113,11 @@ class OrgTree extends React.PureComponent {
 
   render() {
     const {
-      refCodes, refSelectData, setRefModeShow, refModal, parentForm,
+      refCodes, setRefModeShow, refModal, parentForm,
     } = this.props;
 
     const {
-      checkedKeys, treeData, init, expandKeys,
+      checkedKeys, treeData, init, expandKeys, refSelectData,
     } = this.state;
 
     if (refModal === true && init === true) {

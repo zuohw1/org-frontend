@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { routerRedux } from 'dva/router';
 import Service from '../services/org-create';
 
@@ -35,6 +34,23 @@ export default {
       pageSize: 10,
       pageNumber: 1,
     },
+    viewData: [{
+      name: '集团',
+      create_date: '2018-01-01',
+      status: '同步',
+      children: [{
+        name: '总部',
+        create_date: '2018-01-01',
+        status: '同步',
+        children: [{
+          name: '财务部',
+          create_date: '2018-01-01',
+          status: '同步',
+        }],
+      }],
+    }],
+    info: {},
+    attachData: [],
   },
   reducers: {
     stateWillUpdate(state, { payload }) {
@@ -67,6 +83,13 @@ export default {
         payload: { search: { pageNumber: 1, pageSize: 10 } },
       });
     },
+    * getOrgHeaderDocInfo({ payload: { id } }, { call, put }) {
+      const result = yield call(Service.getOrgHeaderDocInfo, id);
+      yield put({
+        type: 'stateWillUpdate',
+        payload: { info: result.info, attachData: result.attachData },
+      });
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -76,6 +99,16 @@ export default {
             type: 'fetch',
             payload: { search: { pageNumber: 1, pageSize: 10 } },
           });
+        } else if (pathname === '/org/create/view') {
+          if (history.location.state !== undefined
+            && history.location.state.id !== undefined) {
+            dispatch({
+              type: 'getOrgHeaderDocInfo',
+              payload: { id: history.location.state.id },
+            });
+          } else {
+            history.goBack(-1);
+          }
         }
       });
     },

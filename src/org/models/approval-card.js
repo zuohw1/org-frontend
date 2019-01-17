@@ -16,8 +16,6 @@ export default {
   state: {
     /* 参照是否显示 */
     refModal: false,
-    /* 参照选中数据 */
-    refSelectData: {},
     /* 卡片记录 */
     record: {},
     /* 通知单列表 */

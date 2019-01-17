@@ -11,7 +11,7 @@ const { Option } = Select;
 
 const ApprovalCard = (state) => {
   const {
-    form, record, refModal, refSelectData, actions, noticeList,
+    form, record, refModal, actions, noticeList,
   } = state;
   const { getFieldDecorator } = form;
   const {
@@ -44,7 +44,7 @@ const ApprovalCard = (state) => {
     }
   };
 
-  const refUrl = 'orgHeaderBatch/selectListByEmNum';
+  const refUrl = 'orgHeaderBatch/selectListByEmNum?';
   const refCodes = [{ code: 'DOC_CODE', refcode: 'DOC_CODE' },
     { code: 'DOC_VERIFIER', refcode: 'DOC_VERIFIER' },
     { code: 'DOC_DATE', refcode: 'DOC_DATE', type: 'Date' },
@@ -77,10 +77,10 @@ const ApprovalCard = (state) => {
         refUrl={refUrl}
         columns={refColumns}
         refCodes={refCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setRefModeShow}
         refModal={refModal}
         parentForm={form}
+        title="批文"
         placeholder="名称"
       />
       <Form>

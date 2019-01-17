@@ -11,12 +11,14 @@ import OrgSearch from '../../org/containers/org-search';
 import OrgExportCondition from '../../org/components/orgsearch/components/org-export-condition';
 import OrgApproval from '../../org/containers/approval';
 import OrgCreate from '../../org/containers/org-create';
+import OrgCreateView from '../../org/containers/org-create-view';
+import OrgCreateAdd from '../../org/containers/org-create-add';
 import OrgMerge from '../../org/containers/org-merge';
 import OrgRename from '../../org/containers/org-rename';
 import OrgDelete from '../../org/containers/org-delete';
 import ChangeDetail from '../../org/containers/change-detail';
 import DocumentLoad from '../../org/containers/document-load';
-import OrgManagerView from '../../org/containers/org-manager-view';
+import OrgView from '../../org/containers/org-view';
 import OrgStructure from '../../org/containers/org-structure';
 import OrgStructureView from '../../org/containers/org-structure-view';
 import OrgStructureModify from '../../org/containers/org-structure-modify';
@@ -35,12 +37,14 @@ const MainLayout = (state) => {
       <Route exact path="/org/search/orgExportCondition" component={OrgExportCondition} />
       <Route exact path="/org/approval" component={OrgApproval} />
       <Route exact path="/org/create" component={OrgCreate} />
+      <Route exact path="/org/create/view" component={OrgCreateView} />
+      <Route exact path="/org/create/add" component={OrgCreateAdd} />
       <Route exact path="/org/merge" component={OrgMerge} />
       <Route exact path="/org/rename" component={OrgRename} />
       <Route exact path="/org/delete" component={OrgDelete} />
       <Route path="/org/changeDetail" component={ChangeDetail} />
       <Route exact path="/org/documentLoad" component={DocumentLoad} />
-      <Route exact path="/org/managerView" component={OrgManagerView} />
+      <Route exact path="/org/view" component={OrgView} />
       <Route exact path="/org/structure" component={OrgStructure} />
       <Route exact path="/org/structure/view" component={OrgStructureView} />
       <Route exact path="/org/structure/modify" component={OrgStructureModify} />

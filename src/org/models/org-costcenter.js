@@ -61,8 +61,6 @@ export default {
     detailModel: false,
     /* 选中的变更明细记录 */
     detailRecord: {},
-    /* 参照选中数据 */
-    refSelectData: {},
     corpModel: false,
     costCenterModel: false,
     majorModel: false,

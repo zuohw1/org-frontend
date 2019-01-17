@@ -1,16 +1,12 @@
 import React from 'react';
-import { Layout, Breadcrumb, Button } from 'antd';
+import { Layout, Breadcrumb } from 'antd';
 import Card from './card';
 import View from './org-view';
 import '../../../assets/styles/module.less';
 
 const { Content } = Layout;
 
-const orgCreate = (state) => {
-  const onClickReturn = () => {
-    state.history.goBack(-1);
-  };
-
+const orgManagerView = (state) => {
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: '10px 0' }}>
@@ -29,11 +25,9 @@ const orgCreate = (state) => {
       >
         <Card {...state} />
         <View {...state} />
-        <Button onClick={onClickReturn}>返回
-        </Button>
       </Content>
     </React.Fragment>
   );
 };
 
-export default orgCreate;
+export default orgManagerView;

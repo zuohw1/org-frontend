@@ -26,4 +26,7 @@ export default {
   delete(id) {
     return request.delete(`orgCreate/delete/${id}`);
   },
+  getOrgHeaderDocInfo(id) {
+    return request.get(`orgCreate/getOrgHeaderDocInfo?docHeaderId=${id}`);
+  },
 };

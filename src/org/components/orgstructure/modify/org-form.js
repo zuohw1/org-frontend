@@ -15,7 +15,6 @@ export default (props) => {
     updateParentOrgList,
     checkedKeys,
     orgModel,
-    refSelectData,
     actions,
     versionId,
     updateOrgModel,
@@ -256,15 +255,14 @@ export default (props) => {
         refUrl={refUrl}
         columns={refColumns}
         refCodes={refCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setOrgModel}
         refModal={orgModel}
         parentForm={form}
+        title="组织"
         placeholder="查找组织"
       />
       <OrgTree
         refCodes={OrgRefCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setUpdateOrgModel}
         refModal={updateOrgModel}
         parentForm={form}

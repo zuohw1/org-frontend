@@ -14,7 +14,6 @@ export default (props) => {
     corpModel,
     costCenterModel,
     majorModel,
-    refSelectData,
     refPid,
     setDetailModel,
     updateCostInfor,
@@ -97,31 +96,31 @@ export default (props) => {
         refUrl={corpRefUrl}
         columns={refColumns}
         refCodes={corpRefCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setCorpModel}
         refModal={corpModel}
         parentForm={form}
+        title="公司段"
         placeholder="公司段"
       />
       <SearchTable
         refUrl={costCenterRefUrl}
         columns={refColumns}
         refCodes={costCenterRefCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setCostCenterModel}
         refModal={costCenterModel}
         parentForm={form}
         refPid={refPid}
+        title="成本中心段"
         placeholder="成本中心段"
       />
       <SearchTable
         refUrl={majorRefUrl}
         columns={refColumns}
         refCodes={majorRefCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setMajorModel}
         refModal={majorModel}
         parentForm={form}
+        title="专业段"
         placeholder="专业段"
       />
       <Modal

@@ -15,7 +15,6 @@ export default ({
   actions,
   formEdit,
   refModal,
-  refSelectData,
 }) => {
   const { getFieldDecorator } = form;
 
@@ -48,7 +47,7 @@ export default ({
     width: '20%',
   }];
 
-  const refUrl = 'orgHeaderBatch/list';
+  const refUrl = 'orgHeaderBatch/list?';
 
   return (
     <div>
@@ -56,10 +55,10 @@ export default ({
         refUrl={refUrl}
         columns={refColumns}
         refCodes={refCodes}
-        refSelectData={refSelectData}
         setRefModeShow={setRefModeShow}
         refModal={refModal}
         parentForm={form}
+        title="批文"
         placeholder="名称"
       />
       <Form>
