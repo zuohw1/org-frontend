@@ -3,7 +3,7 @@ import {
   Button, Col, DatePicker, Form, Input, Radio, Row, Select,
 } from 'antd';
 import moment from 'moment';
-import AttachTable from './attach-table';
+import AttachTable from '../../../components/attach-table';
 import SearchTable from '../../../components/search-table';
 
 const FormItem = Form.Item;

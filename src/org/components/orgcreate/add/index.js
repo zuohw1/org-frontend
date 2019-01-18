@@ -12,7 +12,7 @@ import OrgView from '../../../containers/org-view';
 
 const { Content } = Layout;
 
-const ChangeDetail = (state) => {
+const OrgCreateAdd = (state) => {
   const onClickCommit = () => {
   };
 
@@ -68,4 +68,4 @@ const ChangeDetail = (state) => {
   );
 };
 
-export default ChangeDetail;
+export default OrgCreateAdd;
